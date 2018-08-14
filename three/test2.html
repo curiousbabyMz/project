@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clock</title>
+    <script type="text/javascript" src="three.js"></script>
+    <style>
+        #cc {
+            width: 600px;
+            height: 100%;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas id="cc"></canvas>
+<script src="setThree.js"></script>
+<script src="clock.js"></script>
+<script>
+    init();
+    var time;
+    camera.position.x = 500;
+    camera.position.y = 500;
+    camera.position.z = 500;
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+    light.position.x = 500;
+    light.position.y = 500;
+    scene.add(light);
+
+    var geometry = new THREE.CubeGeometry(300, 300, 300);
+    var texture = new THREE.Texture(c);
+    var material = new THREE.MeshBasicMaterial({map: texture});
+    texture.needsUpdate = true;
+    console.log(texture, material);
+    // var material = new THREE.MeshBasicMaterial({color:0x00ffff});
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+
+    window.setInterval(() => {
+        time = new Date();
+        time.h = time.getHours();
+        time.m = time.getMinutes();
+        time.s = time.getSeconds();
+        drawClock(time.h, time.m, time.s);
+        document.getElementById('cc').getContext('2d').drawImage(c, 0, 0);
+        // console.log(h,m,s);
+    }, 1000)
+
+    drawClock(3, 10, 48);
+
+    function update() {
+        mesh.rotation.y += 0.01;
+        mesh.rotation.x += 0.01;
+    }
+
+    render();
+</script>
+</body>
+</html>
