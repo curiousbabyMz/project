@@ -12,6 +12,11 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	/*每个页面公共css */
+	.flex{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>
