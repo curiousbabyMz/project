@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
-		<view class="personal ">
-			<image class="headImg" src="../../../static/person.png" mode="widthFix"></image>
+		<view class="personal flex">
+			<image class="headImg" src="/static/person.png" mode="widthFix"></image>
 			<view class="name">
 				<text v-if="isLogin">mz</text>
 				<text v-else>登录</text>
@@ -30,11 +30,10 @@
 </script>
 
 <style lang="less">
-	@import url("../../../comm/flex.less");
+	
 
 	.container {
 		.personal {
-			.flex();
 			flex-flow: column nowrap;
 			background: #FFFFFF;
 			position: relative;

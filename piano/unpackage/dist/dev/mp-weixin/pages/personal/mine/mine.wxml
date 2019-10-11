@@ -1,0 +1,1 @@
+<view class="container"><view class="personal flex"><image class="headImg" src="/static/person.png" mode="widthFix"></image><view class="name"><block wx:if="{{isLogin}}"><text>mz</text></block><block wx:else><text>登录</text></block></view><view class="sea"></view></view></view>
