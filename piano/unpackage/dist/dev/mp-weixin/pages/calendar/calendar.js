@@ -122,7 +122,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 31));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 31));};var Toggle = function Toggle() {return __webpack_require__.e(/*! import() | components/toggle */ "components/toggle").then(__webpack_require__.bind(null, /*! @/components/toggle.vue */ 39));};var _default =
+
+
 
 
 
@@ -140,10 +142,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-    Calendar: Calendar },
+    Calendar: Calendar,
+    Toggle: Toggle },
 
   data: function data() {
-    return {};
+    return {
+      items: [
+      [{
+        label: '一',
+        id: 1 },
+      {
+        label: '二',
+        id: 2 },
+      {
+        label: '三',
+        id: 3 }],
+
+      [{
+        label: 'abc',
+        id: 7 }]] };
+
 
 
   },

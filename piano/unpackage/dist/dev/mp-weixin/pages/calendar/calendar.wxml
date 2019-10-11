@@ -1,1 +1,1 @@
-<view><view class="sumTime flex"><view class="hour">累计练习**小时</view><view class="day">累计练习**天</view></view><calendar vue-id="1" bind:__l="__l"></calendar></view>
+<view><view class="sumTime flex"><view class="hour">累计练习**小时</view><view class="day">累计练习**天</view></view><calendar vue-id="1" bind:__l="__l"></calendar><toggle vue-id="2" items="{{items}}" bind:__l="__l"></toggle></view>

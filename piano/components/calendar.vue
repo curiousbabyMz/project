@@ -1,6 +1,11 @@
 <template>
 	<view>
-		333
+		<view class="month">
+			{{month}}
+		</view>
+		<view class="year">
+			{{year}}
+		</view>
 	</view>
 </template>
 
@@ -8,8 +13,14 @@
 	export default {
 		data() {
 			return {
-				
+				month: '',
+				year: ''
 			};
+		},
+		mounted() {
+			let now = new Date();
+			this.month = now.getMonth();
+			this.year = now.getFullYear();
 		}
 	}
 </script>

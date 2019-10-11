@@ -1,0 +1,14 @@
+.navBar {
+  border-bottom: 1rpx solid #C8C7CC;
+}
+.navBar > view {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+.items > view {
+  text-align: center;
+}
+

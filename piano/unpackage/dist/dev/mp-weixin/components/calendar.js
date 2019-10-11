@@ -109,12 +109,23 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      month: '',
+      year: '' };
 
-
+  },
+  mounted: function mounted() {
+    var now = new Date();
+    this.month = now.getMonth();
+    this.year = now.getFullYear();
   } };exports.default = _default;
 
 /***/ })

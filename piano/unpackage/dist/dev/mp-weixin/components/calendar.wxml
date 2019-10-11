@@ -1,1 +1,1 @@
-<view>333</view>
+<view><view class="month">{{''+month+''}}</view><view class="year">{{''+year+''}}</view></view>
