@@ -23,21 +23,28 @@
   color: #007AFF;
 }
 .container .personal .sea,
+.container .personal .sea::before,
 .container .personal .sea::after {
   position: absolute;
   top: -1850rpx;
   width: 2000rpx;
   height: 2000rpx;
-  border-radius: 40% 38%;
+  border-radius: 47% 40%;
   -webkit-animation: 9s sea forwards infinite linear;
           animation: 9s sea forwards infinite linear;
-  overflow: hidden;
-  background: #8ac7ff;
+  background: #8aedffdc;
+}
+.container .personal .sea:before {
+  background: #ffe6b152;
+  -webkit-animation-duration: 8s;
+          animation-duration: 8s;
+  top: 0;
+  content: "";
 }
 .container .personal .sea::after {
-  background: #5daefb;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
+  background: #5daffb7c;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
   top: 0;
   content: "";
 }

@@ -30,8 +30,6 @@
 </script>
 
 <style lang="less">
-	
-
 	.container {
 		.personal {
 			flex-flow: column nowrap;
@@ -54,20 +52,28 @@
 			}
 
 			.sea,
+			.sea::before,
 			.sea::after {
 				position: absolute;
 				top: -1850rpx;
 				width: 2000rpx;
 				height: 2000rpx;
-				border-radius: 40% 38%;
+				border-radius: 47% 40%;
 				animation: 9s sea forwards infinite linear;
-				overflow: hidden;
-				background: #8ac7ff;
+				// overflow: visible;
+				background:#8aedffdc;
+			}
+
+			.sea:before {
+				background: #ffe6b152;
+				animation-duration: 8s;
+				top: 0;
+				content: "";
 			}
 
 			.sea::after {
-				background: #5daefb;
-				animation-delay: 1s;
+				background: #5daffb7c;
+				animation-duration: 10s;
 				top: 0;
 				content: "";
 			}
