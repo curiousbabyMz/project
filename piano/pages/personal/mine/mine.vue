@@ -1,19 +1,28 @@
 <template>
 	<view class="container">
 		<view class="personal flex">
-			<image class="headImg" src="/static/person.png" mode="widthFix"></image>
-			<view class="name">
-				<text v-if="isLogin">mz</text>
-				<text v-else>登录</text>
-			</view>
-			<view class="sea">
-				<!-- <view class="sea1"></view> -->
-			</view>
+			<button class="login" @click="">
+				<text class="headImg icon_person1"></text>
+				<view class="name">
+					<text v-if="isLogin">mz</text>
+					<text v-else>登录</text>
+				</view>
+			</button>
+			<view class="sea"></view>
 		</view>
+		<div v-for="item in [1,2,3,4,5,0,6,7]" :key="index">
+			{{ item }}
+		</div>
 	</view>
 </template>
 
 <script>
+	import {
+		login
+	} from '../../../utils/login.js'
+	import {
+		showPic
+	} from '../../../utils/wxapi.js'
 	export default {
 		data() {
 			return {
@@ -21,7 +30,8 @@
 			}
 		},
 		methods: {
-
+			login,
+			showPic
 		},
 		onLoad() {
 			console.log('Mine onLoad');
@@ -36,19 +46,23 @@
 			background: #FFFFFF;
 			position: relative;
 
-			.headImg {
+			.login {
 				margin-top: 100rpx;
-				width: 200rpx;
 				z-index: 1;
-				flex-shrink: 0;
-				background: #FFFFFF;
-				border-radius: 50%;
-			}
 
-			.name {
-				margin-top: 20rpx;
-				font-size: 26rpx;
-				color: #007AFF;
+				.headImg {
+					background: #FFFFFF;
+					border-radius: 50%;
+					font-size: 150rpx;
+					color: #5daffb;
+					border: 8rpx solid #5daffb;
+				}
+
+				.name {
+					margin-top: 30rpx;
+					font-size: 28rpx;
+					color: #007AFF;
+				}
 			}
 
 			.sea,
@@ -58,33 +72,45 @@
 				top: -1850rpx;
 				width: 2000rpx;
 				height: 2000rpx;
-				border-radius: 47% 40%;
-				animation: 9s sea forwards infinite linear;
+				border-radius: 44% 46%;
+				animation: 10s sea0 forwards infinite linear;
 				// overflow: visible;
-				background:#8aedffdc;
+				background: #8aedffdc;
 			}
 
 			.sea:before {
 				background: #ffe6b152;
-				animation-duration: 8s;
+				animation-duration: 12s;
+				animation-name: 'sea1';
 				top: 0;
 				content: "";
 			}
 
 			.sea::after {
 				background: #5daffb7c;
-				animation-duration: 10s;
+				animation-duration: 14s;
+				animation-name: 'sea2';
 				top: 0;
 				content: "";
 			}
 		}
 
-		@keyframes sea {
-			0% {}
+	}
+
+	.loop(@i)when(@i<3) {
+
+		@keyframes ~'sea@{i}' {
+			0% {
+				transform: rotate(@i*60deg)
+			}
 
 			100% {
-				transform: rotate(360deg)
+				transform: rotate(@i*60+360deg)
 			}
 		}
+
+		.loop(@i+1);
 	}
+
+	.loop(0);
 </style>
