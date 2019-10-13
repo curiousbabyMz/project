@@ -1,16 +1,17 @@
 <template>
 	<view class="container">
 		<view class="personal flex">
-			<button class="login" @click="">
-				<text class="headImg icon_person1"></text>
+			<button class="login" @getuserinfo="getUserAuth" open-type="getUserInfo">
+				<image :src="userInfo.avatarUrl" mode="aspectFill" v-if="userAuth" class="headImg"></image>
+				<text class="headImg icon_person1" v-else></text>
 				<view class="name">
-					<text v-if="isLogin">mz</text>
+					<text v-if="userAuth">{{userInfo.nickName}}</text>
 					<text v-else>登录</text>
 				</view>
 			</button>
 			<view class="sea"></view>
 		</view>
-		<div v-for="item in [1,2,3,4,5,0,6,7]" :key="index">
+		<div v-for="(item,index) in [1,2,3,4,5,0,6,7]" :key="index">
 			{{ item }}
 		</div>
 	</view>
@@ -18,23 +19,39 @@
 
 <script>
 	import {
-		login
+		getUserAuth,
+		auth2Page
 	} from '../../../utils/login.js'
 	import {
-		showPic
-	} from '../../../utils/wxapi.js'
+		showPic,
+	} from '../../../utils/default.js'
 	export default {
 		data() {
 			return {
-
+				userAuth: false,
+				userInfo: null
 			}
 		},
 		methods: {
-			login,
+			getUserAuth(e) {
+				if (getUserAuth(e)) {
+					this.userAuth = true;
+					this.userInfo = getApp().globalData.userInfo;
+				}
+			},
 			showPic
 		},
 		onLoad() {
 			console.log('Mine onLoad');
+			this.userInfo = getApp().globalData.userInfo;
+			getApp().loginCB = () => {
+				console.log('loginCB');
+				auth2Page.call(this)
+				this.userInfo = getApp().globalData.userInfo;
+			}
+		},
+		onShow() {
+
 		}
 	}
 </script>
@@ -54,6 +71,8 @@
 					background: #FFFFFF;
 					border-radius: 50%;
 					font-size: 150rpx;
+					width: 150rpx;
+					height: 150rpx;
 					color: #5daffb;
 					border: 8rpx solid #5daffb;
 				}

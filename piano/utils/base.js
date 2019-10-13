@@ -1,11 +1,12 @@
 export var
-	wxapi = ({
+	wxApi = ({
 		name,
 		data
 	}) => (
 		new Promise((resolve, reject) => {
-			wx[name](Object.assign(data, {
+			wx[name](Object.assign(data || {}, {
 				success: r => {
+					console.log(r);
 					resolve(r)
 				},
 				fail: e => {

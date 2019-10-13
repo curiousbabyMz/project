@@ -1,7 +1,14 @@
 <script>
+	import {
+	login
+	} from './utils/login.js'
 	export default {
+		globalData: {
+
+		},
 		onLaunch: function() {
 			console.log('App Launch')
+			login()
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -21,14 +28,16 @@
 	}
 
 	button {
-		width: auto; 
-		line-height: auto;
-		padding: 0;
-		margin: 0;
-		background: none;
 
+		&,
 		&::after {
+			width: auto;
+			line-height: auto;
+			padding: 0;
+			margin: 0;
+			background: none;
 			border: none;
+			font-size: 0;
 		}
 	}
 
@@ -54,7 +63,7 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
-		line-height: 1em;
+		line-height: 1.2em;
 	}
 
 	.icon_person1:before {

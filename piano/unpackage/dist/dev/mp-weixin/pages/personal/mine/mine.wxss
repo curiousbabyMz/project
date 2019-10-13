@@ -15,6 +15,8 @@
   background: #FFFFFF;
   border-radius: 50%;
   font-size: 150rpx;
+  width: 150rpx;
+  height: 150rpx;
   color: #5daffb;
   border: 8rpx solid #5daffb;
 }
