@@ -2,8 +2,10 @@
 	<view class="container">
 		<view class="personal flex">
 			<button class="login" @getuserinfo="getUserAuth" open-type="getUserInfo">
-				<image :src="userInfo.avatarUrl" mode="aspectFill" v-if="userAuth" class="headImg"></image>
-				<text class="headImg icon_person1" v-else></text>
+				<view class="head">
+					<image :src="userInfo.avatarUrl" mode="aspectFill" :class="{headIn:userAuth,headOut:!userAuth}" class="headImg"></image>
+					<text class="headImg icon_person1" :class="{headIn:!userAuth,headOut:userAuth}"></text>
+				</view>
 				<view class="name">
 					<text v-if="userAuth">{{userInfo.nickName}}</text>
 					<text v-else>登录</text>
@@ -11,9 +13,14 @@
 			</button>
 			<view class="sea"></view>
 		</view>
-		<div v-for="(item,index) in [1,2,3,4,5,0,6,7]" :key="index">
-			{{ item }}
-		</div>
+		<view class="menu">
+			<view class="calendar item" @click="navTo({url:'../../index/index',data:{k:1}})">
+				<text class="label">
+					练习足迹
+				</text>
+				<text class="icon_arrowR"></text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -24,6 +31,7 @@
 	} from '../../../utils/login.js'
 	import {
 		showPic,
+		navTo
 	} from '../../../utils/default.js'
 	export default {
 		data() {
@@ -33,13 +41,14 @@
 			}
 		},
 		methods: {
+			showPic,
+			navTo,
 			getUserAuth(e) {
 				if (getUserAuth(e)) {
 					this.userAuth = true;
 					this.userInfo = getApp().globalData.userInfo;
 				}
 			},
-			showPic
 		},
 		onLoad() {
 			console.log('Mine onLoad');
@@ -57,6 +66,9 @@
 </script>
 
 <style lang="less">
+	@import '../../../comm/flex.less';
+	@import '../../../comm/color.less';
+
 	.container {
 		.personal {
 			flex-flow: column nowrap;
@@ -67,14 +79,33 @@
 				margin-top: 100rpx;
 				z-index: 1;
 
-				.headImg {
-					background: #FFFFFF;
-					border-radius: 50%;
-					font-size: 150rpx;
-					width: 150rpx;
-					height: 150rpx;
-					color: #5daffb;
-					border: 8rpx solid #5daffb;
+				.head {
+					position: relative;
+					width: 166rpx;
+					height: 166rpx;
+
+					.headImg {
+						position: absolute;
+						left: 0;
+						right: 0;
+						background: #FFFFFF;
+						border-radius: 50%;
+						font-size: 150rpx;
+						width: 150rpx;
+						height: 150rpx;
+						color: @defaultColor;
+						border: 8rpx solid @defaultColor;
+					}
+
+					.headIn {
+						transition: all 0.25s 0.25s ease-out;
+						transform: none;
+					}
+
+					.headOut {
+						transition: all 0.25s ease-out;
+						transform: rotateY(90deg);
+					}
 				}
 
 				.name {
@@ -114,6 +145,26 @@
 			}
 		}
 
+		.menu {
+			padding: 0 50rpx;
+			font-size: 34rpx;
+			line-height: 100rpx;
+			color: #333333;
+
+			&>.item {
+				.flex();
+				border-top: 1rpx solid @lineColor;
+				justify-content: space-between;
+
+				text {
+					font-size: 34rpx;
+				}
+
+				&:nth-of-type(1) {
+					border: none;
+				}
+			}
+		}
 	}
 
 	.loop(@i)when(@i<3) {

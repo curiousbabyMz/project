@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
-
-/***/ 1:
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
+/* 0 */,
+/* 1 */
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
   \************************************************************/
@@ -733,7 +733,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1496,115 +1496,7 @@ var uni$1 = uni;var _default =
 uni$1;exports.default = _default;
 
 /***/ }),
-
-/***/ 14:
-/*!********************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 2:
+/* 2 */
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -7086,7 +6978,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7107,14 +6999,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7190,7 +7082,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7566,8 +7458,7 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-
-/***/ 3:
+/* 3 */
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
   \***********************************/
@@ -7597,127 +7488,7 @@ module.exports = g;
 
 
 /***/ }),
-
-/***/ 37:
-/*!***************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/login.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.auth2Page = exports.getUserAuth = exports.getSetting = exports.wxlogin = exports.login = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 60));var _base = __webpack_require__(/*! ./base.js */ 39);
-
-
-var _cloudFn = __webpack_require__(/*! ./cloudFn.js */ 59);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
-
-
-
-exports.login = login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var islogin, setting, _ref2, userInfo, loginInfo;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            islogin = null;_context.next = 3;return (
-
-              (0, _base.wxApi)({
-                name: 'getSetting' }));case 3:setting = _context.sent;if (!
-
-            setting.authSetting["scope.userInfo"]) {_context.next = 11;break;}
-            getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 8;return (
-
-
-              (0, _base.wxApi)({
-                name: 'getUserInfo' }));case 8:_ref2 = _context.sent;userInfo = _ref2.userInfo;
-
-            getApp().globalData["userInfo"] = userInfo;case 11:_context.next = 13;return (
-
-              (0, _cloudFn.wxCloudLogin)());case 13:loginInfo = _context.sent;
-            getApp().globalData.secretInfo = loginInfo;
-            islogin = true;
-
-
-            if (getApp().loginCB) getApp().loginCB();return _context.abrupt("return",
-            islogin);case 18:case "end":return _context.stop();}}}, _callee, this);}));return function login() {return _ref.apply(this, arguments);};}();
-
-
-var
-login,
-wxlogin = function wxlogin() {
-  return (0, _base.wxApi)({
-    name: 'login' });
-
-},
-getSetting = function getSetting() {
-  return;
-},
-getUserAuth = function getUserAuth(e) {
-  console.log(e);
-  getApp().globalData.userInfo = e.detail.userInfo;
-  getApp().globalData["userAuth"] = true;
-  return /ok/.test(e.detail.errMsg);
-},
-auth2Page = function auth2Page() {
-  this.userAuth = getApp().globalData.userAuth;
-};exports.auth2Page = auth2Page;exports.getUserAuth = getUserAuth;exports.getSetting = getSetting;exports.wxlogin = wxlogin;exports.login = login;
-
-/***/ }),
-
-/***/ 38:
-/*!*****************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/default.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.showPic = void 0;var _base = __webpack_require__(/*! ./base.js */ 39);
-
-
-var
-showPic = function showPic(_ref)
-
-
-{var arr = _ref.arr,i = _ref.i;
-  // let
-  //  arr=e.currentTarget.dataset.arr,
-  //  i=e.currentTarget.dataset.i;
-  console.log(wxapi);
-  return (0, _base.wxApi)({
-    name: 'previewImage',
-    data: {
-      urls: arr,
-      current: arr[i] } });
-
-
-};exports.showPic = showPic;
-
-/***/ }),
-
-/***/ 39:
-/*!**************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/base.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.wxApi = void 0;var
-wxApi = function wxApi(_ref) {var
-  name = _ref.name,
-  data = _ref.data;return (
-
-    new Promise(function (resolve, reject) {
-      wx[name](Object.assign(data || {}, {
-        success: function success(r) {
-          console.log(r);
-          resolve(r);
-        },
-        fail: function fail(e) {
-          reject(e);
-        } }));
-
-    }));};exports.wxApi = wxApi;
-
-/***/ }),
-
-/***/ 4:
+/* 4 */
 /*!***********************************************!*\
   !*** F:/Web/Uni-app/project/piano/pages.json ***!
   \***********************************************/
@@ -7728,8 +7499,7 @@ wxApi = function wxApi(_ref) {var
 
 
 /***/ }),
-
-/***/ 5:
+/* 5 */
 /*!*******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-stat/dist/index.js ***!
   \*******************************************************/
@@ -8612,44 +8382,7 @@ main();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-
-/***/ 59:
-/*!*****************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/cloudFn.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.wxCloudLogin = void 0;wx.cloud.init({
-  env: 'cloud1-dbe5a2' });
-
-var cloudFn = function cloudFn(_ref)
-
-
-{var name = _ref.name,data = _ref.data;
-  return wx.cloud.callFunction({
-    name: name,
-    data: data }).
-
-  then(function (r) {
-    console.log(r);
-    return r;
-  });
-};
-var
-wxCloudLogin = function wxCloudLogin() {
-  return cloudFn({
-    name: 'login' }).
-
-  then(function (r) {
-    return r.result;
-  });
-};exports.wxCloudLogin = wxCloudLogin;
-
-/***/ }),
-
-/***/ 6:
+/* 6 */
 /*!******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-stat/package.json ***!
   \******************************************************/
@@ -8659,20 +8392,102 @@ wxCloudLogin = function wxCloudLogin() {
 module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23320190923002","_inBundle":false,"_integrity":"sha512-MnftsvgOac3q1FCOBPzivbFn8GNQFo7D2DY325HeEZyFCWgx5GEwHpGYjT1PQU6v7DaDn0ruxa3ObdpUIYbmZw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23320190923002.tgz","_shasum":"0c400c140ca0b3c05f52d25f11583cf05a0c4e9a","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"fed4c73fb9142a1b277dd79313939cad90693d3e","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23320190923002"};
 
 /***/ }),
+/* 7 */
+/*!****************************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"style"} ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 60:
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "uni-app" }, "pages/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+
+/***/ }),
+/* 8 */
+/*!***************************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"stat"} ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "" };exports.default = _default;
+
+/***/ }),
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
+/*!***************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/login.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.auth2Page = exports.getUserAuth = exports.getSetting = exports.wxlogin = exports.login = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _base = __webpack_require__(/*! ./base.js */ 16);
+
+
+var _cloudFn = __webpack_require__(/*! ./cloudFn.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+
+
+
+
+var
+login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var islogin, setting, _ref2, userInfo, loginInfo;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+            islogin = null;_context.next = 3;return (
+
+              (0, _base.wxApi)({
+                name: 'getSetting' }));case 3:setting = _context.sent;if (!
+
+            setting.authSetting["scope.userInfo"]) {_context.next = 11;break;}
+            getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 8;return (
+
+
+              (0, _base.wxApi)({
+                name: 'getUserInfo' }));case 8:_ref2 = _context.sent;userInfo = _ref2.userInfo;
+
+            getApp().globalData["userInfo"] = userInfo;case 11:_context.next = 13;return (
+
+              (0, _cloudFn.wxCloudLogin)());case 13:loginInfo = _context.sent;
+            getApp().globalData.secretInfo = loginInfo;
+            islogin = true;
+
+
+            if (getApp().loginCB) getApp().loginCB();return _context.abrupt("return",
+            islogin);case 18:case "end":return _context.stop();}}}, _callee, this);}));return function login() {return _ref.apply(this, arguments);};}(),
+
+wxlogin = function wxlogin() {
+  return (0, _base.wxApi)({
+    name: 'login' });
+
+},
+getSetting = function getSetting() {
+  return;
+},
+getUserAuth = function getUserAuth(e) {
+  console.log(e);
+  getApp().globalData.userInfo = e.detail.userInfo;
+  getApp().globalData["userAuth"] = true;
+  return /ok/.test(e.detail.errMsg);
+},
+auth2Page = function auth2Page() {
+  this.userAuth = getApp().globalData.userAuth;
+};exports.auth2Page = auth2Page;exports.getUserAuth = getUserAuth;exports.getSetting = getSetting;exports.wxlogin = wxlogin;exports.login = login;
+
+/***/ }),
+/* 13 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 61);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 14);
 
 
 /***/ }),
-
-/***/ 61:
+/* 14 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -8703,7 +8518,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 62);
+module.exports = __webpack_require__(/*! ./runtime */ 15);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -8719,8 +8534,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-
-/***/ 62:
+/* 15 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -9451,30 +9265,268 @@ if (hadRuntime) {
 
 
 /***/ }),
-
-/***/ 7:
-/*!****************************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"style"} ***!
-  \****************************************************************/
+/* 16 */
+/*!**************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/base.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "uni-app" }, "pages/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.urlStringity = exports.urlParse = exports.wxApi = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var
+wxApi = function wxApi(_ref) {var
+  name = _ref.name,
+  data = _ref.data;return (
+
+    new Promise(function (resolve, reject) {
+      wx[name](Object.assign(data || {}, {
+        success: function success(r) {
+          console.log(r);
+          resolve(r);
+        },
+        fail: function fail(e) {
+          reject(e);
+        } }));
+
+    }));},
+urlParse = function urlParse(str) {var _str$split =
+  str.split('?'),_str$split2 = _slicedToArray(_str$split, 2),url = _str$split2[0],query = _str$split2[1],
+  data = {};
+  query.split('&').map(function (each) {var _each$split =
+    each.split('='),_each$split2 = _slicedToArray(_each$split, 2),key = _each$split2[0],value = _each$split2[1];
+    data[key] = value;
+  });
+  return { url: url, data: data };
+},
+urlStringity = function urlStringity(_ref2)
+
+
+{var url = _ref2.url,data = _ref2.data;
+  var query = '';
+  if (data) {
+    Object.keys(data).map(function (each, i) {
+      query += "".concat(i === 0 ? '?' : '&').concat(each, "=").concat(data[each]);
+    });
+  }
+  return url + query;
+};exports.urlStringity = urlStringity;exports.urlParse = urlParse;exports.wxApi = wxApi;
 
 /***/ }),
-
-/***/ 8:
-/*!***************************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"stat"} ***!
-  \***************************************************************/
+/* 17 */
+/*!*****************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/cloudFn.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "" };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.wxCloudLogin = void 0;wx.cloud.init({
+  env: 'cloud1-dbe5a2' });
+
+var cloudFn = function cloudFn(_ref)
+
+
+{var name = _ref.name,data = _ref.data;
+  return wx.cloud.callFunction({
+    name: name,
+    data: data }).
+
+  then(function (r) {
+    console.log(r);
+    return r;
+  });
+};
+var
+wxCloudLogin = function wxCloudLogin() {
+  return cloudFn({
+    name: 'login' }).
+
+  then(function (r) {
+    return r.result;
+  });
+};exports.wxCloudLogin = wxCloudLogin;
+
+/***/ }),
+/* 18 */,
+/* 19 */,
+/* 20 */
+/*!********************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
+/*!*****************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/default.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ./base.js */ 16);
+
+
+
+
+var
+showPic = function showPic(_ref)
+
+
+{var arr = _ref.arr,i = _ref.i;
+  // return wxApi({
+  // 	name: 'previewImage',
+  // 	data: {
+  // 		urls: arr,
+  // 		current: arr[i]
+  // 	}
+  // })
+  return uni.previewImage({
+    data: {
+      urls: arr,
+      current: arr[i] } });
+
+
+},
+navTo = function navTo(_ref2)
+
+
+{var url = _ref2.url,data = _ref2.data;
+  // return wxApi({
+  // 	name: 'navigateTo',
+  // 	url:urlStringity({
+  // 		url,data
+  // 	})
+  // })
+  return uni.navigateTo({
+    url: (0, _base.urlStringity)({
+      url: url, data: data }) });
+
+
+};exports.navTo = navTo;exports.showPic = showPic;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
-
-}]);
+]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map
