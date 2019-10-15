@@ -5,7 +5,7 @@
 				{{item[current[index]].label||holder[index]}}
 			</view>
 		</view>
-		<view class="items" @click="itemChange" v-if="visible">
+		<view class="items" :class="{toggleIn:visible,toggleOut:!visible}" :style="{transitionDuration:animateTime+'ms'}" @click="itemChange">
 			<view v-for="(item,index) in items[indexToggle]" :key="index" :data-i='index'>
 				{{item.label}}
 			</view>
@@ -18,9 +18,14 @@
 		props: {
 			items: {
 				type: Array,
+				required: true,
 			},
-			holder:null,
+			holder: {
+				default: null,
+				type: Array
+			},
 			index: {
+				default: null,
 				type: Array,
 			}
 		},
@@ -29,21 +34,28 @@
 				indexToggle: -1,
 				current: [0],
 				visible: false,
+				action: false,
+				animateTime: 200
 			};
 		},
 		mounted() {
 			this.current = Array(this.items.length).fill(this.holder ? -1 : 0);
-			console.log(this.current, this.holder);
 			if (this.index) this.current = this.index;
+			console.log(this.current, this.index);
 		},
 		methods: {
-			visibleChange(sw) {
-				this.visible = sw
-			},
 			toggleChange(e) {
 				let sw = this.indexToggle !== e.target.dataset.i;
-				this.visibleChange(sw);
-				this.indexToggle = sw ? e.target.dataset.i : -1;
+				if (sw) {
+					this.visible = sw;
+					this.indexToggle = e.target.dataset.i
+				} else {
+					this.visible = sw;
+					let t = setTimeout(() => {
+						this.indexToggle = -1;
+						clearTimeout(t);
+					}, this.animateTime)
+				}
 			},
 			itemChange(e) {
 				this.current[this.indexToggle] = e.target.dataset.i;
@@ -70,8 +82,20 @@
 	}
 
 	.items {
+		transition-property: all;
+		transition-timing-function: ease-out;
+		transform-origin: 50% 0 0;
+
 		&>view {
 			text-align: center;
 		}
+	}
+
+	.toggleIn {
+		transform: scaleY(1);
+	}
+
+	.toggleOut {
+		transform: scaleY(0);
 	}
 </style>

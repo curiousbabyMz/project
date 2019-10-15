@@ -1,10 +1,12 @@
 <template>
 	<view>
-		<view class="month">
-			{{month}}
-		</view>
-		<view class="year">
-			{{year}}
+		<view class="title flex">
+			<view class="month">
+				{{month}}
+			</view>
+			<view class="year">
+				{{year}}
+			</view>
 		</view>
 	</view>
 </template>

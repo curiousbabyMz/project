@@ -1,18 +1,22 @@
 .flex {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
           align-items: center;
 }
 .container .personal {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
   background: #FFFFFF;
   position: relative;
@@ -38,16 +42,20 @@
   height: inherit;
   font-size: 150rpx;
   color: #5daffb;
-  box-shadow: 0 0 5rpx 5rpx #4481bb62;
+  -webkit-box-shadow: 0 0 5rpx 5rpx #4481bb62;
+          box-shadow: 0 0 5rpx 5rpx #4481bb62;
 }
 .container .personal .login .head .headIn {
   -webkit-transition: all 0.25s 0.25s ease-out;
+  -o-transition: all 0.25s 0.25s ease-out;
   transition: all 0.25s 0.25s ease-out;
   -webkit-transform: none;
+      -ms-transform: none;
           transform: none;
 }
 .container .personal .login .head .headOut {
   -webkit-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
   -webkit-transform: rotateY(90deg);
           transform: rotateY(90deg);
@@ -96,16 +104,20 @@
 .container .menu > .item {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
           align-items: center;
   border-top: 1rpx solid #e2e2e2;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
           justify-content: space-between;
 }
 .container .menu > .item text {

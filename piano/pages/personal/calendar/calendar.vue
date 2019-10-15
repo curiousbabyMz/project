@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<calendar></calendar>
-		<Toggle :items='items'></Toggle>
+		<Toggle :items='items' ></Toggle>
 	</view>
 </template>
 

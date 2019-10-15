@@ -4,10 +4,32 @@
 .navBar > view {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+      -ms-flex: 1;
           flex: 1;
   text-align: center;
 }
+.items {
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-timing-function: ease-out;
+       -o-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+  -webkit-transform-origin: 50% 0 0;
+      -ms-transform-origin: 50% 0 0;
+          transform-origin: 50% 0 0;
+}
 .items > view {
   text-align: center;
+}
+.toggleIn {
+  -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+          transform: scaleY(1);
+}
+.toggleOut {
+  -webkit-transform: scaleY(0);
+      -ms-transform: scaleY(0);
+          transform: scaleY(0);
 }
 
