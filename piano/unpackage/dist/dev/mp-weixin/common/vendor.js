@@ -7489,9 +7489,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!***********************************************!*\
-  !*** F:/Web/Uni-app/project/piano/pages.json ***!
-  \***********************************************/
+/*!**********************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/pages.json ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7593,7 +7593,10 @@ var getPlatformName = function getPlatformName() {
 var getPackName = function getPackName() {
   var packName = '';
   if (getPlatformName() === 'wx' || getPlatformName() === 'qq') {
-    packName = uni.getAccountInfoSync().miniProgram.appId || '';
+    // 兼容微信小程序低版本基础库
+    if (uni.canIUse('getAccountInfoSync')) {
+      packName = uni.getAccountInfoSync().miniProgram.appId || '';
+    }
   }
   return packName;
 };
@@ -8205,7 +8208,7 @@ Stat = /*#__PURE__*/function (_Util) {_inherits(Stat, _Util);_createClass(Stat, 
     _this6 = _possibleConstructorReturn(this, _getPrototypeOf(Stat).call(this));
     _this6.instance = null;
     // 注册拦截器
-    if (typeof uni.addInterceptor === 'function') {
+    if (typeof uni.addInterceptor === 'function' && "development" !== 'development') {
       _this6.addInterceptorInit();
       _this6.interceptLogin();
       _this6.interceptShare(true);
@@ -8389,24 +8392,24 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23320190923002","_inBundle":false,"_integrity":"sha512-MnftsvgOac3q1FCOBPzivbFn8GNQFo7D2DY325HeEZyFCWgx5GEwHpGYjT1PQU6v7DaDn0ruxa3ObdpUIYbmZw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23320190923002.tgz","_shasum":"0c400c140ca0b3c05f52d25f11583cf05a0c4e9a","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"fed4c73fb9142a1b277dd79313939cad90693d3e","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23320190923002"};
+module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2.0.0-alpha-23320190923002","_inBundle":false,"_integrity":"sha512-Tx/EBxz3jI/gKtvaPSUwoLpGcp1BMtKyPxp9iFmX4mRiJbzP6SnrdFJmYdwHLwdtCVDU9DIolB3QtHMbL4+ZHQ==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@alpha","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"alpha","saveSpec":null,"fetchSpec":"alpha"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-23320190923002.tgz","_shasum":"da7ead9bdc4b8e50e142563cd1acb8e7b048d67b","_spec":"@dcloudio/uni-stat@alpha","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"99ef233d7acf114d7aaecd91dbdc983a26bfbc5b","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-23320190923002"};
 
 /***/ }),
 /* 7 */
-/*!****************************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"style"} ***!
-  \****************************************************************/
+/*!***************************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/pages.json?{"type":"style"} ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "uni-app" }, "pages/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": {}, "pages/personal/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
-/*!***************************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"stat"} ***!
-  \***************************************************************/
+/*!**************************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/pages.json?{"type":"stat"} ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8418,62 +8421,56 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 10 */,
 /* 11 */,
 /* 12 */
-/*!***************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/login.js ***!
-  \***************************************************/
+/*!**************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/login.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.auth2Page = exports.getUserAuth = exports.getSetting = exports.wxlogin = exports.login = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _base = __webpack_require__(/*! ./base.js */ 16);
+Object.defineProperty(exports, "__esModule", { value: true });exports.getUserAuth = exports.login = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _base = __webpack_require__(/*! ./base.js */ 16);
 
 
 var _cloudFn = __webpack_require__(/*! ./cloudFn.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 
 
 
-
 var
-login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var islogin, setting, _ref2, userInfo, loginInfo;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            islogin = null;_context.next = 3;return (
+login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var islogin, loginInfo, setting, _ref2, userInfo;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+            islogin = null;_context.prev = 1;_context.next = 4;return (
+
+
+              (0, _cloudFn.wxCloudLogin)());case 4:loginInfo = _context.sent;
+            getApp().globalData.secretInfo = loginInfo;_context.next = 8;return (
+              (0, _base.wxApi)({
+                name: 'getSetting' }));case 8:setting = _context.sent;if (!
+
+            setting.authSetting["scope.userInfo"]) {_context.next = 17;break;}
+            getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 13;return (
+
 
               (0, _base.wxApi)({
-                name: 'getSetting' }));case 3:setting = _context.sent;if (!
+                name: 'getUserInfo' }));case 13:_ref2 = _context.sent;userInfo = _ref2.userInfo;
 
-            setting.authSetting["scope.userInfo"]) {_context.next = 11;break;}
-            getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 8;return (
+            getApp().globalData["userInfo"] = userInfo;
 
-
-              (0, _base.wxApi)({
-                name: 'getUserInfo' }));case 8:_ref2 = _context.sent;userInfo = _ref2.userInfo;
-
-            getApp().globalData["userInfo"] = userInfo;case 11:_context.next = 13;return (
-
-              (0, _cloudFn.wxCloudLogin)());case 13:loginInfo = _context.sent;
-            getApp().globalData.secretInfo = loginInfo;
-            islogin = true;
+            islogin = true;case 17:
 
 
-            if (getApp().loginCB) getApp().loginCB();return _context.abrupt("return",
-            islogin);case 18:case "end":return _context.stop();}}}, _callee, this);}));return function login() {return _ref.apply(this, arguments);};}(),
+            if (getApp().loginCB) {
+              getApp().loginCB();
+            }return _context.abrupt("return",
+            islogin);case 21:_context.prev = 21;_context.t0 = _context["catch"](1);
 
-wxlogin = function wxlogin() {
-  return (0, _base.wxApi)({
-    name: 'login' });
+            console.log(_context.t0);case 24:case "end":return _context.stop();}}}, _callee, this, [[1, 21]]);}));return function login() {return _ref.apply(this, arguments);};}(),
 
-},
-getSetting = function getSetting() {
-  return;
-},
+
 getUserAuth = function getUserAuth(e) {
   console.log(e);
   getApp().globalData.userInfo = e.detail.userInfo;
-  getApp().globalData["userAuth"] = true;
+  this.$state.userAuth = true;
   return /ok/.test(e.detail.errMsg);
-},
-auth2Page = function auth2Page() {
-  this.userAuth = getApp().globalData.userAuth;
-};exports.auth2Page = auth2Page;exports.getUserAuth = getUserAuth;exports.getSetting = getSetting;exports.wxlogin = wxlogin;exports.login = login;
+};exports.getUserAuth = getUserAuth;exports.login = login;
 
 /***/ }),
 /* 13 */
@@ -9266,9 +9263,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 16 */
-/*!**************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/base.js ***!
-  \**************************************************/
+/*!*************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/base.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9313,9 +9310,9 @@ urlStringity = function urlStringity(_ref2)
 
 /***/ }),
 /* 17 */
-/*!*****************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/cloudFn.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/cloudFn.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9455,7 +9452,85 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 21 */,
+/* 21 */
+/*!**************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/state.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var deff = function deff(x, y) {
+  return x !== y;
+};var _default = /*#__PURE__*/function () {
+
+  function _default(obj) {_classCallCheck(this, _default);
+    this.states = {};
+    this.watchs = {};
+    if (obj) {
+      this.setState(obj);
+    }
+  }_createClass(_default, [{ key: "setState", value: function setState(
+    obj) {var _this = this;
+      Object.keys(obj).map(function (each) {
+        if (_this.states[each]) {
+          _this.states[each] = obj[each];
+        } else {
+          _this.watchs[each] = [];
+          var that = _this;
+          Object.defineProperty(_this.states, each, {
+            enmuerable: true,
+            configurable: true,
+            set: function set(newVal) {
+              console.log(this);
+              if (deff(newVal, obj[each])) {
+                obj[each] = newVal;
+                // console.log(that.watchs);
+                that.watchs[each].map(function (_ref)
+
+
+
+                {var obj = _ref.obj,key = _ref.key,fn = _ref.fn;
+                  if (fn) {
+                    fn(newVal);
+                  } else {
+                    obj[key] = newVal;
+                  }
+                });
+              }
+            },
+            get: function get() {
+              return obj[each];
+            } });
+
+          Object.defineProperty(_this, each, {
+            enmuerable: true,
+            configurable: true,
+            set: function set(newVal) {
+              // console.log(this);
+              this.states[each] = newVal;
+            },
+            get: function get() {
+              return obj[each];
+            } });
+
+        }
+      });
+    } }, { key: "setWatch", value: function setWatch(
+    obj, key, keyword) {var fn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      if (this[keyword] !== undefined) {
+        obj[key] = this[keyword];
+        this.watchs[keyword].push({
+          obj: obj,
+          key: key,
+          fn: fn });
+
+      } else {
+        throw Error("state of ".concat(key, " is no defind"));
+      }
+    } }]);return _default;}();exports.default = _default;
+
+/***/ }),
 /* 22 */,
 /* 23 */,
 /* 24 */,
@@ -9477,10 +9552,11 @@ function normalizeComponent (
 /* 40 */,
 /* 41 */,
 /* 42 */,
-/* 43 */
-/*!*****************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/utils/default.js ***!
-  \*****************************************************/
+/* 43 */,
+/* 44 */
+/*!****************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

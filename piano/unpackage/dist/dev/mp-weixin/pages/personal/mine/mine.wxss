@@ -1,22 +1,18 @@
 .flex {
   display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
-      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
-      -ms-flex-align: center;
           align-items: center;
 }
 .container .personal {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
   background: #FFFFFF;
   position: relative;
@@ -24,35 +20,34 @@
 .container .personal .login {
   margin-top: 100rpx;
   z-index: 1;
+  overflow: visible;
 }
 .container .personal .login .head {
   position: relative;
-  width: 166rpx;
-  height: 166rpx;
+  width: 1em;
+  height: 1em;
+  font-size: 150rpx;
 }
 .container .personal .login .head .headImg {
   position: absolute;
   left: 0;
-  right: 0;
+  top: 0;
   background: #FFFFFF;
   border-radius: 50%;
+  width: inherit;
+  height: inherit;
   font-size: 150rpx;
-  width: 150rpx;
-  height: 150rpx;
   color: #5daffb;
-  border: 8rpx solid #5daffb;
+  box-shadow: 0 0 5rpx 5rpx #4481bb62;
 }
 .container .personal .login .head .headIn {
   -webkit-transition: all 0.25s 0.25s ease-out;
-  -o-transition: all 0.25s 0.25s ease-out;
   transition: all 0.25s 0.25s ease-out;
   -webkit-transform: none;
-      -ms-transform: none;
           transform: none;
 }
 .container .personal .login .head .headOut {
   -webkit-transition: all 0.25s ease-out;
-  -o-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
   -webkit-transform: rotateY(90deg);
           transform: rotateY(90deg);
@@ -85,8 +80,8 @@
 }
 .container .personal .sea::after {
   background: #5daffb7c;
-  -webkit-animation-duration: 14s;
-          animation-duration: 14s;
+  -webkit-animation-duration: 11s;
+          animation-duration: 11s;
   -webkit-animation-name: 'sea2';
           animation-name: 'sea2';
   top: 0;
@@ -101,20 +96,16 @@
 .container .menu > .item {
   display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
-      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
-      -ms-flex-align: center;
           align-items: center;
   border-top: 1rpx solid #e2e2e2;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
           justify-content: space-between;
 }
 .container .menu > .item text {

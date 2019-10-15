@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/calendar/calendar",
+    "pages/personal/calendar/calendar",
     "pages/personal/mine/mine"
   ],
   "subPackages": [],
@@ -11,6 +11,5 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap84.json"
+  "usingComponents": {}
 }

@@ -11,11 +11,11 @@
 	export default {
 		data() {
 			return {
-				title: 'Piano Island'
+				title: 'Piano Island',
 			}
 		},
 		onLoad() {
-
+			
 		},
 		methods: {
 

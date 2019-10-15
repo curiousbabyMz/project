@@ -14,9 +14,9 @@
 			<view class="sea"></view>
 		</view>
 		<view class="menu">
-			<view class="calendar item" @click="navTo({url:'../../index/index',data:{k:1}})">
+			<view class="calendar item" @click="navTo({url:'../calendar/calendar',data:{a:1}})">
 				<text class="label">
-					练习足迹
+					足迹
 				</text>
 				<text class="icon_arrowR"></text>
 			</view>
@@ -37,14 +37,14 @@
 		data() {
 			return {
 				userAuth: false,
-				userInfo: null
+				userInfo: null,
 			}
 		},
 		methods: {
 			showPic,
 			navTo,
 			getUserAuth(e) {
-				if (getUserAuth(e)) {
+				if (getUserAuth.call(this, e)) {
 					this.userAuth = true;
 					this.userInfo = getApp().globalData.userInfo;
 				}
@@ -52,10 +52,10 @@
 		},
 		onLoad() {
 			console.log('Mine onLoad');
+			this.$state.setWatch(this, 'userAuth', 'userAuth');
 			this.userInfo = getApp().globalData.userInfo;
 			getApp().loginCB = () => {
 				console.log('loginCB');
-				auth2Page.call(this)
 				this.userInfo = getApp().globalData.userInfo;
 			}
 		},
@@ -78,23 +78,26 @@
 			.login {
 				margin-top: 100rpx;
 				z-index: 1;
+				overflow: visible;
 
 				.head {
 					position: relative;
-					width: 166rpx;
-					height: 166rpx;
+					width: 1em;
+					height: 1em;
+					font-size: 150rpx;
 
 					.headImg {
 						position: absolute;
 						left: 0;
-						right: 0;
+						top: 0;
 						background: #FFFFFF;
 						border-radius: 50%;
+						width: inherit;
+						height: inherit;
 						font-size: 150rpx;
-						width: 150rpx;
-						height: 150rpx;
 						color: @defaultColor;
-						border: 8rpx solid @defaultColor;
+						box-shadow: 0 0 5rpx 5rpx #4481bb62;
+						// border: 8rpx solid @defaultColor;
 					}
 
 					.headIn {
@@ -138,7 +141,7 @@
 
 			.sea::after {
 				background: #5daffb7c;
-				animation-duration: 14s;
+				animation-duration: 11s;
 				animation-name: 'sea2';
 				top: 0;
 				content: "";

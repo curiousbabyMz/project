@@ -1,6 +1,6 @@
 <script>
 	import {
-	login
+		login
 	} from './utils/login.js'
 	export default {
 		globalData: {
@@ -8,7 +8,13 @@
 		},
 		onLaunch: function() {
 			console.log('App Launch')
+			this.$state.setState({
+				userAuth: false
+			})
 			login()
+				.then(r => {
+					this.$state.userAuth = r;
+				})
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -46,13 +52,14 @@
 	}
 
 	@font-face {
-	  font-family: 'iconfont';  /* project id 1449661 */
-	  src: url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.eot');
-	  src: url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.eot?#iefix') format('embedded-opentype'),
-	  url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.woff2') format('woff2'),
-	  url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.woff') format('woff'),
-	  url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.ttf') format('truetype'),
-	  url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.svg#iconfont') format('svg');
+		font-family: 'iconfont';
+		/* project id 1449661 */
+		src: url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.eot');
+		src: url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.eot?#iefix') format('embedded-opentype'),
+			url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.woff2') format('woff2'),
+			url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.woff') format('woff'),
+			url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.ttf') format('truetype'),
+			url('//at.alicdn.com/t/font_1449661_18qbk5m4tcli.svg#iconfont') format('svg');
 	}
 
 	[class*=icon] {
@@ -68,7 +75,8 @@
 	.icon_person1:before {
 		content: "\e62e"
 	}
-	.icon_arrowR:before{
+
+	.icon_arrowR:before {
 		content: '\e65c';
 	}
 </style>
