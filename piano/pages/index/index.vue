@@ -23,7 +23,7 @@
 	}
 </script>
 
-<style>
+<style lang="less" scoped>
 	.content {
 		display: flex;
 		flex-direction: column;

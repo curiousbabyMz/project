@@ -65,7 +65,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	@import '../../../comm/flex.less';
 	@import '../../../comm/color.less';
 

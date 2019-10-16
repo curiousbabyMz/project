@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="calendar">
 		<view class="sumTime flex">
 			<view class="hour">
 				累计练习**小时
@@ -44,7 +44,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.sumTime {
 		justify-content: space-between;
 	}

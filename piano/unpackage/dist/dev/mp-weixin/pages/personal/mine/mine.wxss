@@ -1,34 +1,38 @@
-.flex {
+.flex.data-v-42d1150a {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
           align-items: center;
 }
-.container .personal {
+.container .personal.data-v-42d1150a {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
   background: #FFFFFF;
   position: relative;
 }
-.container .personal .login {
+.container .personal .login.data-v-42d1150a {
   margin-top: 100rpx;
   z-index: 1;
   overflow: visible;
 }
-.container .personal .login .head {
+.container .personal .login .head.data-v-42d1150a {
   position: relative;
   width: 1em;
   height: 1em;
   font-size: 150rpx;
 }
-.container .personal .login .head .headImg {
+.container .personal .login .head .headImg.data-v-42d1150a {
   position: absolute;
   left: 0;
   top: 0;
@@ -38,38 +42,42 @@
   height: inherit;
   font-size: 150rpx;
   color: #5daffb;
-  box-shadow: 0 0 5rpx 5rpx #4481bb62;
+  -webkit-box-shadow: 0 0 5rpx 5rpx #4481bb62;
+          box-shadow: 0 0 5rpx 5rpx #4481bb62;
 }
-.container .personal .login .head .headIn {
+.container .personal .login .head .headIn.data-v-42d1150a {
   -webkit-transition: all 0.25s 0.25s ease-out;
+  -o-transition: all 0.25s 0.25s ease-out;
   transition: all 0.25s 0.25s ease-out;
   -webkit-transform: none;
+      -ms-transform: none;
           transform: none;
 }
-.container .personal .login .head .headOut {
+.container .personal .login .head .headOut.data-v-42d1150a {
   -webkit-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
   -webkit-transform: rotateY(90deg);
           transform: rotateY(90deg);
 }
-.container .personal .login .name {
+.container .personal .login .name.data-v-42d1150a {
   margin-top: 30rpx;
   font-size: 28rpx;
   color: #007AFF;
 }
-.container .personal .sea,
-.container .personal .sea::before,
-.container .personal .sea::after {
+.container .personal .sea.data-v-42d1150a,
+.container .personal .sea.data-v-42d1150a::before,
+.container .personal .sea.data-v-42d1150a::after {
   position: absolute;
   top: -1850rpx;
   width: 2000rpx;
   height: 2000rpx;
   border-radius: 44% 46%;
-  -webkit-animation: 10s sea0 forwards infinite linear;
-          animation: 10s sea0 forwards infinite linear;
+  -webkit-animation: 10s sea0-data-v-42d1150a forwards infinite linear;
+          animation: 10s sea0-data-v-42d1150a forwards infinite linear;
   background: #8aedffdc;
 }
-.container .personal .sea:before {
+.container .personal .sea.data-v-42d1150a:before {
   background: #ffe6b152;
   -webkit-animation-duration: 12s;
           animation-duration: 12s;
@@ -78,7 +86,7 @@
   top: 0;
   content: "";
 }
-.container .personal .sea::after {
+.container .personal .sea.data-v-42d1150a::after {
   background: #5daffb7c;
   -webkit-animation-duration: 11s;
           animation-duration: 11s;
@@ -87,34 +95,38 @@
   top: 0;
   content: "";
 }
-.container .menu {
+.container .menu.data-v-42d1150a {
   padding: 0 50rpx;
   font-size: 34rpx;
   line-height: 100rpx;
   color: #333333;
 }
-.container .menu > .item {
+.container .menu > .item.data-v-42d1150a {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
           align-items: center;
   border-top: 1rpx solid #e2e2e2;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.container .menu > .item text {
+.container .menu > .item text.data-v-42d1150a {
   font-size: 34rpx;
 }
-.container .menu > .item:nth-of-type(1) {
+.container .menu > .item.data-v-42d1150a:nth-of-type(1) {
   border: none;
 }
-@-webkit-keyframes sea0 {
+@-webkit-keyframes sea0-data-v-42d1150a {
 0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -124,7 +136,7 @@
             transform: rotate(360deg);
 }
 }
-@keyframes sea0 {
+@keyframes sea0-data-v-42d1150a {
 0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -134,7 +146,7 @@
             transform: rotate(360deg);
 }
 }
-@-webkit-keyframes sea1 {
+@-webkit-keyframes sea1-data-v-42d1150a {
 0% {
     -webkit-transform: rotate(60deg);
             transform: rotate(60deg);
@@ -144,7 +156,7 @@
             transform: rotate(420deg);
 }
 }
-@keyframes sea1 {
+@keyframes sea1-data-v-42d1150a {
 0% {
     -webkit-transform: rotate(60deg);
             transform: rotate(60deg);
@@ -154,7 +166,7 @@
             transform: rotate(420deg);
 }
 }
-@-webkit-keyframes sea2 {
+@-webkit-keyframes sea2-data-v-42d1150a {
 0% {
     -webkit-transform: rotate(120deg);
             transform: rotate(120deg);
@@ -164,7 +176,7 @@
             transform: rotate(480deg);
 }
 }
-@keyframes sea2 {
+@keyframes sea2-data-v-42d1150a {
 0% {
     -webkit-transform: rotate(120deg);
             transform: rotate(120deg);

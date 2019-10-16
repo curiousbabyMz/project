@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="a">
 		<view class="navBar flex" @click="toggleChange">
 			<view v-for="(item,index) in items" :key="index" :data-i='index'>
 				{{item[current[index]].label||holder[index]}}
@@ -72,17 +72,18 @@
 				this.$emit('change', {
 					value: this.items[this.indexToggle][i],
 					index: i,
+					current:this.indexToggle
 				})
 			},
 		}
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.navBar {
-		// border-bottom: 1rpx solid #C8C7CC;
 
-		&>view {
+		// border-bottom: 1rpx solid #C8C7CC;
+		view {
 			flex: 1;
 			text-align: center;
 		}
@@ -91,6 +92,8 @@
 	.items {
 		transition-property: all;
 		transform-origin: 50% 0 0;
+		max-height: 300rpx;
+		overflow: auto;
 
 		&>view {
 			text-align: center;

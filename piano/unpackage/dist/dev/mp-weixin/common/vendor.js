@@ -7489,9 +7489,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!**********************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/pages.json ***!
-  \**********************************************************/
+/*!***********************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7593,10 +7593,7 @@ var getPlatformName = function getPlatformName() {
 var getPackName = function getPackName() {
   var packName = '';
   if (getPlatformName() === 'wx' || getPlatformName() === 'qq') {
-    // 兼容微信小程序低版本基础库
-    if (uni.canIUse('getAccountInfoSync')) {
-      packName = uni.getAccountInfoSync().miniProgram.appId || '';
-    }
+    packName = uni.getAccountInfoSync().miniProgram.appId || '';
   }
   return packName;
 };
@@ -8208,7 +8205,7 @@ Stat = /*#__PURE__*/function (_Util) {_inherits(Stat, _Util);_createClass(Stat, 
     _this6 = _possibleConstructorReturn(this, _getPrototypeOf(Stat).call(this));
     _this6.instance = null;
     // 注册拦截器
-    if (typeof uni.addInterceptor === 'function' && "development" !== 'development') {
+    if (typeof uni.addInterceptor === 'function') {
       _this6.addInterceptorInit();
       _this6.interceptLogin();
       _this6.interceptShare(true);
@@ -8392,13 +8389,13 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2.0.0-alpha-23320190923002","_inBundle":false,"_integrity":"sha512-Tx/EBxz3jI/gKtvaPSUwoLpGcp1BMtKyPxp9iFmX4mRiJbzP6SnrdFJmYdwHLwdtCVDU9DIolB3QtHMbL4+ZHQ==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@alpha","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"alpha","saveSpec":null,"fetchSpec":"alpha"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-23320190923002.tgz","_shasum":"da7ead9bdc4b8e50e142563cd1acb8e7b048d67b","_spec":"@dcloudio/uni-stat@alpha","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"99ef233d7acf114d7aaecd91dbdc983a26bfbc5b","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-23320190923002"};
+module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23320190923002","_inBundle":false,"_integrity":"sha512-MnftsvgOac3q1FCOBPzivbFn8GNQFo7D2DY325HeEZyFCWgx5GEwHpGYjT1PQU6v7DaDn0ruxa3ObdpUIYbmZw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23320190923002.tgz","_shasum":"0c400c140ca0b3c05f52d25f11583cf05a0c4e9a","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"fed4c73fb9142a1b277dd79313939cad90693d3e","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23320190923002"};
 
 /***/ }),
 /* 7 */
-/*!***************************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/pages.json?{"type":"style"} ***!
-  \***************************************************************************/
+/*!****************************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"style"} ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8407,9 +8404,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 8 */
-/*!**************************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/pages.json?{"type":"stat"} ***!
-  \**************************************************************************/
+/*!***************************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"stat"} ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8421,9 +8418,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 10 */,
 /* 11 */,
 /* 12 */
-/*!**************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/login.js ***!
-  \**************************************************************/
+/*!***************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/login.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9263,9 +9260,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 16 */
-/*!*************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/base.js ***!
-  \*************************************************************/
+/*!**************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/base.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9310,9 +9307,9 @@ urlStringity = function urlStringity(_ref2)
 
 /***/ }),
 /* 17 */
-/*!****************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/cloudFn.js ***!
-  \****************************************************************/
+/*!*****************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/cloudFn.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9453,9 +9450,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 21 */
-/*!**************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/state.js ***!
-  \**************************************************************/
+/*!***************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/state.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9554,9 +9551,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 42 */,
 /* 43 */,
 /* 44 */
-/*!****************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
-  \****************************************************************/
+/*!*****************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/default.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
