@@ -1,46 +1,48 @@
 {
-  "description": "项目配置文件。",
-  "packOptions": {
-    "ignore": []
-  },
-  "setting": {
-    "urlCheck": false,
-    "minified": true,
-    "es6": true
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.7.0",
-  "appid": "wx81d42bdf4fbda5f6",
-  "projectname": "PianoIsland",
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "current": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": 0,
-      "list": [
-        {
-          "name": "我的",
-          "query": "",
-          "id": 0,
-          "pathName": "pages/personal/mine/mine"
-        },
-        {
-          "name": "日历",
-          "query": "",
-          "id": 1,
-          "pathName": "pages/personal/calendar/calendar"
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"minified": true,
+		"es6": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.0",
+	"appid": "wx81d42bdf4fbda5f6",
+	"projectname": "PianoIsland",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"name": "我的",
+					"query": "",
+					"id": 0,
+					"pathName": "pages/personal/mine/mine"
+				},
+				{
+					"name": "日历",
+					"query": "",
+					"id": 1,
+					"pathName": "pages/personal/calendar/calendar"
+				}
+			]
+		}
+	}
 }

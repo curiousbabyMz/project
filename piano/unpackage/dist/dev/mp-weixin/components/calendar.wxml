@@ -1,1 +1,1 @@
-<view><view class="title flex"><view class="month">{{''+month+''}}</view><view class="year">{{''+year+''}}</view></view></view>
+<view><view class="title"><toggle vue-id="1" items="{{title.titleItems}}" holder="{{title.holder}}" index="{{title.index}}" data-event-opts="{{[['^change',[['toggleChange']]]]}}" bind:change="__e" bind:__l="__l"></toggle></view></view>

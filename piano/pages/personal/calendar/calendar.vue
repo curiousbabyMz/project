@@ -9,17 +9,14 @@
 			</view>
 		</view>
 		<calendar></calendar>
-		<Toggle :items='items' ></Toggle>
 	</view>
 </template>
 
 <script>
 	import Calendar from '@/components/calendar.vue'
-	import Toggle from '@/components/toggle.vue'
 	export default {
 		components: {
 			Calendar,
-			Toggle
 		},
 		data() {
 			return {

@@ -5,7 +5,8 @@
 				{{item[current[index]].label||holder[index]}}
 			</view>
 		</view>
-		<view class="items" :class="{toggleIn:visible,toggleOut:!visible}" :style="{transitionDuration:animateTime+'ms'}" @click="itemChange">
+		<view class="items" :class="{toggleIn:visible,toggleOut:!visible}" :style="{transitionDuration:animateTime+'ms'}"
+		 @click="itemChange">
 			<view v-for="(item,index) in items[indexToggle]" :key="index" :data-i='index'>
 				{{item.label}}
 			</view>
@@ -39,9 +40,10 @@
 			};
 		},
 		mounted() {
-			this.current = Array(this.items.length).fill(this.holder ? -1 : 0);
+			this.current = Array(this.items.length).fill(0);
+			if (this.holder) this.current = this.holder.map(each => (each ? -1 : 0));
 			if (this.index) this.current = this.index;
-			console.log(this.current, this.index);
+			console.log(this.current, this.holder, this.items);
 		},
 		methods: {
 			toggleChange(e) {
@@ -58,13 +60,18 @@
 				}
 			},
 			itemChange(e) {
-				this.current[this.indexToggle] = e.target.dataset.i;
+				let i = e.target.dataset.i;
+				this.current[this.indexToggle] = i;
 				this.toggleChange({
 					target: {
 						dataset: {
 							i: this.indexToggle
 						}
 					}
+				})
+				this.$emit('change', {
+					value: this.items[this.indexToggle][i],
+					index: i,
 				})
 			},
 		}
@@ -73,7 +80,7 @@
 
 <style lang="less">
 	.navBar {
-		border-bottom: 1rpx solid #C8C7CC;
+		// border-bottom: 1rpx solid #C8C7CC;
 
 		&>view {
 			flex: 1;
@@ -83,7 +90,6 @@
 
 	.items {
 		transition-property: all;
-		transition-timing-function: ease-out;
 		transform-origin: 50% 0 0;
 
 		&>view {
@@ -92,10 +98,12 @@
 	}
 
 	.toggleIn {
+		transition-timing-function: ease-out;
 		transform: scaleY(1);
 	}
 
 	.toggleOut {
+		transition-timing-function: ease-in;
 		transform: scaleY(0);
 	}
 </style>
