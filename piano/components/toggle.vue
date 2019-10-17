@@ -1,13 +1,13 @@
 <template>
-	<view class="a">
+	<view class="toggle">
 		<view class="navBar flex" @click="toggleChange">
-			<view v-for="(item,index) in items" :key="index" :data-i='index'>
-				{{item[current[index]].label||holder[index]}}
+			<view v-for="(item,index) in toggleItems" :key="index" :data-i='index'>
+				{{item.items[item.index||0].label||item.holder}}
 			</view>
 		</view>
 		<view class="items" :class="{toggleIn:visible,toggleOut:!visible}" :style="{transitionDuration:animateTime+'ms'}"
 		 @click="itemChange">
-			<view v-for="(item,index) in items[indexToggle]" :key="index" :data-i='index'>
+			<view v-for="(item,index) in toggleItems[indexToggle].items" :key="index" :data-i='index'>
 				{{item.label}}
 			</view>
 		</view>
@@ -18,32 +18,35 @@
 	export default {
 		props: {
 			items: {
-				type: Array,
+				type: Object,
 				required: true,
 			},
-			holder: {
-				default: null,
-				type: Array
-			},
-			index: {
-				default: null,
-				type: Array,
-			}
+			// holder: {
+			// 	default: null,
+			// 	type: Array
+			// },
+			// index: {
+			// 	default: null,
+			// 	type: Array,
+			// }
 		},
 		data() {
 			return {
-				indexToggle: -1,
-				current: [0],
+				indexToggle: null,
+				toggleItems: null,
+				// current: [0],
 				visible: false,
 				action: false,
 				animateTime: 200
 			};
 		},
 		mounted() {
+			console.log(this.items);
+			this.toggleItems = this.items;
+			return
 			this.current = Array(this.items.length).fill(0);
 			if (this.holder) this.current = this.holder.map(each => (each ? -1 : 0));
 			if (this.index) this.current = this.index;
-			console.log(this.current, this.holder, this.items);
 		},
 		methods: {
 			toggleChange(e) {
@@ -54,14 +57,14 @@
 				} else {
 					this.visible = sw;
 					let t = setTimeout(() => {
-						this.indexToggle = -1;
+						this.indexToggle = null;
 						clearTimeout(t);
 					}, this.animateTime)
 				}
 			},
 			itemChange(e) {
 				let i = e.target.dataset.i;
-				this.current[this.indexToggle] = i;
+				this.toggleItems[this.indexToggle].index = i;
 				this.toggleChange({
 					target: {
 						dataset: {
@@ -70,9 +73,9 @@
 					}
 				})
 				this.$emit('change', {
-					value: this.items[this.indexToggle][i],
 					index: i,
-					current:this.indexToggle
+					value: this.toggleItems[this.indexToggle].items[i],
+					toggle: this.indexToggle
 				})
 			},
 		}
@@ -80,23 +83,30 @@
 </script>
 
 <style lang="less" scoped>
-	.navBar {
+	.toggle {
+		position: relative;
 
-		// border-bottom: 1rpx solid #C8C7CC;
-		view {
-			flex: 1;
-			text-align: center;
+		.navBar {
+			// border-bottom: 1rpx solid #C8C7CC;
+
+			&>view {
+				flex: 1;
+				text-align: center;
+			}
 		}
-	}
 
-	.items {
-		transition-property: all;
-		transform-origin: 50% 0 0;
-		max-height: 300rpx;
-		overflow: auto;
+		.items {
+			transition-property: all;
+			transform-origin: 50% 0 0;
+			max-height: 300rpx;
+			overflow: auto;
+			position: absolute;
+			width: 100%;
+			background: #ffffffaa;
 
-		&>view {
-			text-align: center;
+			&>view {
+				text-align: center;
+			}
 		}
 	}
 

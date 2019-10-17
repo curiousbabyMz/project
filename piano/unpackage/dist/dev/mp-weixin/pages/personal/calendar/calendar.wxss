@@ -1,7 +1,19 @@
-.sumTime.data-v-0ae3ec6a {
+.calendar.data-v-6edac7b4 {
+  padding: 0 30rpx;
+  color: #333333;
+}
+.calendar .sumTime.data-v-6edac7b4 {
+  margin-top: 30rpx;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
           justify-content: space-between;
+  font-size: 30rpx;
+  line-height: 1.8rem;
+  border-bottom: 1rpx solid #e2e2e2;
+}
+.calendar .sumTime .time.data-v-6edac7b4 {
+  font-size: 38rpx;
+  padding: 0 10rpx;
+  color: #5DDCEB;
 }
 
