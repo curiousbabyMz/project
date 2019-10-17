@@ -58,8 +58,8 @@
   color: #007AFF;
 }
 .container .personal .sea.data-v-30cd7e74,
-.container .personal .sea.data-v-30cd7e74::before,
-.container .personal .sea.data-v-30cd7e74::after {
+.container .personal .sea1.data-v-30cd7e74,
+.container .personal .sea2.data-v-30cd7e74 {
   position: absolute;
   top: -1850rpx;
   width: 2000rpx;
@@ -69,21 +69,17 @@
           animation: 10s sea0-data-v-30cd7e74 forwards infinite linear;
   background: #8aedffdc;
 }
-.container .personal .sea.data-v-30cd7e74:before {
+.container .personal .sea1.data-v-30cd7e74 {
   background: #ffe6b152;
-  -webkit-animation-duration: 12s;
-          animation-duration: 12s;
-  -webkit-animation-name: 'sea1';
-          animation-name: 'sea1';
+  -webkit-animation: 12s sea1-data-v-30cd7e74 forwards infinite linear;
+          animation: 12s sea1-data-v-30cd7e74 forwards infinite linear;
   top: 0;
   content: "";
 }
-.container .personal .sea.data-v-30cd7e74::after {
+.container .personal .sea2.data-v-30cd7e74 {
   background: #5daffb7c;
-  -webkit-animation-duration: 11s;
-          animation-duration: 11s;
-  -webkit-animation-name: 'sea2';
-          animation-name: 'sea2';
+  -webkit-animation: 14s sea2-data-v-30cd7e74 forwards infinite linear;
+          animation: 14s sea2-data-v-30cd7e74 forwards infinite linear;
   top: 0;
   content: "";
 }

@@ -11,9 +11,18 @@
 					<text v-else>登录</text>
 				</view>
 			</button>
-			<view class="sea"></view>
+			<view class="sea">
+				<view class="sea1"></view>
+				<view class="sea2"></view>
+			</view>
 		</view>
 		<view class="menu">
+			<view class="item">
+				<text class="label">
+					打卡
+				</text>
+				<text class="icon_arrowR"></text>
+			</view>
 			<view class="calendar item" @click="navTo({url:'../calendar/calendar',data:{a:1}})">
 				<text class="label">
 					足迹
@@ -119,8 +128,8 @@
 			}
 
 			.sea,
-			.sea::before,
-			.sea::after {
+			.sea1,
+			.sea2 {
 				position: absolute;
 				top: -1850rpx;
 				width: 2000rpx;
@@ -131,18 +140,16 @@
 				background: #8aedffdc;
 			}
 
-			.sea:before {
+			.sea1 {
 				background: #ffe6b152;
-				animation-duration: 12s;
-				animation-name: 'sea1';
+				animation: 12s sea1 forwards infinite linear;
 				top: 0;
 				content: "";
 			}
 
-			.sea::after {
+			.sea2 {
 				background: #5daffb7c;
-				animation-duration: 11s;
-				animation-name: 'sea2';
+				animation: 14s sea2 forwards infinite linear;
 				top: 0;
 				content: "";
 			}

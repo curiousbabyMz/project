@@ -149,6 +149,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
 var _login = __webpack_require__(/*! ../../../utils/login.js */ 12);
 
 
@@ -179,13 +188,16 @@ var _default2 = __webpack_require__(/*! ../../../utils/default.js */ 44); //
 //
 //
 //
-var _default = { data: function data() {return { userAuth: false, userInfo: null };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}} }, onLoad: function onLoad() {var _this = this;console.log('Mine onLoad');this.$state.setWatch(this, 'userAuth', 'userAuth');this.userInfo = getApp().globalData.userInfo;getApp().loginCB = function () {console.log('loginCB');
-      _this.userInfo = getApp().globalData.userInfo;
-    };
-  },
-  onShow: function onShow() {
-
-  } };exports.default = _default;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { userAuth: false, userInfo: null };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}} }, onLoad: function onLoad() {var _this = this;console.log('Mine onLoad');this.$state.setWatch(this, 'userAuth', 'userAuth');this.userInfo = getApp().globalData.userInfo;getApp().loginCB = function () {console.log('loginCB');_this.userInfo = getApp().globalData.userInfo;};}, onShow: function onShow() {} };exports.default = _default;
 
 /***/ }),
 
