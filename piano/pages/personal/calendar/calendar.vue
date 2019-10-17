@@ -56,7 +56,7 @@
 	@import '../../../comm/color.less';
 
 	.calendar {
-		padding: 0 30rpx;
+		padding: 30rpx;
 		color: #333333;
 
 		.sumTime {

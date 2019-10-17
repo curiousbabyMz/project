@@ -16,16 +16,34 @@
 				<view class="sea2"></view>
 			</view>
 		</view>
-		<view class="menu">
-			<view class="item">
-				<text class="label">
-					打卡
-				</text>
-				<text class="icon_arrowR"></text>
+		<view class="exercise">
+			<view @click="clockChange()">
+				<view class="clockIn flex">
+					<text :class="['icon_note',{play:exercise.clockState}]"></text>
+					<view :class="['border',{play:exercise.clockState}]"></view>
+				</view>
+				<view class="tip">
+					<text v-if="!exercise.clockState">开始练琴</text>
+					<text v-else>结束练琴</text>
+				</view>
 			</view>
+			<view class="timeing">
+				<view class="long">{{exercise.long}}</view>
+				<view class="progress">
+					<view :class="['point',{done:exercise.start}]"></view>
+					<view :class="['line',{done:exercise.end}]"></view>
+					<view :class="['point',{done:exercise.end}]"></view>
+				</view>
+				<view class="time">
+					<view class="start">{{exercise.start.slice(-8)}}</view>
+					<view class="end">{{exercise.end.slice(-8)}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="menu">
 			<view class="calendar item" @click="navTo({url:'../calendar/calendar',data:{a:1}})">
 				<text class="label">
-					足迹
+					我的足迹
 				</text>
 				<text class="icon_arrowR"></text>
 			</view>
@@ -47,6 +65,13 @@
 			return {
 				userAuth: false,
 				userInfo: null,
+				exercise: {
+					clock: null,
+					clockState: false,
+					start: '',
+					end: '',
+					long: '00:00:00',
+				}
 			}
 		},
 		methods: {
@@ -57,6 +82,48 @@
 					this.userAuth = true;
 					this.userInfo = getApp().globalData.userInfo;
 				}
+			},
+			clockChange(history = false) {
+				if(!history)this.exercise.clockState = !this.exercise.clockState;
+				if (this.exercise.clockState) {
+					console.log(this.exercise);
+					this.exercise.end = '';
+					this.exercise.clockState = true;
+					let tick = new Date(0, 0, 0);
+					if (history) {
+						tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000)
+					} else {
+						this.exercise.start = new Date().toLocaleString('chinese', {
+							hour12: false
+						});
+					}
+					this.exercise.long = tick.toLocaleString('chinese', {
+						hour12: false
+					}).slice(-8)
+					this.exercise.clock = setInterval(() => {
+						tick.setSeconds(tick.getSeconds() + 1);
+						console.log(1);
+						this.exercise.long = tick.toLocaleString('chinese', {
+							hour12: false
+						}).slice(-8);
+						if (tick.getHours() > 23) {
+							this.clockChange();
+						}
+					}, 1000)
+				} else {
+					this.exercise.end = new Date().toLocaleString('chinese', {
+						hour12: false
+					});
+					this.exercise.clockState = false;
+					clearInterval(this.exercise.clock);
+					this.updateLog();
+				}
+			},
+			updateLog() {
+				uni.setStorage({
+					key: 'exercise',
+					data: this.exercise
+				})
 			},
 		},
 		onLoad() {
@@ -69,7 +136,25 @@
 			}
 		},
 		onShow() {
-
+			let history = uni.getStorageSync('exercise')
+			if (history) {
+				this.exercise = history;
+				this.clockChange(true);
+			}
+		},
+		onHide() {
+			clearInterval(this.exercise.clock)
+			uni.setStorage({
+				key: 'exercise',
+				data: this.exercise
+			})
+		},
+		onUnload() {
+			clearInterval(this.exercise.clock)
+			uni.setStorage({
+				key: 'exercise',
+				data: this.exercise
+			})
 		}
 	}
 </script>
@@ -79,6 +164,8 @@
 	@import '../../../comm/color.less';
 
 	.container {
+		color: #333;
+
 		.personal {
 			flex-flow: column nowrap;
 			background: #FFFFFF;
@@ -155,11 +242,113 @@
 			}
 		}
 
+		.white.button-hover {
+			filter: brightness(0.8);
+		}
+
+
+
+		.exercise {
+			height: 300rpx;
+
+			.clockIn {
+				@c: #41C3CC;
+
+				position: relative;
+				font-size: 50rpx;
+				// width: 2em;
+				height: 2em;
+				// border-radius: 50%;
+				// border: 4rpx solid @c;
+				// border-color: @c #41CC96;
+				color: @c ;
+				margin: 30rpx auto 10rpx;
+
+
+				&>text {
+					position: absolute;
+					font-size: inherit;
+					animation-name: note;
+					animation-duration: 0.8s;
+					animation-iteration-count: infinite;
+					animation-direction: alternate;
+					animation-timing-function: ease-in-out;
+					animation-play-state: paused;
+				}
+
+				.border {
+					position: absolute;
+					width: 2em;
+					height: 2em;
+					border-radius: 50%;
+					border: 5rpx solid @c;
+					border-color: @c #41CC96 #57AED6 #57BAD6;
+					animation-name: noteBorder;
+					animation-duration: 2s;
+					animation-iteration-count: infinite;
+					animation-timing-function: linear;
+					animation-play-state: paused;
+				}
+
+				.play {
+					animation-play-state: running;
+				}
+			}
+
+			.tip {
+				font-size: 28rpx;
+				text-align: center;
+				margin-bottom: 20rpx;
+			}
+
+			.timeing {
+				font-size: 30rpx;
+
+				.long {
+					line-height: 1.8rem;
+					text-align: center;
+					font-size: 32rpx;
+				}
+
+				.progress {
+					.flex();
+
+					.point {
+						content: '';
+						padding: 10rpx;
+						border-radius: 50%;
+						background: #E2E2E2;
+						z-index: 1;
+					}
+
+					.line {
+						width: 300rpx;
+						height: 10rpx;
+						background: #E2E2E2;
+						margin: 0 -10rpx;
+					}
+
+					.done {
+						background: #6C73FF;
+					}
+				}
+
+				.time {
+					.flex();
+					justify-content: space-between;
+					width: 450rpx;
+					line-height: 2rem;
+					margin: 0 auto;
+				}
+			}
+
+		}
+
 		.menu {
+			margin-top: 50rpx;
 			padding: 0 50rpx;
 			font-size: 34rpx;
-			line-height: 100rpx;
-			color: #333333;
+			line-height: 80rpx;
 
 			&>.item {
 				.flex();
@@ -177,15 +366,35 @@
 		}
 	}
 
+	@keyframes note {
+		0% {
+			transform: translateY(5rpx);
+		}
+
+		100% {
+			transform: translateY(-5px);
+		}
+	}
+
+	@keyframes noteBorder {
+		0% {
+			transform: none;
+		}
+
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
 	.loop(@i)when(@i<3) {
 
 		@keyframes ~'sea@{i}' {
 			0% {
-				transform: rotate(@i*60deg)
+				transform: rotate(@i*20deg)
 			}
 
 			100% {
-				transform: rotate(@i*60+360deg)
+				transform: rotate(@i*20+360deg)
 			}
 		}
 

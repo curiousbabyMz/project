@@ -1,5 +1,6 @@
+import env from '../config/server.js'
 wx.cloud.init({
-	env: 'cloud1-dbe5a2'
+	env
 })
 var cloudFn = ({
 	name,
