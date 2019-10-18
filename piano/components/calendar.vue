@@ -88,6 +88,7 @@
 			};
 		},
 		created() {
+			console.log('created');
 			let now = new Date(),
 				yearsNum = 50; //年份数
 			this.title.month.items = Array(12).fill(1).map((each, i) => ({
@@ -131,7 +132,7 @@
 							date: each,
 							month: this.current.getMonth(),
 							year: this.current.getFullYear(),
-							mark: this.marks.some(mark => (mark.date === each && mark.month === this.current.getMonth()+1 && mark.year ===
+							mark: this.marks.some(mark => (mark.date === each && mark.month === this.current.getMonth() + 1 && mark.year ===
 								this.current.getFullYear()))
 						})
 					})
@@ -213,6 +214,7 @@
 						background: #2c80ff;
 						color: #fff;
 						box-shadow: 0 1rpx 1rpx 1rpx #1e385044;
+						border: none;
 					}
 
 					.mark {

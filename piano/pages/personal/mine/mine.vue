@@ -22,13 +22,13 @@
 					<text :class="['icon_note',{play:exercise.clockState}]"></text>
 					<view :class="['border',{play:exercise.clockState}]"></view>
 				</view>
-				<view class="tip">
+				<!-- <view class="tip">
 					<text v-if="!exercise.clockState">开始练琴</text>
 					<text v-else>结束练琴</text>
-				</view>
+				</view> -->
 			</view>
 			<view class="timeing">
-				<view class="long">{{exercise.long}}</view>
+				<view class="duration">{{exercise.duration.slice(-8)}}</view>
 				<view class="progress">
 					<view :class="['point',{done:exercise.start}]"></view>
 					<view :class="['line',{done:exercise.end}]"></view>
@@ -60,6 +60,9 @@
 		showPic,
 		navTo
 	} from '../../../utils/default.js'
+	import {
+		cloudFn
+	} from '../../../utils/cloudFn.js'
 	export default {
 		data() {
 			return {
@@ -70,7 +73,7 @@
 					clockState: false,
 					start: '',
 					end: '',
-					long: '00:00:00',
+					duration: '00:00:00',
 				}
 			}
 		},
@@ -84,7 +87,7 @@
 				}
 			},
 			clockChange(history = false) {
-				if(!history)this.exercise.clockState = !this.exercise.clockState;
+				if (!history) this.exercise.clockState = !this.exercise.clockState;
 				if (this.exercise.clockState) {
 					console.log(this.exercise);
 					this.exercise.end = '';
@@ -97,15 +100,15 @@
 							hour12: false
 						});
 					}
-					this.exercise.long = tick.toLocaleString('chinese', {
+					this.exercise.duration = tick.toLocaleString('chinese', {
 						hour12: false
-					}).slice(-8)
+					})
 					this.exercise.clock = setInterval(() => {
 						tick.setSeconds(tick.getSeconds() + 1);
 						console.log(1);
-						this.exercise.long = tick.toLocaleString('chinese', {
+						this.exercise.duration = tick.toLocaleString('chinese', {
 							hour12: false
-						}).slice(-8);
+						});
 						if (tick.getHours() > 23) {
 							this.clockChange();
 						}
@@ -119,12 +122,31 @@
 					this.updateLog();
 				}
 			},
+			getLogs() {
+				cloudFn({
+						name: 'getLogs',
+						data: {
+							size: 1,
+							current: 1,
+						}
+					})
+					.then(r => {})
+			},
 			updateLog() {
 				uni.setStorage({
 					key: 'exercise',
 					data: this.exercise
 				})
-			},
+				cloudFn({
+						name: 'uploadLog',
+						data: {
+							start: this.exercise.start,
+							end: this.exercise.end,
+							duration: this.exercise.end.getTime() - this.exercise.start.getTime()
+						}
+					})
+					.then(r => {})
+			}
 		},
 		onLoad() {
 			console.log('Mine onLoad');
@@ -304,7 +326,7 @@
 			.timeing {
 				font-size: 30rpx;
 
-				.long {
+				.duration {
 					line-height: 1.8rem;
 					text-align: center;
 					font-size: 32rpx;
