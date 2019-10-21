@@ -1,6 +1,6 @@
 <template>
 	<view class="calendar">
-		<calendar v-if="marks" :SundayFirst="true" :marks='marks' @change='calendarChange'></calendar>
+		<calendar ref='calendar' :SundayFirst="true" :marks='marks' @change='calendarChange' @dateChange='dateSelect'></calendar>
 		<view class="sumTime flex">
 			<view class="hour">
 				<text>已练习</text>
@@ -28,17 +28,23 @@
 		},
 		data() {
 			return {
-				marks: null,
+				marks: [],
 				sumTime: 0,
-				sumDay: 0
+				sumDay: 0,
+				exercises: []
 			}
 		},
 		methods: {
 			calendarChange(e) {
 				console.log(e);
 			},
+			dateSelect(e) {
+				console.log(e);
+			},
+			getLogDetail(time){
+				
+			},
 			getLogs() {
-				let theMonth = new Date().getMonth();
 				cloudFn({
 						name: 'getLogs',
 						data: {
@@ -46,30 +52,41 @@
 						},
 					})
 					.then(r => {
-						let marks = [],
-							sumTime = 0;
-						r.result.data.map(each => {
+						let marks = []
+						this.exercises = r.result.data;
+						this.exercises.map(each => {
 							let date = new Date(each.start);
-							if (date.getMonth() === theMonth) {
-								marks.push({
-									date: date.getDate(),
-									month: date.getMonth() + 1,
-									year: date.getFullYear()
-								})
-							}
-							sumTime += (new Date(each.end).getTime() - date.getTime()) / 1000 / 60 / 60;
+							marks.push({
+								date: date.getDate(),
+								month: date.getMonth() + 1,
+								year: date.getFullYear()
+							})
 						})
 						this.marks = [...new Set(marks)];
-						this.sumTime = Math.floor(sumTime);
-						this.sumDay = marks.length;
+						//渲染先于赋值，原因未明
+						let t = setTimeout(() => {
+							this.$refs.calendar.getDates();
+							clearTimeout(t)
+						}, 0)
+					})
+			},
+			getSumInfo() {
+				cloudFn({
+						name: 'getSumInfo',
+						// log: true
+					})
+					.then(r => {
+						this.sumDay = r.result.sumDay;
+						this.sumTime = r.result.sumTime;
 					})
 			}
 		},
 		onLoad() {
-			// this.getLogs()
+
 		},
 		onShow() {
 			this.getLogs()
+			this.getSumInfo()
 		}
 	}
 </script>

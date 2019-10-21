@@ -20,7 +20,7 @@ export default class {
 					enmuerable: true,
 					configurable: true,
 					set(newVal) {
-						console.log(this);
+						// console.log(this);
 						if (deff(newVal, obj[each])) {
 							obj[each] = newVal;
 							// console.log(that.watchs);

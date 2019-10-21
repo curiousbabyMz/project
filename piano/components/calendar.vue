@@ -35,7 +35,6 @@
 			},
 			marks: {
 				type: Array,
-				default: []
 			}
 		},
 		data() {
@@ -106,11 +105,13 @@
 
 			this.current = now;
 			// this.date = now.getDate()
-			// this.month = now.getMonth()
-			// this.year = now.getFullYear()
+			this.month = now.getMonth()
+			this.year = now.getFullYear()
 
 			this.title.month.index = now.getMonth();
 			this.title.year.index = yearsNum - 1;
+		},
+		mounted() {
 			this.getDates();
 		},
 		methods: {
@@ -120,7 +121,7 @@
 				})
 				let first = new Date(this.current.getFullYear(), this.current.getMonth(), 1),
 					last = new Date(this.current.getFullYear(), this.current.getMonth() + 1, 0);
-				console.log(first, last);
+				// console.log(first, last);
 				Array(first.getDay() - (this.SundayFirst ? 0 : 1)).fill(0).map((each, i) => {
 					this.week[i].list.push({
 						date: ''
@@ -136,10 +137,20 @@
 								this.current.getFullYear()))
 						})
 					})
+				this.$emit('change', {
+					month: this.current.getMonth() + 1,
+					year: this.current.getFullYear(),
+				});
 			},
 			toggleChange(e) {
-				console.log(e);
-				this.current['month' == e.toggle ? 'setMonth' : 'setFullYear'](e.value.id);
+				// console.log(e);
+				if ('month' === e.toggle) {
+					this.current.setMonth(e.value.id);
+				}
+				if ('year' === e.toggle) {
+					this.current.setFullYear(e.value.id);
+				}
+				// this.current['month' == e.toggle ? 'setMonth' : 'setFullYear'](e.value.id);
 				this.getDates()
 			},
 			dayChange(day) {
@@ -147,7 +158,11 @@
 				this.date = this.current.getDate()
 				this.month = this.current.getMonth()
 				this.year = this.current.getFullYear()
-				this.$emit('change', this.current)
+				this.$emit('dateChange', {
+					date: this.date,
+					month: this.month + 1,
+					year: this.year
+				})
 			}
 		}
 	}

@@ -148,7 +148,7 @@ var _default =
 
   },
   mounted: function mounted() {
-    console.log(this.items);
+    // console.log(this.items);
     this.toggleItems = this.items;
     return;
     this.current = Array(this.items.length).fill(0);

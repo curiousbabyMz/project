@@ -250,10 +250,13 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17); //
 //
 //
 //
-var _default = { data: function data() {return { userAuth: false, userInfo: null, exercise: { clock: null, clockState: false, start: '', end: '', duration: '00:00:00' } };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}}, clockChange: function clockChange() {var _this = this;var history = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;if (!history) this.exercise.clockState = !this.exercise.clockState;if (this.exercise.clockState) {console.log(this.exercise);this.exercise.end = '';this.exercise.clockState = true;var tick = new Date(0, 0, 0);if (history) {tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000);} else {this.exercise.start = new Date().toLocaleString('chinese', { hour12: false });}this.exercise.duration = tick.toLocaleString('chinese', { hour12: false });this.exercise.clock = setInterval(function () {tick.setSeconds(tick.getSeconds() + 1);console.log(1);_this.exercise.duration = tick.toLocaleString('chinese', { hour12: false });if (tick.getHours() > 23) {_this.clockChange();}}, 1000);} else {
-        this.exercise.end = new Date().toLocaleString('chinese', {
-          hour12: false });
+var _default = { data: function data() {return { userAuth: false, userInfo: null, exercise: { clock: null, clockState: false, start: '', end: '', duration: '00:00:00' } };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}}, clockChange: function clockChange() {var _this = this;var history = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;if (!history) this.exercise.clockState = !this.exercise.clockState;if (this.exercise.clockState) {console.log(this.exercise);this.exercise.end = '';this.exercise.clockState = true;this.exercise.uploaded = false;var tick = new Date(0, 0, 0, 0, 0, 1);if (history) {tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000);} else {this.exercise.start = new Date().toLocaleString('chinese', { hour12: false });}this.exercise.duration = tick.toLocaleString('chinese', { hour12: false });this.exercise.clock = setInterval(function () {tick.setSeconds(tick.getSeconds() + 1); // console.log(1);
+          _this.exercise.duration = tick.toLocaleString('chinese', { hour12: false });if (tick.getHours() > 23) {_this.clockChange();}}, 1000);} else {
+        if (!history) {
+          this.exercise.end = new Date().toLocaleString('chinese', {
+            hour12: false });
 
+        }
         this.exercise.clockState = false;
         clearInterval(this.exercise.clock);
         this.updateLog();
@@ -269,29 +272,32 @@ var _default = { data: function data() {return { userAuth: false, userInfo: null
 
       then(function (r) {});
     },
-    updateLog: function updateLog() {
-      uni.setStorage({
-        key: 'exercise',
-        data: this.exercise });
-
+    updateLog: function updateLog() {var _this2 = this;
+      if (this.exercise.uploaded) return;
       (0, _cloudFn.cloudFn)({
         name: 'uploadLog',
         data: {
           start: this.exercise.start,
           end: this.exercise.end,
-          duration: this.exercise.end.getTime() - this.exercise.start.getTime() } }).
+          duration: new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime() } }).
 
 
-      then(function (r) {});
+      then(function (r) {
+        _this2.exercise.uploaded = true;
+        uni.setStorage({
+          key: 'exercise',
+          data: _this2.exercise });
+
+      });
     } },
 
-  onLoad: function onLoad() {var _this2 = this;
+  onLoad: function onLoad() {var _this3 = this;
     console.log('Mine onLoad');
     this.$state.setWatch(this, 'userAuth', 'userAuth');
     this.userInfo = getApp().globalData.userInfo;
     getApp().loginCB = function () {
       console.log('loginCB');
-      _this2.userInfo = getApp().globalData.userInfo;
+      _this3.userInfo = getApp().globalData.userInfo;
     };
   },
   onShow: function onShow() {

@@ -692,24 +692,11 @@ function initHooks(mpOptions, hooks, vueOptions) {
 }
 
 function initVueComponent(Vue, vueOptions) {
-  var inputVueOptions = vueOptions; //方便调试
   vueOptions = vueOptions.default || vueOptions;
   var VueComponent;
   if (isFn(vueOptions)) {
     VueComponent = vueOptions;
     vueOptions = VueComponent.extendOptions;
-    //#region 往 vueOptions 中补充定义在父组件中但未定义在子组件中的 prop  
-    // let defaultInputVueOptions = inputVueOptions['default'];  
-    // if (defaultInputVueOptions && defaultInputVueOptions.options && defaultInputVueOptions.options.props) {  
-    //     if (!vueOptions.props) vueOptions.props = {};  
-    //     let propsInDefaultInputVueOptions = defaultInputVueOptions.options.props;  
-    //     for (var oneProp in propsInDefaultInputVueOptions) {  
-    //         if (!vueOptions.props[oneProp]) {  
-    //             vueOptions.props[oneProp] = propsInDefaultInputVueOptions[oneProp];  
-    //         }  
-    //     }  
-    // }  
-    //#endregion  
   } else {
     VueComponent = Vue.extend(vueOptions);
   }
@@ -746,7 +733,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6991,7 +6978,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7012,14 +6999,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7095,7 +7082,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8416,7 +8403,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "usingComponents": {} }, "pages/personal/calendar/calendar": { "usingComponents": { "calendar": "/components/calendar" } }, "pages/personal/mine/mine": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": {}, "pages/personal/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -9286,12 +9273,13 @@ if (hadRuntime) {
 Object.defineProperty(exports, "__esModule", { value: true });exports.urlStringity = exports.urlParse = exports.wxApi = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var
 wxApi = function wxApi(_ref) {var
   name = _ref.name,
-  data = _ref.data;return (
+  data = _ref.data,_ref$log = _ref.
+  log,log = _ref$log === void 0 ? false : _ref$log;return (
 
     new Promise(function (resolve, reject) {
       wx[name](Object.assign(data || {}, {
         success: function success(r) {
-          console.log(r);
+          if (log) console.log(r);
           resolve(r);
         },
         fail: function fail(e) {
@@ -9338,13 +9326,14 @@ var
 cloudFn = function cloudFn(_ref)
 
 
-{var name = _ref.name,data = _ref.data;
+
+{var name = _ref.name,data = _ref.data,_ref$log = _ref.log,log = _ref$log === void 0 ? false : _ref$log;
   return wx.cloud.callFunction({
     name: name,
     data: data }).
 
   then(function (r) {
-    console.log(r);
+    if (log) console.log(r);
     return r;
   });
 },
@@ -9518,7 +9507,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
             enmuerable: true,
             configurable: true,
             set: function set(newVal) {
-              console.log(this);
+              // console.log(this);
               if (deff(newVal, obj[each])) {
                 obj[each] = newVal;
                 // console.log(that.watchs);

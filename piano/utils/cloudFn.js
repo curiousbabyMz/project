@@ -5,14 +5,15 @@ wx.cloud.init({
 export var
 	cloudFn = ({
 		name,
-		data
+		data,
+		log=false
 	}) => {
 		return wx.cloud.callFunction({
 				name,
 				data
 			})
 			.then(r => {
-				console.log(r)
+				if(log)console.log(r)
 				return r
 			})
 	},

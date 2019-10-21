@@ -143,7 +143,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 49));};var _default =
+var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 63));};var _default =
 
 
 {
@@ -152,17 +152,23 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
 
   data: function data() {
     return {
-      marks: null,
+      marks: [],
       sumTime: 0,
-      sumDay: 0 };
+      sumDay: 0,
+      exercises: [] };
 
   },
   methods: {
     calendarChange: function calendarChange(e) {
       console.log(e);
     },
+    dateSelect: function dateSelect(e) {
+      console.log(e);
+    },
+    getLogDetail: function getLogDetail(time) {
+
+    },
     getLogs: function getLogs() {var _this = this;
-      var theMonth = new Date().getMonth();
       (0, _cloudFn.cloudFn)({
         name: 'getLogs',
         data: {
@@ -170,30 +176,41 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
         } }).
 
       then(function (r) {
-        var marks = [],
-        sumTime = 0;
-        r.result.data.map(function (each) {
+        var marks = [];
+        _this.exercises = r.result.data;
+        _this.exercises.map(function (each) {
           var date = new Date(each.start);
-          if (date.getMonth() === theMonth) {
-            marks.push({
-              date: date.getDate(),
-              month: date.getMonth() + 1,
-              year: date.getFullYear() });
+          marks.push({
+            date: date.getDate(),
+            month: date.getMonth() + 1,
+            year: date.getFullYear() });
 
-          }
-          sumTime += (new Date(each.end).getTime() - date.getTime()) / 1000 / 60 / 60;
         });
         _this.marks = _toConsumableArray(new Set(marks));
-        _this.sumTime = Math.floor(sumTime);
-        _this.sumDay = marks.length;
+        //渲染先于赋值，原因未明
+        var t = setTimeout(function () {
+          _this.$refs.calendar.getDates();
+          clearTimeout(t);
+        }, 0);
+      });
+    },
+    getSumInfo: function getSumInfo() {var _this2 = this;
+      (0, _cloudFn.cloudFn)({
+        name: 'getSumInfo'
+        // log: true
+      }).
+      then(function (r) {
+        _this2.sumDay = r.result.sumDay;
+        _this2.sumTime = r.result.sumTime;
       });
     } },
 
   onLoad: function onLoad() {
-    // this.getLogs()
+
   },
   onShow: function onShow() {
     this.getLogs();
+    this.getSumInfo();
   } };exports.default = _default;
 
 /***/ }),

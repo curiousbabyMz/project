@@ -92,7 +92,8 @@
 					console.log(this.exercise);
 					this.exercise.end = '';
 					this.exercise.clockState = true;
-					let tick = new Date(0, 0, 0);
+					this.exercise.uploaded = false;
+					let tick = new Date(0, 0, 0, 0, 0, 1);
 					if (history) {
 						tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000)
 					} else {
@@ -105,7 +106,7 @@
 					})
 					this.exercise.clock = setInterval(() => {
 						tick.setSeconds(tick.getSeconds() + 1);
-						console.log(1);
+						// console.log(1);
 						this.exercise.duration = tick.toLocaleString('chinese', {
 							hour12: false
 						});
@@ -114,9 +115,11 @@
 						}
 					}, 1000)
 				} else {
-					this.exercise.end = new Date().toLocaleString('chinese', {
-						hour12: false
-					});
+					if (!history) {
+						this.exercise.end = new Date().toLocaleString('chinese', {
+							hour12: false
+						});
+					}
 					this.exercise.clockState = false;
 					clearInterval(this.exercise.clock);
 					this.updateLog();
@@ -133,19 +136,22 @@
 					.then(r => {})
 			},
 			updateLog() {
-				uni.setStorage({
-					key: 'exercise',
-					data: this.exercise
-				})
+				if (this.exercise.uploaded) return;
 				cloudFn({
 						name: 'uploadLog',
 						data: {
 							start: this.exercise.start,
 							end: this.exercise.end,
-							duration: this.exercise.end.getTime() - this.exercise.start.getTime()
+							duration: new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime()
 						}
 					})
-					.then(r => {})
+					.then(r => {
+						this.exercise.uploaded = true;
+						uni.setStorage({
+							key: 'exercise',
+							data: this.exercise
+						})
+					})
 			}
 		},
 		onLoad() {
