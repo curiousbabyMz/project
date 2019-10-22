@@ -4,33 +4,40 @@
 .toggle .navBar > view.data-v-59aaf43c {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+      -ms-flex: 1;
           flex: 1;
   text-align: center;
 }
 .toggle .items.data-v-59aaf43c {
   -webkit-transition-property: all;
+  -o-transition-property: all;
   transition-property: all;
   -webkit-transform-origin: 50% 0 0;
+      -ms-transform-origin: 50% 0 0;
           transform-origin: 50% 0 0;
   max-height: 300rpx;
   overflow: auto;
   position: absolute;
   width: 100%;
-  background: #ffffffaa;
+  background: rgba(255, 255, 255, 0.7);
 }
 .toggle .items > view.data-v-59aaf43c {
   text-align: center;
 }
 .toggleIn.data-v-59aaf43c {
   -webkit-transition-timing-function: ease-out;
+       -o-transition-timing-function: ease-out;
           transition-timing-function: ease-out;
   -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
           transform: scaleY(1);
 }
 .toggleOut.data-v-59aaf43c {
   -webkit-transition-timing-function: ease-in;
+       -o-transition-timing-function: ease-in;
           transition-timing-function: ease-in;
   -webkit-transform: scaleY(0);
+      -ms-transform: scaleY(0);
           transform: scaleY(0);
 }
 

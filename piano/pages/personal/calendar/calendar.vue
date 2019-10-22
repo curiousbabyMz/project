@@ -1,6 +1,35 @@
 <template>
 	<view class="calendar">
 		<calendar ref='calendar' :SundayFirst="true" :marks='marks' @change='calendarChange' @dateChange='dateSelect'></calendar>
+		<view class="dateInfo flex" v-if="dateInfo.length>0">
+			<view class="pannel">
+				<view class="clock">
+					<view class="circle"></view>
+					<view class="progress flex" v-for="(item,i) in dateInfo" :key='i'>
+						<view class="left" :style='"transform:rotate("+item.startDeg+"deg)"'>
+							<view class="circle"></view>
+						</view>
+						<view class="right" :style='"transform:rotate("+item.endDeg+180+"deg)"'>
+							<view class="circle"></view>
+						</view>
+					</view>
+					<view class="inside">
+						<text>AM</text>
+					</view>
+					<view class="hour"></view>
+				</view>
+			</view>
+			<view class="items">
+				<view class="item" v-for="item in dateInfo" :key='item._id'>
+					<view>{{item.start}}~{{item.end}}</view>
+					<view>
+						<text v-if="item.long.slice(0,2)>0">{{item.long.slice(0,2)}}小时</text>
+						<text v-if="item.long.slice(3,5)>0">{{item.long.slice(3,5)}}分钟</text>
+						<text v-if="item.long.slice(6)>0">{{item.long.slice(6)}}秒</text>
+					</view>
+				</view>
+			</view>
+		</view>
 		<view class="sumTime flex">
 			<view class="hour">
 				<text>已练习</text>
@@ -13,7 +42,6 @@
 				<text>天</text>
 			</view>
 		</view>
-
 	</view>
 </template>
 
@@ -31,30 +59,56 @@
 				marks: [],
 				sumTime: 0,
 				sumDay: 0,
-				exercises: []
+				dateInfo: null
 			}
 		},
 		methods: {
 			calendarChange(e) {
 				console.log(e);
 			},
+			time2Deg(time) {
+				let [h, m, s] = time.split(':'),
+					date = new Date(2000, 0, 0, h, m, s),
+					hour0 = new Date(2000, 0, 0),
+					duration = date.getTime() - hour0.getTime();
+				return (duration / 1000 / 60 / 60 - 12) / 12 * 360;
+			},
 			dateSelect(e) {
 				console.log(e);
-			},
-			getLogDetail(time){
-				
+				cloudFn({
+						name: 'getLogs',
+						data: {
+							start: `${e.year}/${e.month}/${e.date}`,
+							end: `${e.year}/${e.month}/${e.date}`,
+						}
+					})
+					.then(r => {
+						this.dateInfo = r.result.data.map(each => {
+							each.start = each.start.slice(-8);
+							each.end = each.end.slice(-8);
+							each.long = new Date(0, 0, 0);
+							each.long.setSeconds(each.duration / 1000);
+							each.long = each.long.toLocaleString('chinses', {
+								hour12: false
+							}).slice(-8);
+
+							each.startDeg = this.time2Deg(each.start);
+							each.endDeg = this.time2Deg(each.end);
+
+							return each;
+						});
+					})
 			},
 			getLogs() {
 				cloudFn({
 						name: 'getLogs',
 						data: {
-							// size: 20,
+							// size:20
 						},
 					})
 					.then(r => {
 						let marks = []
-						this.exercises = r.result.data;
-						this.exercises.map(each => {
+						r.result.data.map(each => {
 							let date = new Date(each.start);
 							marks.push({
 								date: date.getDate(),
@@ -98,6 +152,129 @@
 		padding: 30rpx;
 		color: #333333;
 
+		.dateInfo {
+			padding: 20rpx 0;
+			animation: dateInfo 200ms ease-out forwards;
+
+			.pannel {
+				background: #312A32;
+				box-shadow: 0 0 5rpx 2rpx #e1e1e1;
+				border-radius: 20rpx;
+				padding: 20rpx;
+				margin-right: 10rpx;
+
+				.clock {
+					position: relative;
+					width: 250rpx;
+					height: 250rpx;
+
+					.circle {
+						position: absolute;
+						margin: auto;
+						left: 0;
+						right: 0;
+						top: 0;
+						bottom: 0;
+						width: 250rpx;
+						height: 250rpx;
+						box-sizing: border-box;
+						border: 5rpx solid #E6FF00;
+						border-radius: 50%;
+					}
+
+					&>.circle {
+						border-color: #D8D9DBdd;
+					}
+
+					.progress {
+						position: absolute;
+						margin: auto;
+						left: 0;
+						right: 0;
+						top: 0;
+						bottom: 0;
+						width: inherit;
+						height: inherit;
+
+						.left {
+							width: 50%;
+							height: inherit;
+							overflow: hidden;
+							transform-origin: 100% 50% 0;
+							position: relative;
+							// transform: rotate(180deg);
+
+							.circle {
+								right: auto;
+								border-right-color: transparent;
+								border-top-color: transparent;
+							}
+						}
+
+						.right {
+							width: 50%;
+							height: inherit;
+							overflow: hidden;
+							transform-origin: 0% 50% 0;
+							position: relative;
+							// transform: rotate(0deg);
+
+							.circle {
+								left: auto;
+								border-left-color: transparent;
+								border-bottom-color: transparent;
+							}
+						}
+					}
+
+					.inside {
+						position: absolute;
+						left: 0;
+						right: 0;
+						top: 10rpx;
+						margin: auto;
+						text-align: center;
+						color: #BEC2CA;
+						font-size: 24rpx;
+						line-height: 1.8rem;
+					}
+
+					.hour {
+						position: absolute;
+						top: 5rpx;
+						left: 0;
+						right: 0;
+						margin: auto;
+						width: 8rpx;
+						height: 15rpx;
+						background: #D8D9DBdd;
+						border-radius: 0 0 4rpx 4rpx;
+					}
+				}
+			}
+
+			.items {
+				flex: 1;
+				text-align: center;
+				overflow-y: auto;
+				height: 300rpx;
+				margin: -10rpx 0;
+
+				.item {
+					line-height: 1.1rem;
+					font-size: 26rpx;
+					background: #CFECFE;
+					padding: 10rpx;
+					margin: 10rpx 0;
+					border-radius: 10rpx;
+
+					&>view:nth-of-type(2) {
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
 		.sumTime {
 			margin-top: 30rpx;
 			justify-content: space-between;
@@ -110,6 +287,18 @@
 				padding: 0 10rpx;
 				color: #5DDCEB;
 			}
+		}
+	}
+
+	@keyframes dateInfo {
+		0% {
+			transform: translateY(-30rpx);
+			opacity: 0;
+		}
+
+		100% {
+			transform: none;
+			opacity: 1;
 		}
 	}
 </style>

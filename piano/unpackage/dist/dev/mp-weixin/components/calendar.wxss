@@ -3,8 +3,6 @@
   padding: 10rpx 0 50rpx;
 }
 .calendar.data-v-cc77c968::before {
-  -webkit-filter: blur(2rpx);
-          filter: blur(2rpx);
   content: '';
   position: absolute;
   top: 0;
@@ -12,7 +10,7 @@
   left: 0;
   right: 0;
   z-index: -1;
-  background-color: hsla(210, 66%, 18%, 0.2);
+  background-color: hsla(210, 50%, 40%, 0.2);
   border-radius: 10rpx;
 }
 .calendar .title.data-v-cc77c968 {
@@ -25,12 +23,14 @@
   text-align: center;
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
+      -ms-flex-align: start;
           align-items: flex-start;
   color: #444;
 }
 .calendar .date .week > view.data-v-cc77c968 {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+      -ms-flex: 1;
           flex: 1;
 }
 .calendar .date .week .weekItem.data-v-cc77c968 {
@@ -51,10 +51,7 @@
   border: 1rpx solid #F0AD4E;
 }
 .calendar .date .week .dateItem .selected.data-v-cc77c968 {
-  background: #2c80ff;
-  color: #fff;
-  box-shadow: 0 1rpx 1rpx 1rpx #1e385044;
-  border: none;
+  border: 1rpx solid #2c80ff;
 }
 .calendar .date .week .dateItem .mark.data-v-cc77c968 {
   position: relative;
@@ -68,6 +65,7 @@
   padding: 5rpx;
   left: 50%;
   -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
           transform: translate(-50%);
 }
 

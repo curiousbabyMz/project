@@ -102,7 +102,7 @@
 			overflow: auto;
 			position: absolute;
 			width: 100%;
-			background: #ffffffaa;
+			background: rgba(255, 255, 255, .7);
 
 			&>view {
 				text-align: center;
