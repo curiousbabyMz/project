@@ -5,12 +5,13 @@
 			<view class="pannel">
 				<view class="clock">
 					<view class="circle"></view>
-					<view class="progress flex" v-for="(item,i) in dateInfo" :key='i'>
-						<view class="left" :style='"transform:rotate("+item.startDeg+"deg)"'>
-							<view class="circle"></view>
+					<view class="progress flex" v-for="(item,i) in dateInfo" :key='i' v-if="i<1">
+						<view class="left" >
+							<view class="circle" :style="{clipPath:'polygon(50% 50%)'}"></view>
+							<!-- <view class="circle" :style='{transform:"rotate("+((item.startDeg>180?item.startDeg:180)-315)+"deg)"}'></view> -->
 						</view>
-						<view class="right" :style='"transform:rotate("+item.endDeg+180+"deg)"'>
-							<view class="circle"></view>
+						<view class="right" >
+							<view class="circle" :style='{transform:"rotate("+((item.startDeg>180?0:item.startDeg)-135)+"deg)",opacity:0}'></view>
 						</view>
 					</view>
 					<view class="inside">
@@ -206,8 +207,8 @@
 
 							.circle {
 								right: auto;
-								border-right-color: transparent;
-								border-top-color: transparent;
+								// border-right-color: transparent;
+								// border-top-color: transparent;
 							}
 						}
 
