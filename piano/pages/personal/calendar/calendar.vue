@@ -5,23 +5,20 @@
 			<view class="pannel">
 				<view class="clock">
 					<view class="circle"></view>
-					<view class="progress flex" v-for="(item,i) in dateInfo" :key='i' v-if="i<1">
-						<view class="left" >
-							<view class="circle" :style="{clipPath:'polygon(50% 50%)'}"></view>
+					<view :class="['flex','progress'+i]" v-for="(item,i) in dateInfo" :key='i' v-if="i===currentProgress">
+						<view class="mask">
+							<view class="circle" :style="{clipPath:item.clipPath}"></view>
 							<!-- <view class="circle" :style='{transform:"rotate("+((item.startDeg>180?item.startDeg:180)-315)+"deg)"}'></view> -->
-						</view>
-						<view class="right" >
-							<view class="circle" :style='{transform:"rotate("+((item.startDeg>180?0:item.startDeg)-135)+"deg)",opacity:0}'></view>
 						</view>
 					</view>
 					<view class="inside">
-						<text>AM</text>
+						<text>{{dateInfo<12?'AM':'PM'}}</text>
 					</view>
 					<view class="hour"></view>
 				</view>
 			</view>
 			<view class="items">
-				<view class="item" v-for="item in dateInfo" :key='item._id'>
+				<view :class="['item',{selected:i===currentProgress}]" v-for="(item,i) in dateInfo" :key='item._id' @click="progressChange(i)">
 					<view>{{item.start}}~{{item.end}}</view>
 					<view>
 						<text v-if="item.long.slice(0,2)>0">{{item.long.slice(0,2)}}小时</text>
@@ -60,19 +57,26 @@
 				marks: [],
 				sumTime: 0,
 				sumDay: 0,
-				dateInfo: null
+				dateInfo: null,
+				currentProgress: 0
 			}
 		},
 		methods: {
-			calendarChange(e) {
-				console.log(e);
-			},
 			time2Deg(time) {
 				let [h, m, s] = time.split(':'),
 					date = new Date(2000, 0, 0, h, m, s),
 					hour0 = new Date(2000, 0, 0),
 					duration = date.getTime() - hour0.getTime();
-				return (duration / 1000 / 60 / 60 - 12) / 12 * 360;
+				let deg = (duration / 1000 / 60 / 60 - 12) / 12 * 360,
+					x = 50 + Math.sin(Math.PI / 180 * deg) * Math.sqrt(5000),
+					y = 50 - Math.cos(Math.PI / 180 * deg) * Math.sqrt(5000)
+				return {
+					x: x > 100 ? 100 : (x < 0 ? 0 : x),
+					y: y > 100 ? 100 : (y < 0 ? 0 : y)
+				}
+			},
+			calendarChange(e) {
+				console.log(e);
 			},
 			dateSelect(e) {
 				console.log(e);
@@ -84,6 +88,7 @@
 						}
 					})
 					.then(r => {
+						this.currentProgress = 0;
 						this.dateInfo = r.result.data.map(each => {
 							each.start = each.start.slice(-8);
 							each.end = each.end.slice(-8);
@@ -93,12 +98,16 @@
 								hour12: false
 							}).slice(-8);
 
-							each.startDeg = this.time2Deg(each.start);
-							each.endDeg = this.time2Deg(each.end);
+							let start = this.time2Deg(each.start),
+								end = this.time2Deg(each.end);
 
+							each.clipPath = `polygon(50% 50%,${start.x}% ${start.y}%,${end.x}% ${end.y}%)`;
 							return each;
 						});
 					})
+			},
+			progressChange(i) {
+				this.currentProgress = i;
 			},
 			getLogs() {
 				cloudFn({
@@ -149,6 +158,38 @@
 <style lang="less" scoped>
 	@import '../../../comm/color.less';
 
+	.loop(@i)when(@i<5) {
+		.progress@{i} {
+			.circle {
+				border-color: hsl(@i*77+66, 100%, 50%)
+			}
+		}
+
+		.loop(@i+1);
+	}
+
+	@keyframes dateInfo {
+		0% {
+			transform: translateY(-30rpx);
+			opacity: 0;
+		}
+
+		100% {
+			transform: none;
+			opacity: 1;
+		}
+	}
+
+	@keyframes clockProgess {
+		0% {
+			transform: none;
+		}
+
+		100% {
+			transform: scale(1.2);
+		}
+	}
+
 	.calendar {
 		padding: 30rpx;
 		color: #333333;
@@ -168,6 +209,7 @@
 					position: relative;
 					width: 250rpx;
 					height: 250rpx;
+					@clockWeight: 8rpx;
 
 					.circle {
 						position: absolute;
@@ -179,7 +221,7 @@
 						width: 250rpx;
 						height: 250rpx;
 						box-sizing: border-box;
-						border: 5rpx solid #E6FF00;
+						border: @clockWeight solid #E6FF00;
 						border-radius: 50%;
 					}
 
@@ -197,36 +239,17 @@
 						width: inherit;
 						height: inherit;
 
-						.left {
-							width: 50%;
+						.mask {
+							width: inherit;
 							height: inherit;
-							overflow: hidden;
-							transform-origin: 100% 50% 0;
-							position: relative;
-							// transform: rotate(180deg);
 
 							.circle {
-								right: auto;
-								// border-right-color: transparent;
-								// border-top-color: transparent;
-							}
-						}
-
-						.right {
-							width: 50%;
-							height: inherit;
-							overflow: hidden;
-							transform-origin: 0% 50% 0;
-							position: relative;
-							// transform: rotate(0deg);
-
-							.circle {
-								left: auto;
-								border-left-color: transparent;
-								border-bottom-color: transparent;
+								// animation: clockProgess .2s linear forwards 2 alternate;
 							}
 						}
 					}
+
+					.loop(0);
 
 					.inside {
 						position: absolute;
@@ -242,14 +265,14 @@
 
 					.hour {
 						position: absolute;
-						top: 5rpx;
+						top: @clockWeight;
 						left: 0;
 						right: 0;
 						margin: auto;
-						width: 8rpx;
-						height: 15rpx;
+						width: @clockWeight;
+						height: @clockWeight*2.2;
 						background: #D8D9DBdd;
-						border-radius: 0 0 4rpx 4rpx;
+						border-radius: 0 0 @clockWeight/2 @clockWeight/2;
 					}
 				}
 			}
@@ -273,6 +296,10 @@
 						font-weight: bold;
 					}
 				}
+
+				.selected {
+					background: #BAD6E7;
+				}
 			}
 		}
 
@@ -288,18 +315,6 @@
 				padding: 0 10rpx;
 				color: #5DDCEB;
 			}
-		}
-	}
-
-	@keyframes dateInfo {
-		0% {
-			transform: translateY(-30rpx);
-			opacity: 0;
-		}
-
-		100% {
-			transform: none;
-			opacity: 1;
 		}
 	}
 </style>

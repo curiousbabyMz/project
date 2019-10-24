@@ -8446,7 +8446,7 @@ login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_re
               (0, _base.wxApi)({
                 name: 'getSetting' }));case 8:setting = _context.sent;if (!
 
-            setting.authSetting["scope.userInfo"]) {_context.next = 17;break;}
+            setting.authSetting["scope.userInfo"]) {_context.next = 19;break;}
             getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 13;return (
 
 
@@ -8455,22 +8455,26 @@ login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_re
 
             getApp().globalData["userInfo"] = userInfo;
 
-            islogin = true;case 17:
+            islogin = true;_context.next = 20;break;case 19:
+
+            islogin = false;case 20:
 
 
             if (getApp().loginCB) {
               getApp().loginCB();
             }return _context.abrupt("return",
-            islogin);case 21:_context.prev = 21;_context.t0 = _context["catch"](1);
+            islogin);case 24:_context.prev = 24;_context.t0 = _context["catch"](1);
 
-            console.log(_context.t0);case 24:case "end":return _context.stop();}}}, _callee, this, [[1, 21]]);}));return function login() {return _ref.apply(this, arguments);};}(),
+            console.log(_context.t0);case 27:case "end":return _context.stop();}}}, _callee, this, [[1, 24]]);}));return function login() {return _ref.apply(this, arguments);};}(),
 
 
 getUserAuth = function getUserAuth(e) {
   console.log(e);
-  getApp().globalData.userInfo = e.detail.userInfo;
-  this.$state.userAuth = true;
-  return /ok/.test(e.detail.errMsg);
+  if (/ok/.test(e.detail.errMsg)) {
+    getApp().globalData.userInfo = e.detail.userInfo;
+    this.$state.userAuth = true;
+    return true;
+  }
 };exports.getUserAuth = getUserAuth;exports.login = login;
 
 /***/ }),
@@ -9271,7 +9275,14 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.urlStringity = exports.urlParse = exports.wxApi = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var
+Object.defineProperty(exports, "__esModule", { value: true });exports.urlStringity = exports.urlParse = exports.wxApi = exports.$await = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var
+$await = function $await(promise) {
+  return promise.then(function (r) {
+    return [r, null];
+  }).catch(function (e) {
+    return [r, e];
+  });
+},
 wxApi = function wxApi(_ref) {var
   name = _ref.name,
   data = _ref.data,_ref$log = _ref.
@@ -9295,7 +9306,10 @@ urlParse = function urlParse(str) {var _str$split =
     each.split('='),_each$split2 = _slicedToArray(_each$split, 2),key = _each$split2[0],value = _each$split2[1];
     data[key] = value;
   });
-  return { url: url, data: data };
+  return {
+    url: url,
+    data: data };
+
 },
 urlStringity = function urlStringity(_ref2)
 
@@ -9308,7 +9322,7 @@ urlStringity = function urlStringity(_ref2)
     });
   }
   return url + query;
-};exports.urlStringity = urlStringity;exports.urlParse = urlParse;exports.wxApi = wxApi;
+};exports.urlStringity = urlStringity;exports.urlParse = urlParse;exports.wxApi = wxApi;exports.$await = $await;
 
 /***/ }),
 /* 17 */

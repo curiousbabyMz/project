@@ -90,7 +90,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.dateInfo, function(item, __i0__) {
+  var l0 = _vm.__map(_vm.dateInfo, function(item, i) {
     var g0 = item.long.slice(0, 2)
     var g1 = item.long.slice(0, 2)
     var g2 = item.long.slice(3, 5)
@@ -195,9 +195,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
 var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 49));};var _default =
 
 
@@ -210,19 +207,26 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
       marks: [],
       sumTime: 0,
       sumDay: 0,
-      dateInfo: null };
+      dateInfo: null,
+      currentProgress: 0 };
 
   },
   methods: {
-    calendarChange: function calendarChange(e) {
-      console.log(e);
-    },
     time2Deg: function time2Deg(time) {var _time$split =
       time.split(':'),_time$split2 = _slicedToArray(_time$split, 3),h = _time$split2[0],m = _time$split2[1],s = _time$split2[2],
       date = new Date(2000, 0, 0, h, m, s),
       hour0 = new Date(2000, 0, 0),
       duration = date.getTime() - hour0.getTime();
-      return (duration / 1000 / 60 / 60 - 12) / 12 * 360;
+      var deg = (duration / 1000 / 60 / 60 - 12) / 12 * 360,
+      x = 50 + Math.sin(Math.PI / 180 * deg) * Math.sqrt(5000),
+      y = 50 - Math.cos(Math.PI / 180 * deg) * Math.sqrt(5000);
+      return {
+        x: x > 100 ? 100 : x < 0 ? 0 : x,
+        y: y > 100 ? 100 : y < 0 ? 0 : y };
+
+    },
+    calendarChange: function calendarChange(e) {
+      console.log(e);
     },
     dateSelect: function dateSelect(e) {var _this = this;
       console.log(e);
@@ -234,6 +238,7 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
 
 
       then(function (r) {
+        _this.currentProgress = 0;
         _this.dateInfo = r.result.data.map(function (each) {
           each.start = each.start.slice(-8);
           each.end = each.end.slice(-8);
@@ -243,12 +248,16 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
             hour12: false }).
           slice(-8);
 
-          each.startDeg = _this.time2Deg(each.start);
-          each.endDeg = _this.time2Deg(each.end);
+          var start = _this.time2Deg(each.start),
+          end = _this.time2Deg(each.end);
 
+          each.clipPath = "polygon(50% 50%,".concat(start.x, "% ").concat(start.y, "%,").concat(end.x, "% ").concat(end.y, "%)");
           return each;
         });
       });
+    },
+    progressChange: function progressChange(i) {
+      this.currentProgress = i;
     },
     getLogs: function getLogs() {var _this2 = this;
       (0, _cloudFn.cloudFn)({
