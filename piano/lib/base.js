@@ -6,13 +6,13 @@ export var
 			return [r, e]
 		})
 	},
-	wxApi = ({
+	uniApi = ({
 		name,
 		data,
 		log = false
 	}) => (
 		new Promise((resolve, reject) => {
-			wx[name](Object.assign(data || {}, {
+			uni[name](Object.assign(data || {}, {
 				success: r => {
 					if (log) console.log(r);
 					resolve(r)
@@ -21,7 +21,8 @@ export var
 					reject(e)
 				}
 			}))
-		})),
+		})
+	),
 	urlParse = (str) => {
 		let [url, query] = str.split('?'),
 			data = {};

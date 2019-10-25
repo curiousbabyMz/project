@@ -8,11 +8,10 @@
 					<view :class="['flex','progress'+i]" v-for="(item,i) in dateInfo" :key='i' v-if="i===currentProgress">
 						<view class="mask">
 							<view class="circle" :style="{clipPath:item.clipPath}"></view>
-							<!-- <view class="circle" :style='{transform:"rotate("+((item.startDeg>180?item.startDeg:180)-315)+"deg)"}'></view> -->
 						</view>
 					</view>
 					<view class="inside">
-						<text>{{dateInfo<12?'AM':'PM'}}</text>
+						<text>{{(dateInfo[currentProgress].start[0]+dateInfo[currentProgress].start[1])<12?'AM':'PM'}}</text>
 					</view>
 					<view class="hour"></view>
 				</view>
@@ -46,8 +45,9 @@
 <script>
 	import Calendar from '@/components/calendar.vue'
 	import {
-		cloudFn
-	} from '../../../utils/cloudFn.js'
+		getLogs,
+		getSumInfo,
+	} from "../../../api/api.js"
 	export default {
 		components: {
 			Calendar,
@@ -80,12 +80,12 @@
 			},
 			dateSelect(e) {
 				console.log(e);
-				cloudFn({
-						name: 'getLogs',
+				getLogs({
 						data: {
 							start: `${e.year}/${e.month}/${e.date}`,
 							end: `${e.year}/${e.month}/${e.date}`,
-						}
+						},
+						wxCloud: true
 					})
 					.then(r => {
 						this.currentProgress = 0;
@@ -110,11 +110,11 @@
 				this.currentProgress = i;
 			},
 			getLogs() {
-				cloudFn({
-						name: 'getLogs',
+				getLogs({
 						data: {
 							// size:20
 						},
+						wxCloud: true,
 					})
 					.then(r => {
 						let marks = []
@@ -133,21 +133,22 @@
 							clearTimeout(t)
 						}, 0)
 					})
+					.catch(e=>{})
 			},
 			getSumInfo() {
-				cloudFn({
-						name: 'getSumInfo',
+				let r=getSumInfo({
+						wxCloud: true
 						// log: true
 					})
-					.then(r => {
-						this.sumDay = r.result.sumDay;
-						this.sumTime = r.result.sumTime;
-					})
+					console.log(r);
+					// .then(r => {
+					// 	this.sumDay = r.result.sumDay;
+					// 	this.sumTime = r.result.sumTime;
+					// })
+					// .catch(e => {})
 			}
 		},
-		onLoad() {
-
-		},
+		onLoad() {},
 		onShow() {
 			this.getLogs()
 			this.getSumInfo()
@@ -186,7 +187,7 @@
 		}
 
 		100% {
-			transform: scale(1.2);
+			transform: scale(1.1);
 		}
 	}
 
@@ -229,7 +230,7 @@
 						border-color: #D8D9DBdd;
 					}
 
-					.progress {
+					[class*=progress] {
 						position: absolute;
 						margin: auto;
 						left: 0;
@@ -244,7 +245,7 @@
 							height: inherit;
 
 							.circle {
-								// animation: clockProgess .2s linear forwards 2 alternate;
+								animation: clockProgess .2s linear forwards 2 alternate;
 							}
 						}
 					}
@@ -287,7 +288,7 @@
 				.item {
 					line-height: 1.1rem;
 					font-size: 26rpx;
-					background: #CFECFE;
+					background: #BAD6E7;
 					padding: 10rpx;
 					margin: 10rpx 0;
 					border-radius: 10rpx;
@@ -298,7 +299,7 @@
 				}
 
 				.selected {
-					background: #BAD6E7;
+					background: #CFECFE;
 				}
 			}
 		}

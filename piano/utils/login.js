@@ -1,25 +1,27 @@
 import {
-	wxApi
-} from './base.js'
+	uniApi
+} from '../lib/base.js'
 import {
-	wxCloudLogin
-} from './cloudFn.js'
+	cloudFn
+} from '../lib/cloudFn.js'
 
 export var
 	login = async () => {
 			let islogin = null;
 			try {
 				// #ifdef MP-WEIXIN
-				let loginInfo = await wxCloudLogin();
-				getApp().globalData.secretInfo = loginInfo;
-				let setting = await wxApi({
+				let loginInfo = await cloudFn({
+					name: 'login'
+				});
+				getApp().globalData.secretInfo = loginInfo.result;
+				let setting = await uniApi({
 					name: 'getSetting'
 				});
 				if (setting.authSetting[`scope.userInfo`]) {
 					getApp().globalData[`userAuth`] = setting.authSetting[`scope.userInfo`];
 					let {
 						userInfo
-					} = await wxApi({
+					} = await uniApi({
 						name: 'getUserInfo'
 					})
 					getApp().globalData[`userInfo`] = userInfo

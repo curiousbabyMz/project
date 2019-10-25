@@ -28,8 +28,8 @@
             transform: none;
 }
 100% {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
 }
 }
 @keyframes clockProgess-data-v-6edac7b4 {
@@ -38,8 +38,8 @@
             transform: none;
 }
 100% {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
 }
 }
 .calendar.data-v-6edac7b4 {
@@ -81,7 +81,7 @@
 .calendar .dateInfo .pannel .clock > .circle.data-v-6edac7b4 {
   border-color: #D8D9DBdd;
 }
-.calendar .dateInfo .pannel .clock .progress.data-v-6edac7b4 {
+.calendar .dateInfo .pannel .clock [class*=progress].data-v-6edac7b4 {
   position: absolute;
   margin: auto;
   left: 0;
@@ -91,9 +91,13 @@
   width: inherit;
   height: inherit;
 }
-.calendar .dateInfo .pannel .clock .progress .mask.data-v-6edac7b4 {
+.calendar .dateInfo .pannel .clock [class*=progress] .mask.data-v-6edac7b4 {
   width: inherit;
   height: inherit;
+}
+.calendar .dateInfo .pannel .clock [class*=progress] .mask .circle.data-v-6edac7b4 {
+  -webkit-animation: clockProgess-data-v-6edac7b4 0.2s linear forwards 2 alternate;
+          animation: clockProgess-data-v-6edac7b4 0.2s linear forwards 2 alternate;
 }
 .calendar .dateInfo .pannel .clock .progress0 .circle.data-v-6edac7b4 {
   border-color: hsl(66, 100%, 50%);
@@ -145,7 +149,7 @@
 .calendar .dateInfo .items .item.data-v-6edac7b4 {
   line-height: 1.1rem;
   font-size: 26rpx;
-  background: #CFECFE;
+  background: #BAD6E7;
   padding: 10rpx;
   margin: 10rpx 0;
   border-radius: 10rpx;
@@ -154,7 +158,7 @@
   font-weight: bold;
 }
 .calendar .dateInfo .items .selected.data-v-6edac7b4 {
-  background: #BAD6E7;
+  background: #CFECFE;
 }
 .calendar .sumTime.data-v-6edac7b4 {
   margin-top: 30rpx;
