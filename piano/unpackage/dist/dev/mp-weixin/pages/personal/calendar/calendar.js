@@ -90,6 +90,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.dateInfo, function(item, i) {
+    var g0 = item.long.slice(0, 2)
+    var g1 = item.long.slice(0, 2)
+    var g2 = item.long.slice(3, 5)
+    var g3 = item.long.slice(3, 5)
+    var g4 = item.long.slice(6)
+    var g5 = item.long.slice(6)
+    return {
+      $orig: _vm.__get_orig(item),
+      g0: g0,
+      g1: g1,
+      g2: g2,
+      g3: g3,
+      g4: g4,
+      g5: g5
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -143,7 +169,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 49));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var Calendar = function Calendar() {return __webpack_require__.e(/*! import() | components/calendar */ "components/calendar").then(__webpack_require__.bind(null, /*! @/components/calendar.vue */ 49));};var _default =
 
 
 {
@@ -155,30 +207,68 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
       marks: [],
       sumTime: 0,
       sumDay: 0,
-      exercises: [] };
+      dateInfo: null,
+      currentProgress: 0 };
 
   },
   methods: {
+    time2Deg: function time2Deg(time) {var _time$split =
+      time.split(':'),_time$split2 = _slicedToArray(_time$split, 3),h = _time$split2[0],m = _time$split2[1],s = _time$split2[2],
+      date = new Date(2000, 0, 0, h, m, s),
+      hour0 = new Date(2000, 0, 0),
+      duration = date.getTime() - hour0.getTime();
+      var deg = (duration / 1000 / 60 / 60 - 12) / 12 * 360,
+      x = 50 + Math.sin(Math.PI / 180 * deg) * Math.sqrt(5000),
+      y = 50 - Math.cos(Math.PI / 180 * deg) * Math.sqrt(5000);
+      return {
+        x: x > 100 ? 100 : x < 0 ? 0 : x,
+        y: y > 100 ? 100 : y < 0 ? 0 : y };
+
+    },
     calendarChange: function calendarChange(e) {
       console.log(e);
     },
-    dateSelect: function dateSelect(e) {
+    dateSelect: function dateSelect(e) {var _this = this;
       console.log(e);
-    },
-    getLogDetail: function getLogDetail(time) {
-
-    },
-    getLogs: function getLogs() {var _this = this;
       (0, _cloudFn.cloudFn)({
         name: 'getLogs',
         data: {
-          // size: 20,
+          start: "".concat(e.year, "/").concat(e.month, "/").concat(e.date),
+          end: "".concat(e.year, "/").concat(e.month, "/").concat(e.date) } }).
+
+
+      then(function (r) {
+        _this.currentProgress = 0;
+        _this.dateInfo = r.result.data.map(function (each) {
+          each.start = each.start.slice(-8);
+          each.end = each.end.slice(-8);
+          each.long = new Date(0, 0, 0);
+          each.long.setSeconds(each.duration / 1000);
+          each.long = each.long.toLocaleString('chinses', {
+            hour12: false }).
+          slice(-8);
+
+          var start = _this.time2Deg(each.start),
+          end = _this.time2Deg(each.end);
+
+          each.clipPath = "polygon(50% 50%,".concat(start.x, "% ").concat(start.y, "%,").concat(end.x, "% ").concat(end.y, "%)");
+          return each;
+        });
+      });
+    },
+    progressChange: function progressChange(i) {
+      this.currentProgress = i;
+    },
+    getLogs: function getLogs() {var _this2 = this;
+      (0, _cloudFn.cloudFn)({
+        name: 'getLogs',
+        data: {
+          // size:20
         } }).
 
       then(function (r) {
         var marks = [];
-        _this.exercises = r.result.data;
-        _this.exercises.map(function (each) {
+        r.result.data.map(function (each) {
           var date = new Date(each.start);
           marks.push({
             date: date.getDate(),
@@ -186,22 +276,22 @@ var _cloudFn = __webpack_require__(/*! ../../../utils/cloudFn.js */ 17);function
             year: date.getFullYear() });
 
         });
-        _this.marks = _toConsumableArray(new Set(marks));
+        _this2.marks = _toConsumableArray(new Set(marks));
         //渲染先于赋值，原因未明
         var t = setTimeout(function () {
-          _this.$refs.calendar.getDates();
+          _this2.$refs.calendar.getDates();
           clearTimeout(t);
         }, 0);
       });
     },
-    getSumInfo: function getSumInfo() {var _this2 = this;
+    getSumInfo: function getSumInfo() {var _this3 = this;
       (0, _cloudFn.cloudFn)({
         name: 'getSumInfo'
         // log: true
       }).
       then(function (r) {
-        _this2.sumDay = r.result.sumDay;
-        _this2.sumTime = r.result.sumTime;
+        _this3.sumDay = r.result.sumDay;
+        _this3.sumTime = r.result.sumTime;
       });
     } },
 

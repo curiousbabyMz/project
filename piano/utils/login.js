@@ -25,6 +25,8 @@ export var
 					getApp().globalData[`userInfo`] = userInfo
 
 					islogin = true;
+				} else {
+					islogin = false;
 				}
 				// #endif
 				if (getApp().loginCB) {
@@ -37,7 +39,9 @@ export var
 		},
 		getUserAuth = function(e) {
 			console.log(e);
-			getApp().globalData.userInfo = e.detail.userInfo;
-			this.$state.userAuth = true;
-			return (/ok/).test(e.detail.errMsg);
+			if ((/ok/).test(e.detail.errMsg)) {
+				getApp().globalData.userInfo = e.detail.userInfo;
+				this.$state.userAuth = true;
+				return true;
+			}
 		}

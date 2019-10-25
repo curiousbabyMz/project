@@ -176,7 +176,6 @@
 		padding: 10rpx 0 50rpx;
 
 		&::before {
-			filter: blur(2rpx);
 			content: '';
 			position: absolute;
 			top: 0;
@@ -184,7 +183,7 @@
 			left: 0;
 			right: 0;
 			z-index: -1;
-			background-color: hsla(210, 66%, 18%, 0.2);
+			background-color: hsla(210, 50%, 40%, 0.2);
 			border-radius: 10rpx;
 		}
 
@@ -226,10 +225,10 @@
 					}
 
 					.selected {
-						background: #2c80ff;
-						color: #fff;
-						box-shadow: 0 1rpx 1rpx 1rpx #1e385044;
-						border: none;
+						border: 1rpx solid #2c80ff;
+						// color: #fff;
+						// box-shadow: 0 1rpx 1rpx 1rpx #1e385044;
+						// border: none;
 					}
 
 					.mark {

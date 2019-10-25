@@ -19,7 +19,7 @@
   overflow: auto;
   position: absolute;
   width: 100%;
-  background: #ffffffaa;
+  background: rgba(255, 255, 255, 0.7);
 }
 .toggle .items > view.data-v-0ad993c4 {
   text-align: center;

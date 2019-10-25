@@ -3,8 +3,6 @@
   padding: 10rpx 0 50rpx;
 }
 .calendar.data-v-ec7ca6f0::before {
-  -webkit-filter: blur(2rpx);
-          filter: blur(2rpx);
   content: '';
   position: absolute;
   top: 0;
@@ -12,7 +10,7 @@
   left: 0;
   right: 0;
   z-index: -1;
-  background-color: hsla(210, 66%, 18%, 0.2);
+  background-color: hsla(210, 50%, 40%, 0.2);
   border-radius: 10rpx;
 }
 .calendar .title.data-v-ec7ca6f0 {
@@ -53,11 +51,7 @@
   border: 1rpx solid #F0AD4E;
 }
 .calendar .date .week .dateItem .selected.data-v-ec7ca6f0 {
-  background: #2c80ff;
-  color: #fff;
-  -webkit-box-shadow: 0 1rpx 1rpx 1rpx #1e385044;
-          box-shadow: 0 1rpx 1rpx 1rpx #1e385044;
-  border: none;
+  border: 1rpx solid #2c80ff;
 }
 .calendar .date .week .dateItem .mark.data-v-ec7ca6f0 {
   position: relative;

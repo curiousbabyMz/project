@@ -1,13 +1,20 @@
 export var
+	$await = promise => {
+		return promise.then(r => {
+			return [r, null]
+		}).catch(e => {
+			return [r, e]
+		})
+	},
 	wxApi = ({
 		name,
 		data,
-		log=false
+		log = false
 	}) => (
 		new Promise((resolve, reject) => {
 			wx[name](Object.assign(data || {}, {
 				success: r => {
-					if(log)console.log(r);
+					if (log) console.log(r);
 					resolve(r)
 				},
 				fail: e => {
@@ -22,7 +29,10 @@ export var
 			let [key, value] = each.split('=');
 			data[key] = value;
 		})
-		return {url,data};
+		return {
+			url,
+			data
+		};
 	},
 	urlStringity = ({
 		url,
