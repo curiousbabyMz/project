@@ -5,6 +5,7 @@ Vue.config.productionTip = false
 
 import State from './lib/state.js'
 Vue.prototype.$state = new State();
+
 // import {
 // 	$await
 // } from './lib/base.js'

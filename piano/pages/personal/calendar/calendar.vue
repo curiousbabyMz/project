@@ -13,7 +13,7 @@
 					<view class="inside">
 						<text>{{(dateInfo[currentProgress].start[0]+dateInfo[currentProgress].start[1])<12?'AM':'PM'}}</text>
 					</view>
-					<view class="hour"></view>
+					<view :class="'hour'+i" v-for="(item,i) in 12" :key='i'></view>
 				</view>
 			</view>
 			<view class="items">
@@ -133,19 +133,18 @@
 							clearTimeout(t)
 						}, 0)
 					})
-					.catch(e=>{})
+					.catch(e => {})
 			},
 			getSumInfo() {
-				let r=getSumInfo({
+				getSumInfo({
 						wxCloud: true
 						// log: true
 					})
-					console.log(r);
-					// .then(r => {
-					// 	this.sumDay = r.result.sumDay;
-					// 	this.sumTime = r.result.sumTime;
-					// })
-					// .catch(e => {})
+					.then(r => {
+						this.sumDay = r.result.sumDay;
+						this.sumTime = r.result.sumTime;
+					})
+					.catch(e => {})
 			}
 		},
 		onLoad() {},
@@ -159,15 +158,6 @@
 <style lang="less" scoped>
 	@import '../../../comm/color.less';
 
-	.loop(@i)when(@i<5) {
-		.progress@{i} {
-			.circle {
-				border-color: hsl(@i*77+66, 100%, 50%)
-			}
-		}
-
-		.loop(@i+1);
-	}
 
 	@keyframes dateInfo {
 		0% {
@@ -207,10 +197,12 @@
 				margin-right: 10rpx;
 
 				.clock {
-					position: relative;
-					width: 250rpx;
-					height: 250rpx;
+					@clockWidth: 280rpx;
 					@clockWeight: 8rpx;
+					@clockColor: #D8D9DBdd;
+					position: relative;
+					width: @clockWidth;
+					height: @clockWidth;
 
 					.circle {
 						position: absolute;
@@ -219,15 +211,16 @@
 						right: 0;
 						top: 0;
 						bottom: 0;
-						width: 250rpx;
-						height: 250rpx;
+						width: @clockWidth;
+						height: @clockWidth;
 						box-sizing: border-box;
-						border: @clockWeight solid #E6FF00;
+						// background: #e6ff00;
+						// border: @clockWeight solid transparent;
 						border-radius: 50%;
 					}
 
 					&>.circle {
-						border-color: #D8D9DBdd;
+						border: @clockWeight solid @clockColor;
 					}
 
 					[class*=progress] {
@@ -250,7 +243,20 @@
 						}
 					}
 
-					.loop(0);
+					.pLoop(@i)when(@i<5) {
+						.progress@{i} {
+							.circle {
+								width: @clockWidth - @clockWeight*2;
+								height: @clockWidth - @clockWeight*2;
+								background: radial-gradient(hsl(@i*77+66, 0%, 0%),
+									hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
+							}
+						}
+
+						.pLoop(@i+1);
+					}
+
+					.pLoop(0);
 
 					.inside {
 						position: absolute;
@@ -264,7 +270,7 @@
 						line-height: 1.8rem;
 					}
 
-					.hour {
+					[class*=hour] {
 						position: absolute;
 						top: @clockWeight;
 						left: 0;
@@ -272,9 +278,20 @@
 						margin: auto;
 						width: @clockWeight;
 						height: @clockWeight*2.2;
-						background: #D8D9DBdd;
-						border-radius: 0 0 @clockWeight/2 @clockWeight/2;
+						background: @clockColor;
+						border-radius: 0 0 50% 50%;
+						transform-origin: 50% @clockWidth/2-@clockWeight*2/2 0;
 					}
+
+					.hour(@i)when(@i<12) {
+						.hour@{i} {
+							transform: rotate(@i*30deg);
+						}
+
+						.hour(@i+1);
+					}
+
+					.hour(0);
 				}
 			}
 

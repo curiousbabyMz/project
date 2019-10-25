@@ -61,8 +61,8 @@
 }
 .calendar .dateInfo .pannel .clock.data-v-6edac7b4 {
   position: relative;
-  width: 250rpx;
-  height: 250rpx;
+  width: 280rpx;
+  height: 280rpx;
 }
 .calendar .dateInfo .pannel .clock .circle.data-v-6edac7b4 {
   position: absolute;
@@ -71,15 +71,14 @@
   right: 0;
   top: 0;
   bottom: 0;
-  width: 250rpx;
-  height: 250rpx;
+  width: 280rpx;
+  height: 280rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  border: 8rpx solid #E6FF00;
   border-radius: 50%;
 }
 .calendar .dateInfo .pannel .clock > .circle.data-v-6edac7b4 {
-  border-color: #D8D9DBdd;
+  border: 8rpx solid #D8D9DBdd;
 }
 .calendar .dateInfo .pannel .clock [class*=progress].data-v-6edac7b4 {
   position: absolute;
@@ -100,19 +99,34 @@
           animation: clockProgess-data-v-6edac7b4 0.2s linear forwards 2 alternate;
 }
 .calendar .dateInfo .pannel .clock .progress0 .circle.data-v-6edac7b4 {
-  border-color: hsl(66, 100%, 50%);
+  width: 264rpx;
+  height: 264rpx;
+  background: -o-radial-gradient(hsl(0, 0%, 0%), hsl(66, 100%, 50%));
+  background: radial-gradient(hsl(0, 0%, 0%), hsl(66, 100%, 50%));
 }
 .calendar .dateInfo .pannel .clock .progress1 .circle.data-v-6edac7b4 {
-  border-color: hsl(143, 100%, 50%);
+  width: 264rpx;
+  height: 264rpx;
+  background: -o-radial-gradient(hsl(0, 0%, 0%), hsl(143, 100%, 50%));
+  background: radial-gradient(hsl(0, 0%, 0%), hsl(143, 100%, 50%));
 }
 .calendar .dateInfo .pannel .clock .progress2 .circle.data-v-6edac7b4 {
-  border-color: hsl(220, 100%, 50%);
+  width: 264rpx;
+  height: 264rpx;
+  background: -o-radial-gradient(hsl(0, 0%, 0%), hsl(220, 100%, 50%));
+  background: radial-gradient(hsl(0, 0%, 0%), hsl(220, 100%, 50%));
 }
 .calendar .dateInfo .pannel .clock .progress3 .circle.data-v-6edac7b4 {
-  border-color: hsl(297, 100%, 50%);
+  width: 264rpx;
+  height: 264rpx;
+  background: -o-radial-gradient(hsl(0, 0%, 0%), hsl(297, 100%, 50%));
+  background: radial-gradient(hsl(0, 0%, 0%), hsl(297, 100%, 50%));
 }
 .calendar .dateInfo .pannel .clock .progress4 .circle.data-v-6edac7b4 {
-  border-color: hsl(14, 100%, 50%);
+  width: 264rpx;
+  height: 264rpx;
+  background: -o-radial-gradient(hsl(0, 0%, 0%), hsl(14, 100%, 50%));
+  background: radial-gradient(hsl(0, 0%, 0%), hsl(14, 100%, 50%));
 }
 .calendar .dateInfo .pannel .clock .inside.data-v-6edac7b4 {
   position: absolute;
@@ -125,7 +139,7 @@
   font-size: 24rpx;
   line-height: 1.8rem;
 }
-.calendar .dateInfo .pannel .clock .hour.data-v-6edac7b4 {
+.calendar .dateInfo .pannel .clock [class*=hour].data-v-6edac7b4 {
   position: absolute;
   top: 8rpx;
   left: 0;
@@ -134,7 +148,70 @@
   width: 8rpx;
   height: 17.6rpx;
   background: #D8D9DBdd;
-  border-radius: 0 0 4rpx 4rpx;
+  border-radius: 0 0 50% 50%;
+  -webkit-transform-origin: 50% 132rpx 0;
+      -ms-transform-origin: 50% 132rpx 0;
+          transform-origin: 50% 132rpx 0;
+}
+.calendar .dateInfo .pannel .clock .hour0.data-v-6edac7b4 {
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+.calendar .dateInfo .pannel .clock .hour1.data-v-6edac7b4 {
+  -webkit-transform: rotate(30deg);
+      -ms-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+.calendar .dateInfo .pannel .clock .hour2.data-v-6edac7b4 {
+  -webkit-transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+          transform: rotate(60deg);
+}
+.calendar .dateInfo .pannel .clock .hour3.data-v-6edac7b4 {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.calendar .dateInfo .pannel .clock .hour4.data-v-6edac7b4 {
+  -webkit-transform: rotate(120deg);
+      -ms-transform: rotate(120deg);
+          transform: rotate(120deg);
+}
+.calendar .dateInfo .pannel .clock .hour5.data-v-6edac7b4 {
+  -webkit-transform: rotate(150deg);
+      -ms-transform: rotate(150deg);
+          transform: rotate(150deg);
+}
+.calendar .dateInfo .pannel .clock .hour6.data-v-6edac7b4 {
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.calendar .dateInfo .pannel .clock .hour7.data-v-6edac7b4 {
+  -webkit-transform: rotate(210deg);
+      -ms-transform: rotate(210deg);
+          transform: rotate(210deg);
+}
+.calendar .dateInfo .pannel .clock .hour8.data-v-6edac7b4 {
+  -webkit-transform: rotate(240deg);
+      -ms-transform: rotate(240deg);
+          transform: rotate(240deg);
+}
+.calendar .dateInfo .pannel .clock .hour9.data-v-6edac7b4 {
+  -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.calendar .dateInfo .pannel .clock .hour10.data-v-6edac7b4 {
+  -webkit-transform: rotate(300deg);
+      -ms-transform: rotate(300deg);
+          transform: rotate(300deg);
+}
+.calendar .dateInfo .pannel .clock .hour11.data-v-6edac7b4 {
+  -webkit-transform: rotate(330deg);
+      -ms-transform: rotate(330deg);
+          transform: rotate(330deg);
 }
 .calendar .dateInfo .items.data-v-6edac7b4 {
   -webkit-box-flex: 1;

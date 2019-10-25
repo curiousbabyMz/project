@@ -1,5 +1,4 @@
 import {
-	uniApi,
 	urlParse,
 	urlStringity
 } from '../lib/base.js'
@@ -8,8 +7,7 @@ export var
 		arr,
 		i
 	}) => {
-		return uniApi({
-			name: 'previewImage',
+		return uni.previewImage({
 			data: {
 				urls: arr,
 				current: arr[i]
@@ -20,22 +18,18 @@ export var
 		url,
 		data
 	}) => {
-		return uniApi({
-			name: 'navigateTo',
-			data: {
-				url: urlStringity({
-					url,
-					data
-				})
-			}
+		return uni.navigateTo({
+			url: urlStringity({
+				url,
+				data
+			})
 		})
 	},
 	toast = data => {
-		return uniApi({
-			name: 'showToast',
-			data: Object.assign({
+		return uni.showToast(
+			Object.assign({
 				title: '操作成功',
 				icon: 'none'
 			}, data)
-		})
+		)
 	}

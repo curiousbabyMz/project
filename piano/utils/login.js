@@ -14,17 +14,20 @@ export var
 					name: 'login'
 				});
 				getApp().globalData.secretInfo = loginInfo.result;
-				let setting = await uniApi({
-					name: 'getSetting'
-				});
+				let [err, setting] = await uni.getSetting()
+				if (err) {
+					console.log(err);
+					return;
+				}
 				if (setting.authSetting[`scope.userInfo`]) {
 					getApp().globalData[`userAuth`] = setting.authSetting[`scope.userInfo`];
-					let {
-						userInfo
-					} = await uniApi({
-						name: 'getUserInfo'
-					})
-					getApp().globalData[`userInfo`] = userInfo
+					let [err, r] = await uni.getUserInfo()
+
+					if (err) {
+						console.log(err);
+						return;
+					}
+					getApp().globalData[`userInfo`] = r.userInfo
 
 					islogin = true;
 				} else {

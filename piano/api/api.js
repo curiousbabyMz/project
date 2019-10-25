@@ -1,7 +1,4 @@
 import {
-	uniApi
-} from '../lib/base.js';
-import {
 	cloudFn
 } from '../lib/cloudFn.js';
 // async function api({
@@ -10,28 +7,24 @@ import {
 // 	wxCloud,
 // 	log = false,
 // }) {
-// 	try {
-// 		if (wxCloud) {
-// 			let r = await cloudFn({
-// 				name: url,
+// 	if (wxCloud) {
+// 		let r = await cloudFn({
+// 			name: url,
+// 			data
+// 		})
+// 		if (log) console.log(r);
+// 		// if (err) console.log(err);
+// 		return r
+// 	} else {
+// 		let [err, r] = await uni.request({
+// 			data: {
+// 				url,
 // 				data
-// 			})
-// 			if (log) console.log(r);
-// 			// return r
-// 		} else {
-// 			let r = await uniApi({
-// 				name: 'request',
-// 				data: {
-// 					url,
-// 					data
-// 				}
-// 			})
-// 			if (log) console.log(r);
-// 			// return r
-// 		}
-// 	} catch (e) {
-// 		// TODO handle the exception
-// 		console.log(e);
+// 			}
+// 		})
+// 		if (log) console.log(r);
+// 		if (err) console.log(err);
+// 		// return r
 // 	}
 // };
 const api = ({
@@ -42,31 +35,30 @@ const api = ({
 }) => {
 	return new Promise((res, rej) => {
 		if (wxCloud) {
-			 cloudFn({
-				name: url,
-				data,
-				log
-			})
-			.then(r=>{
-				if(log)console.log(r)
-				res(r);
-			})
-			.catch(e=>{
-				rej(e);
-			})
+			cloudFn({
+					name: url,
+					data,
+					log
+				})
+				.then(r => {
+					if (log) console.log(r)
+					res(r);
+				})
+				.catch(e => {
+					rej(e);
+				})
 		} else {
-			 uniApi({
-				name: 'request',
-				url,
-				data,
-			})
-			.then(r=>{
-				if(log)console.log(r)
-				res(r);
-			})
-			.catch(e=>{
-				rej(e);
-			})
+			uni.request({
+					url,
+					data,
+				})
+				.then(r => {
+					if (log) console.log(r)
+					res(r);
+				})
+				.catch(e => {
+					rej(e);
+				})
 		}
 	})
 }

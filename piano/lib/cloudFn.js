@@ -16,4 +16,7 @@ export var
 				if(log)console.log(r)
 				return r
 			})
+			.catch(e=>{
+				console.log(e);
+			})
 	}

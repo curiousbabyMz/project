@@ -6,23 +6,6 @@ export var
 			return [r, e]
 		})
 	},
-	uniApi = ({
-		name,
-		data,
-		log = false
-	}) => (
-		new Promise((resolve, reject) => {
-			uni[name](Object.assign(data || {}, {
-				success: r => {
-					if (log) console.log(r);
-					resolve(r)
-				},
-				fail: e => {
-					reject(e)
-				}
-			}))
-		})
-	),
 	urlParse = (str) => {
 		let [url, query] = str.split('?'),
 			data = {};

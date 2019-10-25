@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6981,7 +6981,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7002,14 +7002,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7085,7 +7085,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8431,15 +8431,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getUserAuth = exports.login = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _base = __webpack_require__(/*! ../lib/base.js */ 16);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getUserAuth = exports.login = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _base = __webpack_require__(/*! ../lib/base.js */ 16);
 
 
-var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 
 
 
 var
-login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var islogin, loginInfo, setting, _ref2, userInfo;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var islogin, loginInfo, _ref2, _ref3, err, setting, _ref4, _ref5, _err, r;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
             islogin = null;_context.prev = 1;_context.next = 4;return (
 
 
@@ -8447,29 +8447,32 @@ login = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_re
                 name: 'login' }));case 4:loginInfo = _context.sent;
 
             getApp().globalData.secretInfo = loginInfo.result;_context.next = 8;return (
-              (0, _base.uniApi)({
-                name: 'getSetting' }));case 8:setting = _context.sent;if (!
-
-            setting.authSetting["scope.userInfo"]) {_context.next = 19;break;}
-            getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 13;return (
+              uni.getSetting());case 8:_ref2 = _context.sent;_ref3 = _slicedToArray(_ref2, 2);err = _ref3[0];setting = _ref3[1];if (!
+            err) {_context.next = 15;break;}
+            console.log(err);return _context.abrupt("return");case 15:if (!
 
 
-              (0, _base.uniApi)({
-                name: 'getUserInfo' }));case 13:_ref2 = _context.sent;userInfo = _ref2.userInfo;
+            setting.authSetting["scope.userInfo"]) {_context.next = 30;break;}
+            getApp().globalData["userAuth"] = setting.authSetting["scope.userInfo"];_context.next = 19;return (
+              uni.getUserInfo());case 19:_ref4 = _context.sent;_ref5 = _slicedToArray(_ref4, 2);_err = _ref5[0];r = _ref5[1];if (!
 
-            getApp().globalData["userInfo"] = userInfo;
+            _err) {_context.next = 26;break;}
+            console.log(_err);return _context.abrupt("return");case 26:
 
-            islogin = true;_context.next = 20;break;case 19:
 
-            islogin = false;case 20:
+            getApp().globalData["userInfo"] = r.userInfo;
+
+            islogin = true;_context.next = 31;break;case 30:
+
+            islogin = false;case 31:
 
 
             if (getApp().loginCB) {
               getApp().loginCB();
             }return _context.abrupt("return",
-            islogin);case 24:_context.prev = 24;_context.t0 = _context["catch"](1);
+            islogin);case 35:_context.prev = 35;_context.t0 = _context["catch"](1);
 
-            console.log(_context.t0);case 27:case "end":return _context.stop();}}}, _callee, this, [[1, 24]]);}));return function login() {return _ref.apply(this, arguments);};}(),
+            console.log(_context.t0);case 38:case "end":return _context.stop();}}}, _callee, this, [[1, 35]]);}));return function login() {return _ref.apply(this, arguments);};}(),
 
 
 getUserAuth = function getUserAuth(e) {
@@ -8480,6 +8483,7 @@ getUserAuth = function getUserAuth(e) {
     return true;
   }
 };exports.getUserAuth = getUserAuth;exports.login = login;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 13 */
@@ -9279,7 +9283,7 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.urlStringity = exports.urlParse = exports.uniApi = exports.$await = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var
+Object.defineProperty(exports, "__esModule", { value: true });exports.urlStringity = exports.urlParse = exports.$await = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var
 $await = function $await(promise) {
   return promise.then(function (r) {
     return [r, null];
@@ -9287,23 +9291,6 @@ $await = function $await(promise) {
     return [r, e];
   });
 },
-uniApi = function uniApi(_ref) {var
-  name = _ref.name,
-  data = _ref.data,_ref$log = _ref.
-  log,log = _ref$log === void 0 ? false : _ref$log;return (
-
-    new Promise(function (resolve, reject) {
-      uni[name](Object.assign(data || {}, {
-        success: function success(r) {
-          if (log) console.log(r);
-          resolve(r);
-        },
-        fail: function fail(e) {
-          reject(e);
-        } }));
-
-    }));},
-
 urlParse = function urlParse(str) {var _str$split =
   str.split('?'),_str$split2 = _slicedToArray(_str$split, 2),url = _str$split2[0],query = _str$split2[1],
   data = {};
@@ -9316,10 +9303,10 @@ urlParse = function urlParse(str) {var _str$split =
     data: data };
 
 },
-urlStringity = function urlStringity(_ref2)
+urlStringity = function urlStringity(_ref)
 
 
-{var url = _ref2.url,data = _ref2.data;
+{var url = _ref.url,data = _ref.data;
   var query = '';
   if (data) {
     Object.keys(data).map(function (each, i) {
@@ -9327,8 +9314,7 @@ urlStringity = function urlStringity(_ref2)
     });
   }
   return url + query;
-};exports.urlStringity = urlStringity;exports.urlParse = urlParse;exports.uniApi = uniApi;exports.$await = $await;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+};exports.urlStringity = urlStringity;exports.urlParse = urlParse;exports.$await = $await;
 
 /***/ }),
 /* 17 */
@@ -9356,6 +9342,9 @@ cloudFn = function cloudFn(_ref)
   then(function (r) {
     if (log) console.log(r);
     return r;
+  }).
+  catch(function (e) {
+    console.log(e);
   });
 };exports.cloudFn = cloudFn;
 
@@ -9495,12 +9484,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   return x !== y;
 };var _default = /*#__PURE__*/function () {
 
-  function _default(obj) {_classCallCheck(this, _default);
-    this.states = {};
+  function _default() {var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};_classCallCheck(this, _default);
+    this.states = obj;
     this.watchs = {};
-    if (obj) {
-      this.setState(obj);
-    }
   }_createClass(_default, [{ key: "setState", value: function setState(
     obj) {var _this = this;
       Object.keys(obj).map(function (each) {
@@ -9584,10 +9570,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getSumInfo = exports.uploadLog = exports.getLogs = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
-
-
-var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getSumInfo = exports.uploadLog = exports.getLogs = void 0;var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);
 
 
 // async function api({
@@ -9596,28 +9579,24 @@ var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);
 // 	wxCloud,
 // 	log = false,
 // }) {
-// 	try {
-// 		if (wxCloud) {
-// 			let r = await cloudFn({
-// 				name: url,
+// 	if (wxCloud) {
+// 		let r = await cloudFn({
+// 			name: url,
+// 			data
+// 		})
+// 		if (log) console.log(r);
+// 		// if (err) console.log(err);
+// 		return r
+// 	} else {
+// 		let [err, r] = await uni.request({
+// 			data: {
+// 				url,
 // 				data
-// 			})
-// 			if (log) console.log(r);
-// 			// return r
-// 		} else {
-// 			let r = await uniApi({
-// 				name: 'request',
-// 				data: {
-// 					url,
-// 					data
-// 				}
-// 			})
-// 			if (log) console.log(r);
-// 			// return r
-// 		}
-// 	} catch (e) {
-// 		// TODO handle the exception
-// 		console.log(e);
+// 			}
+// 		})
+// 		if (log) console.log(r);
+// 		if (err) console.log(err);
+// 		// return r
 // 	}
 // };
 var api = function api(_ref)
@@ -9641,8 +9620,7 @@ var api = function api(_ref)
         rej(e);
       });
     } else {
-      (0, _base.uniApi)({
-        name: 'request',
+      uni.request({
         url: url,
         data: data }).
 
@@ -9692,6 +9670,7 @@ getSumInfo = function getSumInfo(_ref4)
     wxCloud: wxCloud });
 
 };exports.getSumInfo = getSumInfo;exports.uploadLog = uploadLog;exports.getLogs = getLogs;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 38 */,
@@ -9710,8 +9689,7 @@ getSumInfo = function getSumInfo(_ref4)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
 
 
 
@@ -9720,8 +9698,7 @@ showPic = function showPic(_ref)
 
 
 {var arr = _ref.arr,i = _ref.i;
-  return (0, _base.uniApi)({
-    name: 'previewImage',
+  return uni.previewImage({
     data: {
       urls: arr,
       current: arr[i] } });
@@ -9732,25 +9709,22 @@ navTo = function navTo(_ref2)
 
 
 {var url = _ref2.url,data = _ref2.data;
-  return (0, _base.uniApi)({
-    name: 'navigateTo',
-    data: {
-      url: (0, _base.urlStringity)({
-        url: url,
-        data: data }) } });
-
+  return uni.navigateTo({
+    url: (0, _base.urlStringity)({
+      url: url,
+      data: data }) });
 
 
 },
 toast = function toast(data) {
-  return (0, _base.uniApi)({
-    name: 'showToast',
-    data: Object.assign({
-      title: '操作成功',
-      icon: 'none' },
-    data) });
+  return uni.showToast(
+  Object.assign({
+    title: '操作成功',
+    icon: 'none' },
+  data));
 
 };exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 ]]);

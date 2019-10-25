@@ -285,17 +285,16 @@ var _api = __webpack_require__(/*! ../../../api/api.js */ 37);function _toConsum
       }).
       catch(function (e) {});
     },
-    getSumInfo: function getSumInfo() {
-      var r = (0, _api.getSumInfo)({
+    getSumInfo: function getSumInfo() {var _this3 = this;
+      (0, _api.getSumInfo)({
         wxCloud: true
         // log: true
-      });
-      console.log(r);
-      // .then(r => {
-      // 	this.sumDay = r.result.sumDay;
-      // 	this.sumTime = r.result.sumTime;
-      // })
-      // .catch(e => {})
+      }).
+      then(function (r) {
+        _this3.sumDay = r.result.sumDay;
+        _this3.sumTime = r.result.sumTime;
+      }).
+      catch(function (e) {});
     } },
 
   onLoad: function onLoad() {},
