@@ -8,13 +8,12 @@
 					<view :class="['flex','progress'+i]" v-for="(item,i) in dateInfo" :key='i' v-if="i===currentProgress">
 						<view class="mask">
 							<view class="circle" :style="{clipPath:item.clipPath}"></view>
-							<!-- <view class="circle" :style='{transform:"rotate("+((item.startDeg>180?item.startDeg:180)-315)+"deg)"}'></view> -->
 						</view>
 					</view>
 					<view class="inside">
-						<text>{{dateInfo<12?'AM':'PM'}}</text>
+						<text>{{(dateInfo[currentProgress].start[0]+dateInfo[currentProgress].start[1])<12?'AM':'PM'}}</text>
 					</view>
-					<view class="hour"></view>
+					<view :class="'hour'+i" v-for="(item,i) in 12" :key='i'></view>
 				</view>
 			</view>
 			<view class="items">
@@ -46,8 +45,9 @@
 <script>
 	import Calendar from '@/components/calendar.vue'
 	import {
-		cloudFn
-	} from '../../../utils/cloudFn.js'
+		getLogs,
+		getSumInfo,
+	} from "../../../api/api.js"
 	export default {
 		components: {
 			Calendar,
@@ -80,12 +80,12 @@
 			},
 			dateSelect(e) {
 				console.log(e);
-				cloudFn({
-						name: 'getLogs',
+				getLogs({
 						data: {
 							start: `${e.year}/${e.month}/${e.date}`,
 							end: `${e.year}/${e.month}/${e.date}`,
-						}
+						},
+						wxCloud: true
 					})
 					.then(r => {
 						this.currentProgress = 0;
@@ -110,11 +110,11 @@
 				this.currentProgress = i;
 			},
 			getLogs() {
-				cloudFn({
-						name: 'getLogs',
+				getLogs({
 						data: {
 							// size:20
 						},
+						wxCloud: true,
 					})
 					.then(r => {
 						let marks = []
@@ -133,21 +133,21 @@
 							clearTimeout(t)
 						}, 0)
 					})
+					.catch(e => {})
 			},
 			getSumInfo() {
-				cloudFn({
-						name: 'getSumInfo',
+				getSumInfo({
+						wxCloud: true
 						// log: true
 					})
 					.then(r => {
 						this.sumDay = r.result.sumDay;
 						this.sumTime = r.result.sumTime;
 					})
+					.catch(e => {})
 			}
 		},
-		onLoad() {
-
-		},
+		onLoad() {},
 		onShow() {
 			this.getLogs()
 			this.getSumInfo()
@@ -158,15 +158,6 @@
 <style lang="less" scoped>
 	@import '../../../comm/color.less';
 
-	.loop(@i)when(@i<5) {
-		.progress@{i} {
-			.circle {
-				border-color: hsl(@i*77+66, 100%, 50%)
-			}
-		}
-
-		.loop(@i+1);
-	}
 
 	@keyframes dateInfo {
 		0% {
@@ -186,7 +177,7 @@
 		}
 
 		100% {
-			transform: scale(1.2);
+			transform: scale(1.1);
 		}
 	}
 
@@ -206,10 +197,12 @@
 				margin-right: 10rpx;
 
 				.clock {
-					position: relative;
-					width: 250rpx;
-					height: 250rpx;
+					@clockWidth: 280rpx;
 					@clockWeight: 8rpx;
+					@clockColor: #D8D9DBdd;
+					position: relative;
+					width: @clockWidth;
+					height: @clockWidth;
 
 					.circle {
 						position: absolute;
@@ -218,18 +211,19 @@
 						right: 0;
 						top: 0;
 						bottom: 0;
-						width: 250rpx;
-						height: 250rpx;
+						width: @clockWidth;
+						height: @clockWidth;
 						box-sizing: border-box;
-						border: @clockWeight solid #E6FF00;
+						// background: #e6ff00;
+						// border: @clockWeight solid transparent;
 						border-radius: 50%;
 					}
 
 					&>.circle {
-						border-color: #D8D9DBdd;
+						border: @clockWeight solid @clockColor;
 					}
 
-					.progress {
+					[class*=progress] {
 						position: absolute;
 						margin: auto;
 						left: 0;
@@ -244,12 +238,25 @@
 							height: inherit;
 
 							.circle {
-								// animation: clockProgess .2s linear forwards 2 alternate;
+								animation: clockProgess .2s linear forwards 2 alternate;
 							}
 						}
 					}
 
-					.loop(0);
+					.pLoop(@i)when(@i<5) {
+						.progress@{i} {
+							.circle {
+								width: @clockWidth - @clockWeight*2;
+								height: @clockWidth - @clockWeight*2;
+								background: radial-gradient(hsl(@i*77+66, 0%, 0%),
+									hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
+							}
+						}
+
+						.pLoop(@i+1);
+					}
+
+					.pLoop(0);
 
 					.inside {
 						position: absolute;
@@ -263,7 +270,7 @@
 						line-height: 1.8rem;
 					}
 
-					.hour {
+					[class*=hour] {
 						position: absolute;
 						top: @clockWeight;
 						left: 0;
@@ -271,9 +278,20 @@
 						margin: auto;
 						width: @clockWeight;
 						height: @clockWeight*2.2;
-						background: #D8D9DBdd;
-						border-radius: 0 0 @clockWeight/2 @clockWeight/2;
+						background: @clockColor;
+						border-radius: 0 0 50% 50%;
+						transform-origin: 50% @clockWidth/2-@clockWeight*2/2 0;
 					}
+
+					.hour(@i)when(@i<12) {
+						.hour@{i} {
+							transform: rotate(@i*30deg);
+						}
+
+						.hour(@i+1);
+					}
+
+					.hour(0);
 				}
 			}
 
@@ -287,7 +305,7 @@
 				.item {
 					line-height: 1.1rem;
 					font-size: 26rpx;
-					background: #CFECFE;
+					background: #BAD6E7;
 					padding: 10rpx;
 					margin: 10rpx 0;
 					border-radius: 10rpx;
@@ -298,7 +316,7 @@
 				}
 
 				.selected {
-					background: #BAD6E7;
+					background: #CFECFE;
 				}
 			}
 		}

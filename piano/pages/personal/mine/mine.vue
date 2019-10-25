@@ -58,11 +58,12 @@
 	} from '../../../utils/login.js'
 	import {
 		showPic,
+		toast,
 		navTo
 	} from '../../../utils/default.js'
 	import {
 		cloudFn
-	} from '../../../utils/cloudFn.js'
+	} from '../../../lib/cloudFn.js'
 	export default {
 		data() {
 			return {
@@ -137,12 +138,20 @@
 			},
 			updateLog() {
 				if (this.exercise.uploaded) return;
+				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
+				if (duration < 5 * 60 * 1000) {
+					toast({
+						title: '练习时间少于5分钟不计入哦，请加油~',
+						duration: 3000
+					})
+					return
+				}
 				cloudFn({
 						name: 'uploadLog',
 						data: {
 							start: this.exercise.start,
 							end: this.exercise.end,
-							duration: new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime()
+							duration,
 						}
 					})
 					.then(r => {

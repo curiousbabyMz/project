@@ -6,22 +6,6 @@ export var
 			return [r, e]
 		})
 	},
-	wxApi = ({
-		name,
-		data,
-		log = false
-	}) => (
-		new Promise((resolve, reject) => {
-			wx[name](Object.assign(data || {}, {
-				success: r => {
-					if (log) console.log(r);
-					resolve(r)
-				},
-				fail: e => {
-					reject(e)
-				}
-			}))
-		})),
 	urlParse = (str) => {
 		let [url, query] = str.split('?'),
 			data = {};

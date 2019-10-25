@@ -6,7 +6,7 @@ export var
 	cloudFn = ({
 		name,
 		data,
-		log=false
+		log
 	}) => {
 		return wx.cloud.callFunction({
 				name,
@@ -16,12 +16,7 @@ export var
 				if(log)console.log(r)
 				return r
 			})
-	},
-	wxCloudLogin = () => {
-		return cloudFn({
-				name: 'login',
-			})
-			.then(r => {
-				return r.result
+			.catch(e=>{
+				console.log(e);
 			})
 	}

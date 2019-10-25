@@ -3,12 +3,13 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-import State from 'utils/state.js'
+import State from './lib/state.js'
 Vue.prototype.$state = new State();
-import {
-	$await
-} from './utils/base.js'
-Vue.prototype.$await = $await;
+
+// import {
+// 	$await
+// } from './lib/base.js'
+// Vue.prototype.$await = $await;
 
 
 App.mpType = 'app'

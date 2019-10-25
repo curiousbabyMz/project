@@ -2,12 +2,9 @@ var deff = (x, y) => {
 	return x !== y;
 }
 export default class {
-	constructor(obj) {
-		this.states = {};
+	constructor(obj={}) {
+		this.states = obj;
 		this.watchs = {};
-		if (obj) {
-			this.setState(obj);
-		}
 	}
 	setState(obj) {
 		Object.keys(obj).map(each => {
