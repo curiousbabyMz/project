@@ -59,11 +59,12 @@
 	import {
 		showPic,
 		toast,
-		navTo
+		navTo,
+		formateTime
 	} from '../../../utils/default.js'
 	import {
-		cloudFn
-	} from '../../../lib/cloudFn.js'
+		uploadLog
+	} from '../../../api/api.js'
 	export default {
 		data() {
 			return {
@@ -75,6 +76,7 @@
 					start: '',
 					end: '',
 					duration: '00:00:00',
+					lessTime: 10 * 60
 				}
 			}
 		},
@@ -98,56 +100,38 @@
 					if (history) {
 						tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000)
 					} else {
-						this.exercise.start = new Date().toLocaleString('chinese', {
-							hour12: false
-						});
+						this.exercise.start = formateTime(new Date());
 					}
-					this.exercise.duration = tick.toLocaleString('chinese', {
-						hour12: false
-					})
+					console.log(this.exercise.start);
+					this.exercise.duration = formateTime(tick)
 					this.exercise.clock = setInterval(() => {
 						tick.setSeconds(tick.getSeconds() + 1);
 						// console.log(1);
-						this.exercise.duration = tick.toLocaleString('chinese', {
-							hour12: false
-						});
+						this.exercise.duration = formateTime(tick);
 						if (tick.getHours() > 23) {
 							this.clockChange();
 						}
 					}, 1000)
 				} else {
 					if (!history) {
-						this.exercise.end = new Date().toLocaleString('chinese', {
-							hour12: false
-						});
+						this.exercise.end = formateTime(new Date());
 					}
 					this.exercise.clockState = false;
 					clearInterval(this.exercise.clock);
 					this.updateLog();
 				}
 			},
-			getLogs() {
-				cloudFn({
-						name: 'getLogs',
-						data: {
-							size: 1,
-							current: 1,
-						}
-					})
-					.then(r => {})
-			},
 			updateLog() {
 				if (this.exercise.uploaded) return;
 				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
-				if (duration < 5 * 60 * 1000) {
+				if (duration < this.lessTime * 1000) {
 					toast({
 						title: '练习时间少于5分钟不计入哦，请加油~',
 						duration: 3000
 					})
 					return
 				}
-				cloudFn({
-						name: 'uploadLog',
+				uploadLog({
 						data: {
 							start: this.exercise.start,
 							end: this.exercise.end,
@@ -229,7 +213,7 @@
 						height: inherit;
 						font-size: 150rpx;
 						color: @defaultColor;
-						box-shadow: 0 0 5rpx 5rpx #4481bb62;
+						box-shadow: 0 0 5rpx 5rpx rgba(68, 129, 187, 0.384);
 						// border: 8rpx solid @defaultColor;
 					}
 
@@ -261,18 +245,18 @@
 				border-radius: 44% 46%;
 				animation: 10s sea0 forwards infinite linear;
 				// overflow: visible;
-				background: #8aedffdc;
+				background: rgba(138, 237, 255, 0.863);
 			}
 
 			.sea1 {
-				background: #ffe6b152;
+				background: rgba(255, 230, 177, 0.322);
 				animation: 12s sea1 forwards infinite linear;
 				top: 0;
 				content: "";
 			}
 
 			.sea2 {
-				background: #5daffb7c;
+				background: rgba(93, 175, 251, 0.486);
 				animation: 14s sea2 forwards infinite linear;
 				top: 0;
 				content: "";

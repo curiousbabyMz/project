@@ -11,7 +11,7 @@
 						</view>
 					</view>
 					<view class="inside">
-						<text>{{(dateInfo[currentProgress].start[0]+dateInfo[currentProgress].start[1])<12?'AM':'PM'}}</text>
+						<text>{{12>(dateInfo[currentProgress].start[0]+dateInfo[currentProgress].start[1])-0 ?'AM':'PM'}}</text>
 					</view>
 					<view :class="'hour'+i" v-for="(item,i) in 12" :key='i'></view>
 				</view>
@@ -48,6 +48,9 @@
 		getLogs,
 		getSumInfo,
 	} from "../../../api/api.js"
+	import {
+		formateTime
+	} from '../../../utils/default.js'
 	export default {
 		components: {
 			Calendar,
@@ -94,9 +97,7 @@
 							each.end = each.end.slice(-8);
 							each.long = new Date(0, 0, 0);
 							each.long.setSeconds(each.duration / 1000);
-							each.long = each.long.toLocaleString('chinses', {
-								hour12: false
-							}).slice(-8);
+							each.long = formateTime(new Date(each.long)).slice(-8);
 
 							let start = this.time2Deg(each.start),
 								end = this.time2Deg(each.end);
@@ -137,8 +138,8 @@
 			},
 			getSumInfo() {
 				getSumInfo({
-						wxCloud: true
-						// log: true
+						wxCloud: true,
+						log: true
 					})
 					.then(r => {
 						this.sumDay = r.result.sumDay;
@@ -173,12 +174,10 @@
 
 	@keyframes clockProgess {
 		0% {
-			transform: none;
+			opacity: 0;
 		}
 
-		100% {
-			transform: scale(1.1);
-		}
+		100% {}
 	}
 
 	.calendar {
@@ -199,7 +198,7 @@
 				.clock {
 					@clockWidth: 280rpx;
 					@clockWeight: 8rpx;
-					@clockColor: #D8D9DBdd;
+					@clockColor: rgba(216, 217, 219, 0.867);
 					position: relative;
 					width: @clockWidth;
 					height: @clockWidth;
@@ -221,6 +220,7 @@
 
 					&>.circle {
 						border: @clockWeight solid @clockColor;
+						z-index: 1;
 					}
 
 					[class*=progress] {
@@ -238,7 +238,7 @@
 							height: inherit;
 
 							.circle {
-								animation: clockProgess .2s linear forwards 2 alternate;
+								animation: clockProgess .5s linear forwards;
 							}
 						}
 					}
@@ -246,10 +246,9 @@
 					.pLoop(@i)when(@i<5) {
 						.progress@{i} {
 							.circle {
-								width: @clockWidth - @clockWeight*2;
-								height: @clockWidth - @clockWeight*2;
-								background: radial-gradient(hsl(@i*77+66, 0%, 0%),
-									hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
+								width: @clockWidth;
+								height: @clockWidth;
+								background: radial-gradient(hsl(@i*77+66+57, 100%, 50%), hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
 							}
 						}
 

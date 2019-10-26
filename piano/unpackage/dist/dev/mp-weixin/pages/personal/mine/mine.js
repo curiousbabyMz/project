@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mine.vue?vue&type=script&lang=js& */ 44);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _mine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _mine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _mine_vue_vue_type_style_index_0_id_42d1150a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mine.vue?vue&type=style&index=0&id=42d1150a&lang=less&scoped=true& */ 47);
-/* harmony import */ var _D_CodeSoftware_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 22);
+/* harmony import */ var _D_CodeSoftware_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 21);
 
 
 
@@ -198,93 +198,77 @@ var _default2 = __webpack_require__(/*! ../../../utils/default.js */ 46);
 
 
 
-var _cloudFn = __webpack_require__(/*! ../../../lib/cloudFn.js */ 17); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = { data: function data() {return { userAuth: false, userInfo: null, exercise: { clock: null, clockState: false, start: '', end: '', duration: '00:00:00' } };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}}, clockChange: function clockChange() {var _this = this;var history = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;if (!history) this.exercise.clockState = !this.exercise.clockState;if (this.exercise.clockState) {console.log(this.exercise);this.exercise.end = '';this.exercise.clockState = true;this.exercise.uploaded = false;var tick = new Date(0, 0, 0, 0, 0, 1);if (history) {tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000);} else {this.exercise.start = new Date().toLocaleString('chinese', { hour12: false });}this.exercise.duration = tick.toLocaleString('chinese', { hour12: false });this.exercise.clock = setInterval(function () {tick.setSeconds(tick.getSeconds() + 1); // console.log(1);
-          _this.exercise.duration = tick.toLocaleString('chinese', { hour12: false });if (tick.getHours() > 23) {_this.clockChange();}}, 1000);} else {
-        if (!history) {
-          this.exercise.end = new Date().toLocaleString('chinese', {
-            hour12: false });
 
-        }
-        this.exercise.clockState = false;
+var _api = __webpack_require__(/*! ../../../api/api.js */ 37); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { userAuth: false, userInfo: null, exercise: { clock: null, clockState: false, start: '', end: '', duration: '00:00:00', lessTime: 10 * 60 } };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}}, clockChange: function clockChange() {var _this = this;var history = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;if (!history) this.exercise.clockState = !this.exercise.clockState;if (this.exercise.clockState) {console.log(this.exercise);this.exercise.end = '';this.exercise.clockState = true;this.exercise.uploaded = false;var tick = new Date(0, 0, 0, 0, 0, 1);if (history) {tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000);} else {this.exercise.start = (0, _default2.formateTime)(new Date());}console.log(this.exercise.start);this.exercise.duration = (0, _default2.formateTime)(tick);this.exercise.clock = setInterval(function () {tick.setSeconds(tick.getSeconds() + 1); // console.log(1);
+          _this.exercise.duration = (0, _default2.formateTime)(tick);if (tick.getHours() > 23) {_this.clockChange();}}, 1000);} else {if (!history) {this.exercise.end = (0, _default2.formateTime)(new Date());}this.exercise.clockState = false;
         clearInterval(this.exercise.clock);
         this.updateLog();
       }
     },
-    getLogs: function getLogs() {
-      (0, _cloudFn.cloudFn)({
-        name: 'getLogs',
-        data: {
-          size: 1,
-          current: 1 } }).
-
-
-      then(function (r) {});
-    },
     updateLog: function updateLog() {var _this2 = this;
       if (this.exercise.uploaded) return;
       var duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
-      if (duration < 5 * 60 * 1000) {
+      if (duration < this.lessTime * 1000) {
         (0, _default2.toast)({
           title: '练习时间少于5分钟不计入哦，请加油~',
           duration: 3000 });
 
         return;
       }
-      (0, _cloudFn.cloudFn)({
-        name: 'uploadLog',
+      (0, _api.uploadLog)({
         data: {
           start: this.exercise.start,
           end: this.exercise.end,

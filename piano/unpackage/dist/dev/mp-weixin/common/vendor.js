@@ -8404,7 +8404,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": {}, "pages/personal/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "usingComponents": {} }, "pages/personal/calendar/calendar": { "usingComponents": { "calendar": "/components/calendar" } }, "pages/personal/mine/mine": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -9331,14 +9331,12 @@ var
 cloudFn = function cloudFn(_ref)
 
 
-
-{var name = _ref.name,data = _ref.data,log = _ref.log;
+{var name = _ref.name,data = _ref.data;
   return wx.cloud.callFunction({
     name: name,
     data: data }).
 
   then(function (r) {
-    if (log) console.log(r);
     return r;
   }).
   catch(function (e) {
@@ -9362,85 +9360,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 envs.betaServer;exports.default = _default;
 
 /***/ }),
-/* 19 */
-/*!*************************************************!*\
-  !*** F:/Web/Uni-app/project/piano/lib/state.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var deff = function deff(x, y) {
-  return x !== y;
-};var _default = /*#__PURE__*/function () {
-
-  function _default() {var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};_classCallCheck(this, _default);
-    this.states = obj;
-    this.watchs = {};
-  }_createClass(_default, [{ key: "setState", value: function setState(
-    obj) {var _this = this;
-      Object.keys(obj).map(function (each) {
-        if (_this.states[each]) {
-          _this.states[each] = obj[each];
-        } else {
-          _this.watchs[each] = [];
-          var that = _this;
-          Object.defineProperty(_this.states, each, {
-            enmuerable: true,
-            configurable: true,
-            set: function set(newVal) {
-              // console.log(this);
-              if (deff(newVal, obj[each])) {
-                obj[each] = newVal;
-                // console.log(that.watchs);
-                that.watchs[each].map(function (_ref)
-
-
-
-                {var obj = _ref.obj,key = _ref.key,fn = _ref.fn;
-                  if (fn) {
-                    fn(newVal);
-                  } else {
-                    obj[key] = newVal;
-                  }
-                });
-              }
-            },
-            get: function get() {
-              return obj[each];
-            } });
-
-          Object.defineProperty(_this, each, {
-            enmuerable: true,
-            configurable: true,
-            set: function set(newVal) {
-              // console.log(this);
-              this.states[each] = newVal;
-            },
-            get: function get() {
-              return obj[each];
-            } });
-
-        }
-      });
-    } }, { key: "setWatch", value: function setWatch(
-    obj, key, keyword) {var fn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      if (this[keyword] !== undefined) {
-        obj[key] = this[keyword];
-        this.watchs[keyword].push({
-          obj: obj,
-          key: key,
-          fn: fn });
-
-      } else {
-        throw Error("state of ".concat(key, " is no defind"));
-      }
-    } }]);return _default;}();exports.default = _default;
-
-/***/ }),
+/* 19 */,
 /* 20 */,
-/* 21 */,
-/* 22 */
+/* 21 */
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
   \********************************************************************/
@@ -9546,7 +9468,97 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 23 */
+/* 22 */
+/*!*************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/lib/state.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var deff = function deff(x, y) {
+  return x !== y;
+};var _default = /*#__PURE__*/function () {
+
+  function _default() {var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};_classCallCheck(this, _default);
+    this.states = obj;
+    this.watchs = {};
+  }_createClass(_default, [{ key: "setState", value: function setState(
+    obj) {var _this = this;
+      Object.keys(obj).map(function (each) {
+        if (_this.states[each]) {
+          _this.states[each] = obj[each];
+        } else {
+          _this.watchs[each] = [];
+          var that = _this;
+          Object.defineProperty(_this.states, each, {
+            enmuerable: true,
+            configurable: true,
+            set: function set(newVal) {
+              // console.log(this);
+              if (deff(newVal, obj[each])) {
+                obj[each] = newVal;
+                // console.log(that.watchs);
+                that.watchs[each].map(function (_ref)
+
+
+
+                {var obj = _ref.obj,key = _ref.key,fn = _ref.fn;
+                  if (fn) {
+                    fn(newVal);
+                  } else {
+                    obj[key] = newVal;
+                  }
+                });
+              }
+            },
+            get: function get() {
+              return obj[each];
+            } });
+
+          Object.defineProperty(_this, each, {
+            enmuerable: true,
+            configurable: true,
+            set: function set(newVal) {
+              // console.log(this);
+              this.states[each] = newVal;
+            },
+            get: function get() {
+              return obj[each];
+            } });
+
+        }
+      });
+    } }, { key: "setWatch", value: function setWatch(
+    obj, key, keyword) {var fn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      if (this[keyword] !== undefined) {
+        obj[key] = this[keyword];
+        this.watchs[keyword].push({
+          obj: obj,
+          key: key,
+          fn: fn });
+
+      } else {
+        throw Error("state of ".concat(key, " is no defind"));
+      }
+    } }]);return _default;}();exports.default = _default;
+
+/***/ }),
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */
 /*!***********************************************!*\
   !*** F:/Web/Uni-app/project/piano/api/api.js ***!
   \***********************************************/
@@ -9657,20 +9669,6 @@ getSumInfo = function getSumInfo(_ref4)
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
 /* 38 */,
 /* 39 */,
 /* 40 */,
@@ -9687,7 +9685,7 @@ getSumInfo = function getSumInfo(_ref4)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.formateTime = exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
 
 
 
@@ -9721,7 +9719,22 @@ toast = function toast(data) {
     icon: 'none' },
   data));
 
-};exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
+},
+formateTime = function formateTime(date) {
+  var
+  y = date.getFullYear(),
+  m = date.getMonth(),
+  d = date.getDate(),
+  h = date.getHours(),
+  min = date.getMinutes(),
+  s = date.getSeconds();
+  m = m < 10 ? "0".concat(m) : m;
+  d = d < 10 ? "0".concat(d) : d;
+  h = h < 10 ? "0".concat(h) : h;
+  min = min < 10 ? "0".concat(min) : min;
+  s = s < 10 ? "0".concat(s) : s;
+  return "".concat(y, "/").concat(m, "/").concat(d, " ").concat(h, ":").concat(min, ":").concat(s);
+};exports.formateTime = formateTime;exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
