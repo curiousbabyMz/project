@@ -11,6 +11,9 @@
 				{{item.label}}
 			</view>
 		</view>
+		<view class="mask" v-if="indexToggle!==null" @click="toggleChange" :style="{opacity:mask?1:0}">
+			<view :data-i='indexToggle'></view>
+		</view>
 	</view>
 </template>
 
@@ -21,14 +24,10 @@
 				type: Object,
 				required: true,
 			},
-			// holder: {
-			// 	default: null,
-			// 	type: Array
-			// },
-			// index: {
-			// 	default: null,
-			// 	type: Array,
-			// }
+			mask: {
+				type: Boolean,
+				value: false
+			}
 		},
 		data() {
 			return {
@@ -103,10 +102,20 @@
 			position: absolute;
 			width: 100%;
 			background: rgba(255, 255, 255, .7);
+			z-index: 1;
 
 			&>view {
 				text-align: center;
 			}
+		}
+	}
+
+	.mask {
+		view {
+			width: 100vw;
+			height: 100vh;
+			position: fixed;
+			background: rgba(0, 0, 0, 0.2);
 		}
 	}
 

@@ -1,7 +1,7 @@
 <template>
 	<view class="calendar">
 		<view class="title">
-			<Toggle class='toggle' :items='title' @change='toggleChange'></Toggle>
+			<Toggle class='toggle' :items='title' @change='toggleChange' :mask='true'></Toggle>
 		</view>
 		<view class="date">
 			<view class="week flex">

@@ -17,15 +17,15 @@
 			</view>
 		</view>
 		<view class="exercise">
-			<view @click="clockChange()">
+			<view class="btn" @click="clockChange()">
 				<view class="clockIn flex">
 					<text :class="['icon_note',{play:exercise.clockState}]"></text>
 					<view :class="['border',{play:exercise.clockState}]"></view>
 				</view>
-				<!-- <view class="tip">
+				<view class="tip">
 					<text v-if="!exercise.clockState">开始练琴</text>
 					<text v-else>结束练琴</text>
-				</view> -->
+				</view>
 			</view>
 			<view class="timeing">
 				<view class="duration">{{exercise.duration.slice(-8)}}</view>
@@ -76,8 +76,13 @@
 					start: '',
 					end: '',
 					duration: '00:00:00',
+<<<<<<< HEAD
 					lessTime: 10 * 60
 				}
+=======
+				},
+				lessTime: 10
+>>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 			}
 		},
 		methods: {
@@ -92,7 +97,7 @@
 			clockChange(history = false) {
 				if (!history) this.exercise.clockState = !this.exercise.clockState;
 				if (this.exercise.clockState) {
-					console.log(this.exercise);
+					// console.log(this.exercise);
 					this.exercise.end = '';
 					this.exercise.clockState = true;
 					this.exercise.uploaded = false;
@@ -102,7 +107,10 @@
 					} else {
 						this.exercise.start = formateTime(new Date());
 					}
+<<<<<<< HEAD
 					console.log(this.exercise.start);
+=======
+>>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 					this.exercise.duration = formateTime(tick)
 					this.exercise.clock = setInterval(() => {
 						tick.setSeconds(tick.getSeconds() + 1);
@@ -124,9 +132,14 @@
 			updateLog() {
 				if (this.exercise.uploaded) return;
 				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
+<<<<<<< HEAD
 				if (duration < this.lessTime * 1000) {
+=======
+				// console.log(duration);
+				if (duration < this.lessTime * 60 * 1000) {
+>>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 					toast({
-						title: '练习时间少于5分钟不计入哦，请加油~',
+						title: `练习时间少于${this.lessTime}分钟不计入哦，请加油~`,
 						duration: 3000
 					})
 					return
@@ -136,13 +149,17 @@
 							start: this.exercise.start,
 							end: this.exercise.end,
 							duration,
-						}
+						},
+						wxCloud: true
 					})
 					.then(r => {
 						this.exercise.uploaded = true;
 						uni.setStorage({
 							key: 'exercise',
-							data: this.exercise
+							data: {
+								start: formateTime(this.exercise.start),
+								end: formateTime(this.exercise.end)
+							}
 						})
 					})
 			}
@@ -159,7 +176,8 @@
 		onShow() {
 			let history = uni.getStorageSync('exercise')
 			if (history) {
-				this.exercise = history;
+				this.exercise.start = new Date(history.start);
+				this.exercise.end = new Date(history.end);
 				this.clockChange(true);
 			}
 		},
@@ -272,54 +290,59 @@
 		.exercise {
 			height: 300rpx;
 
-			.clockIn {
-				@c: #41C3CC;
+			.btn {
+				margin: auto;
+				width: 4rem;
 
-				position: relative;
-				font-size: 50rpx;
-				// width: 2em;
-				height: 2em;
-				// border-radius: 50%;
-				// border: 4rpx solid @c;
-				// border-color: @c #41CC96;
-				color: @c ;
-				margin: 30rpx auto 10rpx;
+				.clockIn {
+					@c: #41C3CC;
 
-
-				&>text {
-					position: absolute;
-					font-size: inherit;
-					animation-name: note;
-					animation-duration: 0.8s;
-					animation-iteration-count: infinite;
-					animation-direction: alternate;
-					animation-timing-function: ease-in-out;
-					animation-play-state: paused;
-				}
-
-				.border {
-					position: absolute;
-					width: 2em;
+					position: relative;
+					font-size: 50rpx;
+					// width: 2em;
 					height: 2em;
-					border-radius: 50%;
-					border: 5rpx solid @c;
-					border-color: @c #41CC96 #57AED6 #57BAD6;
-					animation-name: noteBorder;
-					animation-duration: 2s;
-					animation-iteration-count: infinite;
-					animation-timing-function: linear;
-					animation-play-state: paused;
+					// border-radius: 50%;
+					// border: 4rpx solid @c;
+					// border-color: @c #41CC96;
+					color: @c ;
+					margin: 30rpx auto 10rpx;
+
+
+					&>text {
+						position: absolute;
+						font-size: inherit;
+						animation-name: note;
+						animation-duration: 0.8s;
+						animation-iteration-count: infinite;
+						animation-direction: alternate;
+						animation-timing-function: ease-in-out;
+						animation-play-state: paused;
+					}
+
+					.border {
+						position: absolute;
+						width: 2em;
+						height: 2em;
+						border-radius: 50%;
+						border: 5rpx solid @c;
+						border-color: @c #41CC96 #57AED6 #57BAD6;
+						animation-name: noteBorder;
+						animation-duration: 2s;
+						animation-iteration-count: infinite;
+						animation-timing-function: linear;
+						animation-play-state: paused;
+					}
+
+					.play {
+						animation-play-state: running;
+					}
 				}
 
-				.play {
-					animation-play-state: running;
+				.tip {
+					font-size: 25rpx;
+					text-align: center;
+					margin-bottom: 20rpx;
 				}
-			}
-
-			.tip {
-				font-size: 28rpx;
-				text-align: center;
-				margin-bottom: 20rpx;
 			}
 
 			.timeing {
