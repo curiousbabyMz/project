@@ -246,7 +246,8 @@ var _api = __webpack_require__(/*! ../../../api/api.js */ 37);function _toConsum
           each.start = each.start.slice(-8);
           each.end = each.end.slice(-8);
           each.long = new Date(0, 0, 0);
-          each.long.setSeconds(each.duration / 1000);
+          var duration = new Date(each.end).getTime() - new Date(each.start).getTime();
+          each.long.setSeconds(duration / 1000);
           each.long = (0, _default2.formateTime)(each.long).slice(-8);
 
           var start = _this.time2Deg(each.start),

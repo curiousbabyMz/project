@@ -252,15 +252,15 @@ var _api = __webpack_require__(/*! ../../../api/api.js */ 37); //
 //
 //
 //
-var _default = { data: function data() {return { userAuth: false, userInfo: null, exercise: { clock: null, clockState: false, start: '', end: '', duration: '00:00:00' }, lessTime: 10 };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}}, clockChange: function clockChange() {var _this = this;var history = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;if (!history) this.exercise.clockState = !this.exercise.clockState;if (this.exercise.clockState) {console.log(this.exercise);this.exercise.end = '';this.exercise.clockState = true;this.exercise.uploaded = false;var tick = new Date(0, 0, 0, 0, 0, 1);if (history) {tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000);} else {this.exercise.start = (0, _default2.formateTime)(new Date());}this.exercise.duration = (0, _default2.formateTime)(tick);this.exercise.clock = setInterval(function () {tick.setSeconds(tick.getSeconds() + 1); // console.log(1);
-          _this.exercise.duration = (0, _default2.formateTime)(tick);if (tick.getHours() > 23) {_this.clockChange();}}, 1000);} else {if (!history) {this.exercise.end = (0, _default2.formateTime)(new Date());}this.exercise.clockState = false;clearInterval(this.exercise.clock);
-        this.updateLog();
+var _default = { data: function data() {return { userAuth: false, userInfo: null, exercise: { clock: null, clockState: false, start: '', end: '', duration: '00:00:00' }, lessTime: 10 };}, methods: { showPic: _default2.showPic, navTo: _default2.navTo, getUserAuth: function getUserAuth(e) {if (_login.getUserAuth.call(this, e)) {this.userAuth = true;this.userInfo = getApp().globalData.userInfo;}}, clockChange: function clockChange() {var _this = this;var history = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;if (!history) this.exercise.clockState = !this.exercise.clockState;if (this.exercise.clockState) {// console.log(this.exercise);
+        this.exercise.end = '';this.exercise.clockState = true;this.exercise.uploaded = false;var tick = new Date(0, 0, 0, 0, 0, 1);if (history) {tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000);} else {this.exercise.start = (0, _default2.formateTime)(new Date());}this.exercise.duration = (0, _default2.formateTime)(tick);this.exercise.clock = setInterval(function () {tick.setSeconds(tick.getSeconds() + 1); // console.log(1);
+          _this.exercise.duration = (0, _default2.formateTime)(tick);if (tick.getHours() > 23) {_this.clockChange();}}, 1000);} else {if (!history) {this.exercise.end = (0, _default2.formateTime)(new Date());}this.exercise.clockState = false;clearInterval(this.exercise.clock);this.updateLog();
       }
     },
     updateLog: function updateLog() {var _this2 = this;
       if (this.exercise.uploaded) return;
       var duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
-      console.log(duration);
+      // console.log(duration);
       if (duration < this.lessTime * 60 * 1000) {
         (0, _default2.toast)({
           title: "\u7EC3\u4E60\u65F6\u95F4\u5C11\u4E8E".concat(this.lessTime, "\u5206\u949F\u4E0D\u8BA1\u5165\u54E6\uFF0C\u8BF7\u52A0\u6CB9~"),
@@ -280,7 +280,10 @@ var _default = { data: function data() {return { userAuth: false, userInfo: null
         _this2.exercise.uploaded = true;
         uni.setStorage({
           key: 'exercise',
-          data: _this2.exercise });
+          data: {
+            start: (0, _default2.formateTime)(_this2.exercise.start),
+            end: (0, _default2.formateTime)(_this2.exercise.end) } });
+
 
       });
     } },
@@ -297,7 +300,8 @@ var _default = { data: function data() {return { userAuth: false, userInfo: null
   onShow: function onShow() {
     var history = uni.getStorageSync('exercise');
     if (history) {
-      this.exercise = history;
+      this.exercise.start = new Date(history.start);
+      this.exercise.end = new Date(history.end);
       this.clockChange(true);
     }
   },

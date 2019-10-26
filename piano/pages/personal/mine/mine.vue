@@ -92,7 +92,7 @@
 			clockChange(history = false) {
 				if (!history) this.exercise.clockState = !this.exercise.clockState;
 				if (this.exercise.clockState) {
-					console.log(this.exercise);
+					// console.log(this.exercise);
 					this.exercise.end = '';
 					this.exercise.clockState = true;
 					this.exercise.uploaded = false;
@@ -123,7 +123,7 @@
 			updateLog() {
 				if (this.exercise.uploaded) return;
 				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
-				console.log(duration);
+				// console.log(duration);
 				if (duration < this.lessTime * 60 * 1000) {
 					toast({
 						title: `练习时间少于${this.lessTime}分钟不计入哦，请加油~`,
@@ -143,7 +143,10 @@
 						this.exercise.uploaded = true;
 						uni.setStorage({
 							key: 'exercise',
-							data: this.exercise
+							data: {
+								start: formateTime(this.exercise.start),
+								end: formateTime(this.exercise.end)
+							}
 						})
 					})
 			}
@@ -160,7 +163,8 @@
 		onShow() {
 			let history = uni.getStorageSync('exercise')
 			if (history) {
-				this.exercise = history;
+				this.exercise.start = new Date(history.start);
+				this.exercise.end = new Date(history.end);
 				this.clockChange(true);
 			}
 		},

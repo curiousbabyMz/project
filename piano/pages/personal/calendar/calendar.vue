@@ -96,7 +96,8 @@
 							each.start = each.start.slice(-8);
 							each.end = each.end.slice(-8);
 							each.long = new Date(0, 0, 0);
-							each.long.setSeconds(each.duration / 1000);
+							let duration = new Date(each.end).getTime() - new Date(each.start).getTime();
+							each.long.setSeconds(duration / 1000);
 							each.long = formateTime(each.long).slice(-8);
 
 							let start = this.time2Deg(each.start),
