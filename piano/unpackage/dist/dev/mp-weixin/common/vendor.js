@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6981,7 +6981,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7002,14 +7002,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7085,7 +7085,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9372,23 +9372,13 @@ wxCloudLogin = function wxCloudLogin() {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var envs = __webpack_require__(/*! ./env.json */ 19);var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var envs = __webpack_require__(/*! ./env.json */ 22);var _default =
 envs.betaServer;exports.default = _default;
 
 /***/ }),
-/* 19 */
-/*!***************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/config/env.json ***!
-  \***************************************************************/
-/*! exports provided: betaServer, proServer, default */
-/***/ (function(module) {
-
-module.exports = {"betaServer":"cloud1-dbe5a2","proServer":"cloud-pro-01dw0"};
-
-/***/ }),
+/* 19 */,
 /* 20 */,
-/* 21 */,
-/* 22 */
+/* 21 */
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
   \********************************************************************/
@@ -9494,7 +9484,107 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 23 */
+/* 22 */
+/*!***************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/config/env.json ***!
+  \***************************************************************/
+/*! exports provided: betaServer, proServer, default */
+/***/ (function(module) {
+
+module.exports = {"betaServer":"cloud1-dbe5a2","proServer":"cloud-pro-01dw0"};
+
+/***/ }),
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */
+/*!****************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ./base.js */ 16);
+
+
+
+
+var
+showPic = function showPic(_ref)
+
+
+{var arr = _ref.arr,i = _ref.i;
+  // return wxApi({
+  // 	name: 'previewImage',
+  // 	data: {
+  // 		urls: arr,
+  // 		current: arr[i]
+  // 	}
+  // })
+  return uni.previewImage({
+    data: {
+      urls: arr,
+      current: arr[i] } });
+
+
+},
+navTo = function navTo(_ref2)
+
+
+{var url = _ref2.url,data = _ref2.data;
+  // return wxApi({
+  // 	name: 'navigateTo',
+  // 	url:urlStringity({
+  // 		url,data
+  // 	})
+  // })
+  return uni.navigateTo({
+    url: (0, _base.urlStringity)({
+      url: url, data: data }) });
+
+
+};exports.navTo = navTo;exports.showPic = showPic;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */
 /*!**************************************************************!*\
   !*** C:/code/MiniProgram/test2/project/piano/utils/state.js ***!
   \**************************************************************/
@@ -9571,79 +9661,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         throw Error("state of ".concat(key, " is no defind"));
       }
     } }]);return _default;}();exports.default = _default;
-
-/***/ }),
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
-/*!****************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ./base.js */ 16);
-
-
-
-
-var
-showPic = function showPic(_ref)
-
-
-{var arr = _ref.arr,i = _ref.i;
-  // return wxApi({
-  // 	name: 'previewImage',
-  // 	data: {
-  // 		urls: arr,
-  // 		current: arr[i]
-  // 	}
-  // })
-  return uni.previewImage({
-    data: {
-      urls: arr,
-      current: arr[i] } });
-
-
-},
-navTo = function navTo(_ref2)
-
-
-{var url = _ref2.url,data = _ref2.data;
-  // return wxApi({
-  // 	name: 'navigateTo',
-  // 	url:urlStringity({
-  // 		url,data
-  // 	})
-  // })
-  return uni.navigateTo({
-    url: (0, _base.urlStringity)({
-      url: url, data: data }) });
-
-
-};exports.navTo = navTo;exports.showPic = showPic;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 ]]);
