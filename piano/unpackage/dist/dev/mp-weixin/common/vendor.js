@@ -9366,7 +9366,8 @@ envs.betaServer;exports.default = _default;
 /***/ }),
 /* 19 */,
 /* 20 */,
-/* 21 */
+/* 21 */,
+/* 22 */
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
   \********************************************************************/
@@ -9472,7 +9473,7 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /*!************************************************************!*\
   !*** C:/code/MiniProgram/test2/project/piano/lib/state.js ***!
   \************************************************************/
@@ -9548,7 +9549,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     } }]);return _default;}();exports.default = _default;
 
 /***/ }),
-/* 23 */,
 /* 24 */,
 /* 25 */,
 /* 26 */,
@@ -9562,7 +9562,79 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 34 */,
 /* 35 */,
 /* 36 */,
-/* 37 */
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */
+/*!****************************************************************!*\
+  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
+
+
+
+var
+showPic = function showPic(_ref)
+
+
+{var arr = _ref.arr,i = _ref.i;
+  return uni.previewImage({
+    data: {
+      urls: arr,
+      current: arr[i] } });
+
+
+},
+navTo = function navTo(_ref2)
+
+
+{var url = _ref2.url,data = _ref2.data;
+  return uni.navigateTo({
+    url: (0, _base.urlStringity)({
+      url: url,
+      data: data }) });
+
+
+},
+toast = function toast(data) {
+  return uni.showToast(
+  Object.assign({
+    title: '操作成功',
+    icon: 'none' },
+  data));
+
+};exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */
 /*!**********************************************************!*\
   !*** C:/code/MiniProgram/test2/project/piano/api/api.js ***!
   \**********************************************************/
@@ -9670,60 +9742,6 @@ getSumInfo = function getSumInfo(_ref4)
     wxCloud: wxCloud });
 
 };exports.getSumInfo = getSumInfo;exports.uploadLog = uploadLog;exports.getLogs = getLogs;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
-/*!****************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
-
-
-
-var
-showPic = function showPic(_ref)
-
-
-{var arr = _ref.arr,i = _ref.i;
-  return uni.previewImage({
-    data: {
-      urls: arr,
-      current: arr[i] } });
-
-
-},
-navTo = function navTo(_ref2)
-
-
-{var url = _ref2.url,data = _ref2.data;
-  return uni.navigateTo({
-    url: (0, _base.urlStringity)({
-      url: url,
-      data: data }) });
-
-
-},
-toast = function toast(data) {
-  return uni.showToast(
-  Object.assign({
-    title: '操作成功',
-    icon: 'none' },
-  data));
-
-};exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
