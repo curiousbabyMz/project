@@ -76,13 +76,8 @@
 					start: '',
 					end: '',
 					duration: '00:00:00',
-<<<<<<< HEAD
-					lessTime: 10 * 60
-				}
-=======
 				},
 				lessTime: 10
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 			}
 		},
 		methods: {
@@ -107,10 +102,6 @@
 					} else {
 						this.exercise.start = formateTime(new Date());
 					}
-<<<<<<< HEAD
-					console.log(this.exercise.start);
-=======
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 					this.exercise.duration = formateTime(tick)
 					this.exercise.clock = setInterval(() => {
 						tick.setSeconds(tick.getSeconds() + 1);
@@ -132,12 +123,8 @@
 			updateLog() {
 				if (this.exercise.uploaded) return;
 				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
-<<<<<<< HEAD
-				if (duration < this.lessTime * 1000) {
-=======
 				// console.log(duration);
 				if (duration < this.lessTime * 60 * 1000) {
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 					toast({
 						title: `练习时间少于${this.lessTime}分钟不计入哦，请加油~`,
 						duration: 3000
@@ -148,7 +135,7 @@
 						data: {
 							start: this.exercise.start,
 							end: this.exercise.end,
-							duration,
+							// duration,
 						},
 						wxCloud: true
 					})
@@ -156,10 +143,7 @@
 						this.exercise.uploaded = true;
 						uni.setStorage({
 							key: 'exercise',
-							data: {
-								start: formateTime(this.exercise.start),
-								end: formateTime(this.exercise.end)
-							}
+							data: this.exercise
 						})
 					})
 			}
@@ -176,8 +160,9 @@
 		onShow() {
 			let history = uni.getStorageSync('exercise')
 			if (history) {
-				this.exercise.start = new Date(history.start);
-				this.exercise.end = new Date(history.end);
+				this.exercise = history;
+				this.exercise.start = formateTime(new Date(history.start));
+				if (history.end) this.exercise.end = formateTime(new Date(history.end));
 				this.clockChange(true);
 			}
 		},

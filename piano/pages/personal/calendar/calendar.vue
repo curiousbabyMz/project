@@ -51,9 +51,6 @@
 		getLogs,
 		getSumInfo,
 	} from "../../../api/api.js"
-	import {
-		formateTime
-	} from '../../../utils/default.js'
 	export default {
 		components: {
 			Calendar,
@@ -96,18 +93,12 @@
 					.then(r => {
 						this.currentProgress = 0;
 						this.dateInfo = r.result.data.map(each => {
-							each.start = each.start.slice(-8);
-							each.end = each.end.slice(-8);
 							each.long = new Date(0, 0, 0);
-<<<<<<< HEAD
-							each.long.setSeconds(each.duration / 1000);
-							each.long = formateTime(new Date(each.long)).slice(-8);
-=======
 							let duration = new Date(each.end).getTime() - new Date(each.start).getTime();
 							each.long.setSeconds(duration / 1000);
 							each.long = formateTime(each.long).slice(-8);
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
-
+							each.start = each.start.slice(-8);
+							each.end = each.end.slice(-8);
 							let start = this.time2Deg(each.start),
 								end = this.time2Deg(each.end);
 
@@ -207,11 +198,7 @@
 				.clock {
 					@clockWidth: 280rpx;
 					@clockWeight: 8rpx;
-<<<<<<< HEAD
-					@clockColor: rgba(216, 217, 219, 0.867);
-=======
 					@clockColor: rgba(215, 216, 218, 0.867);
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 					position: relative;
 					width: @clockWidth;
 					height: @clockWidth;
@@ -251,11 +238,7 @@
 							height: inherit;
 
 							.circle {
-<<<<<<< HEAD
-								animation: clockProgess .5s linear forwards;
-=======
 								animation: clockProgess .2s linear forwards;
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 							}
 						}
 					}
@@ -265,12 +248,7 @@
 							.circle {
 								width: @clockWidth;
 								height: @clockWidth;
-<<<<<<< HEAD
-								background: radial-gradient(hsl(@i*77+66+57, 100%, 50%), hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
-=======
-								background: radial-gradient(hsl(@i*77+66+47, 100%, 50%),
-									hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
+								background: radial-gradient(hsl(@i*77+66+47, 100%, 50%), hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
 							}
 						}
 

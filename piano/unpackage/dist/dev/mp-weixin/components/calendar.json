@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "toggle": "/components/toggle"
+  },
+  "component": true
+}

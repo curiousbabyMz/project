@@ -1177,8 +1177,6 @@ function parseBaseApp(vm, _ref3)
 
 
       this.$vm.$scope = this;
-      // vm 上也挂载 globalData
-      this.$vm.globalData = this.globalData;
 
       this.$vm._isMounted = true;
       this.$vm.__call_hook('mounted', args);
@@ -7492,9 +7490,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!**********************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/pages.json ***!
-  \**********************************************************/
+/*!***********************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8395,24 +8393,24 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23720191024001","_inBundle":false,"_integrity":"sha512-vJEk493Vdb8KueNzR2otzDi23rfyRcQBo/t1R41MwNGPk+AUB94gh10+HVLo98DRcvMzkuVofz3KXTAfEx24iw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23720191024001.tgz","_shasum":"18272814446a9bc6053bc92666ec7064a1767588","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"a725c04ef762e5df78a9a69d140c2666e0de05fc","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23720191024001"};
+module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23620191019001","_inBundle":false,"_integrity":"sha512-gBpkjEOQ/LhTnXBVi266PoTNT5VJtbYoEVy+gZ8/LN9/jKEWeWndd2Lu7vn7hmUySVM5K5UV/Bd5LEVkgXB8mA==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23620191019001.tgz","_shasum":"5c006b903ae7bc407c8b1786de249ffbf72da996","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"bc995d4b43b68e7fe7914ae6b2112117d36e63a8","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23620191019001"};
 
 /***/ }),
 /* 7 */
-/*!***************************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/pages.json?{"type":"style"} ***!
-  \***************************************************************************/
+/*!****************************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"style"} ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "usingComponents": {} }, "pages/personal/calendar/calendar": { "usingComponents": { "calendar": "/components/calendar" } }, "pages/personal/mine/mine": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": {}, "pages/personal/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
-/*!**************************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/pages.json?{"type":"stat"} ***!
-  \**************************************************************************/
+/*!***************************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/pages.json?{"type":"stat"} ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8424,9 +8422,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 10 */,
 /* 11 */,
 /* 12 */
-/*!**************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/login.js ***!
-  \**************************************************************/
+/*!***************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/login.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9276,9 +9274,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 16 */
-/*!***********************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/lib/base.js ***!
-  \***********************************************************/
+/*!************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/lib/base.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9318,9 +9316,9 @@ urlStringity = function urlStringity(_ref)
 
 /***/ }),
 /* 17 */
-/*!**************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/lib/cloudFn.js ***!
-  \**************************************************************/
+/*!***************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/lib/cloudFn.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9348,9 +9346,9 @@ cloudFn = function cloudFn(_ref)
 
 /***/ }),
 /* 18 */
-/*!****************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/config/server.js ***!
-  \****************************************************************/
+/*!*****************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/config/server.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9471,15 +9469,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 22 */
-<<<<<<< HEAD
 /*!*************************************************!*\
   !*** F:/Web/Uni-app/project/piano/lib/state.js ***!
   \*************************************************/
-=======
-/*!************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/lib/state.js ***!
-  \************************************************************/
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9567,15 +9559,72 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 35 */,
 /* 36 */,
 /* 37 */
-<<<<<<< HEAD
+/*!*****************************************************!*\
+  !*** F:/Web/Uni-app/project/piano/utils/default.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.formateTime = exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
+
+
+
+var
+showPic = function showPic(_ref)
+
+
+{var arr = _ref.arr,i = _ref.i;
+  return uni.previewImage({
+    data: {
+      urls: arr,
+      current: arr[i] } });
+
+
+},
+navTo = function navTo(_ref2)
+
+
+{var url = _ref2.url,data = _ref2.data;
+  return uni.navigateTo({
+    url: (0, _base.urlStringity)({
+      url: url,
+      data: data }) });
+
+
+},
+toast = function toast(data) {
+  return uni.showToast(
+  Object.assign({
+    title: '操作成功',
+    icon: 'none' },
+  data));
+
+},
+formateTime = function formateTime(date) {
+  var
+  y = date.getFullYear(),
+  m = date.getMonth() + 1,
+  d = date.getDate(),
+  h = date.getHours(),
+  min = date.getMinutes(),
+  s = date.getSeconds();
+
+  m = m < 10 ? "0".concat(m) : m;
+  d = d < 10 ? "0".concat(d) : d;
+  h = h < 10 ? "0".concat(h) : h;
+  min = min < 10 ? "0".concat(min) : min;
+  s = s < 10 ? "0".concat(s) : s;
+
+  return "".concat(y, "/").concat(m, "/").concat(d, " ").concat(h, ":").concat(min, ":").concat(s);
+};exports.formateTime = formateTime;exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 38 */
 /*!***********************************************!*\
   !*** F:/Web/Uni-app/project/piano/api/api.js ***!
   \***********************************************/
-=======
-/*!**********************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/api/api.js ***!
-  \**********************************************************/
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9680,83 +9729,6 @@ getSumInfo = function getSumInfo(_ref4)
     wxCloud: wxCloud });
 
 };exports.getSumInfo = getSumInfo;exports.uploadLog = uploadLog;exports.getLogs = getLogs;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
-/*!****************************************************************!*\
-  !*** C:/code/MiniProgram/test2/project/piano/utils/default.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.formateTime = exports.toast = exports.navTo = exports.showPic = void 0;var _base = __webpack_require__(/*! ../lib/base.js */ 16);
-
-
-
-var
-showPic = function showPic(_ref)
-
-
-{var arr = _ref.arr,i = _ref.i;
-  return uni.previewImage({
-    data: {
-      urls: arr,
-      current: arr[i] } });
-
-
-},
-navTo = function navTo(_ref2)
-
-
-{var url = _ref2.url,data = _ref2.data;
-  return uni.navigateTo({
-    url: (0, _base.urlStringity)({
-      url: url,
-      data: data }) });
-
-
-},
-toast = function toast(data) {
-  return uni.showToast(
-  Object.assign({
-    title: '操作成功',
-    icon: 'none' },
-  data));
-
-},
-formateTime = function formateTime(date) {
-  var
-  y = date.getFullYear(),
-  m = date.getMonth(),
-  d = date.getDate(),
-  h = date.getHours(),
-  min = date.getMinutes(),
-  s = date.getSeconds();
-<<<<<<< HEAD
-=======
-
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
-  m = m < 10 ? "0".concat(m) : m;
-  d = d < 10 ? "0".concat(d) : d;
-  h = h < 10 ? "0".concat(h) : h;
-  min = min < 10 ? "0".concat(min) : min;
-  s = s < 10 ? "0".concat(s) : s;
-<<<<<<< HEAD
-=======
-
->>>>>>> db3df3497e59c6ca0bd0d9420c2617d270ce4f44
-  return "".concat(y, "/").concat(m, "/").concat(d, " ").concat(h, ":").concat(min, ":").concat(s);
-};exports.formateTime = formateTime;exports.toast = toast;exports.navTo = navTo;exports.showPic = showPic;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
