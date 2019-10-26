@@ -17,15 +17,15 @@
 			</view>
 		</view>
 		<view class="exercise">
-			<view @click="clockChange()">
+			<view class="btn" @click="clockChange()">
 				<view class="clockIn flex">
 					<text :class="['icon_note',{play:exercise.clockState}]"></text>
 					<view :class="['border',{play:exercise.clockState}]"></view>
 				</view>
-				<!-- <view class="tip">
+				<view class="tip">
 					<text v-if="!exercise.clockState">开始练琴</text>
 					<text v-else>结束练琴</text>
-				</view> -->
+				</view>
 			</view>
 			<view class="timeing">
 				<view class="duration">{{exercise.duration.slice(-8)}}</view>
@@ -59,11 +59,12 @@
 	import {
 		showPic,
 		toast,
-		navTo
+		navTo,
+		formateTime
 	} from '../../../utils/default.js'
 	import {
-		cloudFn
-	} from '../../../lib/cloudFn.js'
+		uploadLog
+	} from '../../../api/api.js'
 	export default {
 		data() {
 			return {
@@ -75,7 +76,8 @@
 					start: '',
 					end: '',
 					duration: '00:00:00',
-				}
+				},
+				lessTime: 10
 			}
 		},
 		methods: {
@@ -98,61 +100,44 @@
 					if (history) {
 						tick.setSeconds((new Date().getTime() - new Date(this.exercise.start).getTime()) / 1000)
 					} else {
-						this.exercise.start = new Date().toLocaleString('chinese', {
-							hour12: false
-						});
+						this.exercise.start = formateTime(new Date());
 					}
-					this.exercise.duration = tick.toLocaleString('chinese', {
-						hour12: false
-					})
+					this.exercise.duration = formateTime(tick)
 					this.exercise.clock = setInterval(() => {
 						tick.setSeconds(tick.getSeconds() + 1);
 						// console.log(1);
-						this.exercise.duration = tick.toLocaleString('chinese', {
-							hour12: false
-						});
+						this.exercise.duration = formateTime(tick);
 						if (tick.getHours() > 23) {
 							this.clockChange();
 						}
 					}, 1000)
 				} else {
 					if (!history) {
-						this.exercise.end = new Date().toLocaleString('chinese', {
-							hour12: false
-						});
+						this.exercise.end = formateTime(new Date());
 					}
 					this.exercise.clockState = false;
 					clearInterval(this.exercise.clock);
 					this.updateLog();
 				}
 			},
-			getLogs() {
-				cloudFn({
-						name: 'getLogs',
-						data: {
-							size: 1,
-							current: 1,
-						}
-					})
-					.then(r => {})
-			},
 			updateLog() {
 				if (this.exercise.uploaded) return;
 				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
-				if (duration < 5 * 60 * 1000) {
+				console.log(duration);
+				if (duration < this.lessTime * 60 * 1000) {
 					toast({
-						title: '练习时间少于5分钟不计入哦，请加油~',
+						title: `练习时间少于${this.lessTime}分钟不计入哦，请加油~`,
 						duration: 3000
 					})
 					return
 				}
-				cloudFn({
-						name: 'uploadLog',
+				uploadLog({
 						data: {
 							start: this.exercise.start,
 							end: this.exercise.end,
 							duration,
-						}
+						},
+						wxCloud: true
 					})
 					.then(r => {
 						this.exercise.uploaded = true;
@@ -229,7 +214,7 @@
 						height: inherit;
 						font-size: 150rpx;
 						color: @defaultColor;
-						box-shadow: 0 0 5rpx 5rpx #4481bb62;
+						box-shadow: 0 0 5rpx 5rpx rgba(68, 129, 187, 0.384);
 						// border: 8rpx solid @defaultColor;
 					}
 
@@ -261,18 +246,18 @@
 				border-radius: 44% 46%;
 				animation: 10s sea0 forwards infinite linear;
 				// overflow: visible;
-				background: #8aedffdc;
+				background: rgba(138, 237, 255, 0.863);
 			}
 
 			.sea1 {
-				background: #ffe6b152;
+				background: rgba(255, 230, 177, 0.322);
 				animation: 12s sea1 forwards infinite linear;
 				top: 0;
 				content: "";
 			}
 
 			.sea2 {
-				background: #5daffb7c;
+				background: rgba(93, 175, 251, 0.486);
 				animation: 14s sea2 forwards infinite linear;
 				top: 0;
 				content: "";
@@ -288,54 +273,59 @@
 		.exercise {
 			height: 300rpx;
 
-			.clockIn {
-				@c: #41C3CC;
+			.btn {
+				margin: auto;
+				width: 4rem;
 
-				position: relative;
-				font-size: 50rpx;
-				// width: 2em;
-				height: 2em;
-				// border-radius: 50%;
-				// border: 4rpx solid @c;
-				// border-color: @c #41CC96;
-				color: @c ;
-				margin: 30rpx auto 10rpx;
+				.clockIn {
+					@c: #41C3CC;
 
-
-				&>text {
-					position: absolute;
-					font-size: inherit;
-					animation-name: note;
-					animation-duration: 0.8s;
-					animation-iteration-count: infinite;
-					animation-direction: alternate;
-					animation-timing-function: ease-in-out;
-					animation-play-state: paused;
-				}
-
-				.border {
-					position: absolute;
-					width: 2em;
+					position: relative;
+					font-size: 50rpx;
+					// width: 2em;
 					height: 2em;
-					border-radius: 50%;
-					border: 5rpx solid @c;
-					border-color: @c #41CC96 #57AED6 #57BAD6;
-					animation-name: noteBorder;
-					animation-duration: 2s;
-					animation-iteration-count: infinite;
-					animation-timing-function: linear;
-					animation-play-state: paused;
+					// border-radius: 50%;
+					// border: 4rpx solid @c;
+					// border-color: @c #41CC96;
+					color: @c ;
+					margin: 30rpx auto 10rpx;
+
+
+					&>text {
+						position: absolute;
+						font-size: inherit;
+						animation-name: note;
+						animation-duration: 0.8s;
+						animation-iteration-count: infinite;
+						animation-direction: alternate;
+						animation-timing-function: ease-in-out;
+						animation-play-state: paused;
+					}
+
+					.border {
+						position: absolute;
+						width: 2em;
+						height: 2em;
+						border-radius: 50%;
+						border: 5rpx solid @c;
+						border-color: @c #41CC96 #57AED6 #57BAD6;
+						animation-name: noteBorder;
+						animation-duration: 2s;
+						animation-iteration-count: infinite;
+						animation-timing-function: linear;
+						animation-play-state: paused;
+					}
+
+					.play {
+						animation-play-state: running;
+					}
 				}
 
-				.play {
-					animation-play-state: running;
+				.tip {
+					font-size: 25rpx;
+					text-align: center;
+					margin-bottom: 20rpx;
 				}
-			}
-
-			.tip {
-				font-size: 28rpx;
-				text-align: center;
-				margin-bottom: 20rpx;
 			}
 
 			.timeing {
