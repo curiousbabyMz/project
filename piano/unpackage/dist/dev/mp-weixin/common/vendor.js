@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6979,7 +6979,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7000,14 +7000,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7083,7 +7083,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8404,7 +8404,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": {}, "pages/personal/calendar/calendar": {}, "pages/personal/mine/mine": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "usingComponents": {} }, "pages/personal/calendar/calendar": {}, "pages/personal/mine/mine": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "music", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -9602,6 +9602,7 @@ toast = function toast(data) {
 
 },
 formateTime = function formateTime(date) {
+  if (!date instanceof Date) return null;
   var
   y = date.getFullYear(),
   m = date.getMonth() + 1,
@@ -9629,7 +9630,7 @@ formateTime = function formateTime(date) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getSumInfo = exports.uploadLog = exports.getLogs = void 0;var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getSumInfo = exports.uploadLog = exports.getLogs = exports.getConfig = void 0;var _cloudFn = __webpack_require__(/*! ../lib/cloudFn.js */ 17);
 
 
 // async function api({
@@ -9693,11 +9694,24 @@ var api = function api(_ref)
     }
   });
 };
-var getLogs = function getLogs(_ref2)
+var
+getConfig = function getConfig(_ref2)
 
 
 
 {var data = _ref2.data,log = _ref2.log,_ref2$wxCloud = _ref2.wxCloud,wxCloud = _ref2$wxCloud === void 0 ? false : _ref2$wxCloud;
+  return api({
+    url: wxCloud ? 'config' : '',
+    data: data,
+    log: log,
+    wxCloud: wxCloud });
+
+},
+getLogs = function getLogs(_ref3)
+
+
+
+{var data = _ref3.data,log = _ref3.log,_ref3$wxCloud = _ref3.wxCloud,wxCloud = _ref3$wxCloud === void 0 ? false : _ref3$wxCloud;
   return api({
     url: wxCloud ? 'getLogs' : '',
     data: data,
@@ -9705,11 +9719,11 @@ var getLogs = function getLogs(_ref2)
     wxCloud: wxCloud });
 
 },
-uploadLog = function uploadLog(_ref3)
+uploadLog = function uploadLog(_ref4)
 
 
 
-{var data = _ref3.data,log = _ref3.log,_ref3$wxCloud = _ref3.wxCloud,wxCloud = _ref3$wxCloud === void 0 ? false : _ref3$wxCloud;
+{var data = _ref4.data,log = _ref4.log,_ref4$wxCloud = _ref4.wxCloud,wxCloud = _ref4$wxCloud === void 0 ? false : _ref4$wxCloud;
   return api({
     url: wxCloud ? 'uploadLog' : '',
     data: data,
@@ -9717,18 +9731,18 @@ uploadLog = function uploadLog(_ref3)
     wxCloud: wxCloud });
 
 },
-getSumInfo = function getSumInfo(_ref4)
+getSumInfo = function getSumInfo(_ref5)
 
 
 
-{var data = _ref4.data,log = _ref4.log,_ref4$wxCloud = _ref4.wxCloud,wxCloud = _ref4$wxCloud === void 0 ? false : _ref4$wxCloud;
+{var data = _ref5.data,log = _ref5.log,_ref5$wxCloud = _ref5.wxCloud,wxCloud = _ref5$wxCloud === void 0 ? false : _ref5$wxCloud;
   return api({
     url: wxCloud ? 'getSumInfo' : '',
     data: data,
     log: log,
     wxCloud: wxCloud });
 
-};exports.getSumInfo = getSumInfo;exports.uploadLog = uploadLog;exports.getLogs = getLogs;
+};exports.getSumInfo = getSumInfo;exports.uploadLog = uploadLog;exports.getLogs = getLogs;exports.getConfig = getConfig;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })

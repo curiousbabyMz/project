@@ -2,6 +2,9 @@
 	import {
 		login
 	} from './utils/login.js'
+	import {
+		getConfig
+	} from './api/api.js'
 	export default {
 		globalData: {
 
@@ -11,6 +14,7 @@
 			this.$state.setState({
 				userAuth: false
 			})
+			this.getConfig();
 			login()
 				.then(r => {
 					this.$state.userAuth = r;
@@ -21,6 +25,17 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		methods: {
+			getConfig() {
+				getConfig({
+						wxCloud: true
+					})
+					.then(r => {
+						getApp().globalData.lessTime = r.result.lessTime;
+						if (getApp().configCB) getApp().configCB(r.result);
+					})
+			}
 		}
 	}
 </script>
@@ -52,13 +67,14 @@
 	}
 
 	@font-face {
-	  font-family: 'iconfont';  /* project id 1449661 */
-	  src: url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.eot');
-	  src: url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.eot?#iefix') format('embedded-opentype'),
-	  url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.woff2') format('woff2'),
-	  url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.woff') format('woff'),
-	  url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.ttf') format('truetype'),
-	  url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.svg#iconfont') format('svg');
+		font-family: 'iconfont';
+		/* project id 1449661 */
+		src: url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.eot');
+		src: url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.eot?#iefix') format('embedded-opentype'),
+			url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.woff2') format('woff2'),
+			url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.woff') format('woff'),
+			url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.ttf') format('truetype'),
+			url('//at.alicdn.com/t/font_1449661_p5isjlsv7v.svg#iconfont') format('svg');
 	}
 
 	[class*=icon] {
@@ -78,7 +94,8 @@
 	.icon_arrowR:before {
 		content: '\e65c';
 	}
-	.icon_note:before{
-		content:'\e624'
+
+	.icon_note:before {
+		content: '\e624'
 	}
 </style>

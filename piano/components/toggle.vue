@@ -86,8 +86,8 @@
 		position: relative;
 
 		.navBar {
-			// border-bottom: 1rpx solid #C8C7CC;
 
+			// border-bottom: 1rpx solid #C8C7CC;
 			&>view {
 				flex: 1;
 				text-align: center;
@@ -116,6 +116,8 @@
 			height: 100vh;
 			position: fixed;
 			background: rgba(0, 0, 0, 0.2);
+			left: 0;
+			top: 0;
 		}
 	}
 

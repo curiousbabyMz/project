@@ -101,7 +101,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _login = __webpack_require__(/*! ./utils/login.js */ 12);var _default =
+var _login = __webpack_require__(/*! ./utils/login.js */ 12);
+
+
+var _api = __webpack_require__(/*! ./api/api.js */ 38);var _default =
 
 
 {
@@ -113,6 +116,7 @@ var _login = __webpack_require__(/*! ./utils/login.js */ 12);var _default =
     this.$state.setState({
       userAuth: false });
 
+    this.getConfig();
     (0, _login.login)().
     then(function (r) {
       _this.$state.userAuth = r;
@@ -123,7 +127,17 @@ var _login = __webpack_require__(/*! ./utils/login.js */ 12);var _default =
   },
   onHide: function onHide() {
     console.log('App Hide');
-  } };exports.default = _default;
+  },
+  methods: {
+    getConfig: function getConfig() {
+      (0, _api.getConfig)({
+        wxCloud: true }).
+
+      then(function (r) {
+        getApp().globalData.lessTime = r.result.lessTime;
+        if (getApp().configCB) getApp().configCB(r.result);
+      });
+    } } };exports.default = _default;
 
 /***/ }),
 /* 12 */,

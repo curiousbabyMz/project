@@ -34,6 +34,7 @@ export var
 		)
 	},
 	formateTime = date => {
+		if (!date instanceof Date) return null;
 		let
 			y = date.getFullYear(),
 			m = date.getMonth() + 1,

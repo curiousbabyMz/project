@@ -85,8 +85,8 @@
 				console.log(e);
 				getLogs({
 						data: {
-							start: `${e.year}/${e.month}/${e.date}`,
-							end: `${e.year}/${e.month}/${e.date}`,
+							start: `${e.year}/${e.month<10?'0'+e.month:e.month}/${e.date<10?'0'+e.date:e.date}`,
+							end: `${e.year}/${e.month<10?'0'+e.month:e.month}/${e.date<10?'0'+e.date:e.date}`,
 						},
 						wxCloud: true
 					})
@@ -148,7 +148,8 @@
 					.catch(e => {})
 			}
 		},
-		onLoad() {},
+		onLoad() {
+		},
 		onShow() {
 			this.getLogs()
 			this.getSumInfo()

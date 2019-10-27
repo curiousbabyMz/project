@@ -235,8 +235,8 @@ var _api = __webpack_require__(/*! ../../../api/api.js */ 38);function _toConsum
       console.log(e);
       (0, _api.getLogs)({
         data: {
-          start: "".concat(e.year, "/").concat(e.month, "/").concat(e.date),
-          end: "".concat(e.year, "/").concat(e.month, "/").concat(e.date) },
+          start: "".concat(e.year, "/").concat(e.month < 10 ? '0' + e.month : e.month, "/").concat(e.date < 10 ? '0' + e.date : e.date),
+          end: "".concat(e.year, "/").concat(e.month < 10 ? '0' + e.month : e.month, "/").concat(e.date < 10 ? '0' + e.date : e.date) },
 
         wxCloud: true }).
 
@@ -298,7 +298,8 @@ var _api = __webpack_require__(/*! ../../../api/api.js */ 38);function _toConsum
       catch(function (e) {});
     } },
 
-  onLoad: function onLoad() {},
+  onLoad: function onLoad() {
+  },
   onShow: function onShow() {
     this.getLogs();
     this.getSumInfo();

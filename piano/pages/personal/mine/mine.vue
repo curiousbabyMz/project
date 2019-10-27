@@ -77,7 +77,7 @@
 					end: '',
 					duration: '00:00:00',
 				},
-				lessTime: 10
+				lessTime: 1
 			}
 		},
 		methods: {
@@ -155,6 +155,9 @@
 			getApp().loginCB = () => {
 				console.log('loginCB');
 				this.userInfo = getApp().globalData.userInfo;
+			}
+			getApp().configCB = r => {
+				this.lessTime = r.lessTime
 			}
 		},
 		onShow() {

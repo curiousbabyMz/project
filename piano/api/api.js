@@ -62,7 +62,20 @@ const api = ({
 		}
 	})
 }
-export var getLogs = ({
+export var
+	getConfig = ({
+		data,
+		log,
+		wxCloud = false
+	}) => {
+		return api({
+			url: wxCloud ? 'config' : '',
+			data,
+			log,
+			wxCloud
+		})
+	},
+	getLogs = ({
 		data,
 		log,
 		wxCloud = false
