@@ -124,9 +124,9 @@
 				if (this.exercise.uploaded) return;
 				let duration = new Date(this.exercise.end).getTime() - new Date(this.exercise.start).getTime();
 				// console.log(duration);
-				if (duration < this.lessTime * 60 * 1000) {
+				if (duration < this.lessTime) {
 					toast({
-						title: `练习时间少于${this.lessTime}分钟不计入哦，请加油~`,
+						title: `练习时间少于${this.lessTime/1000/60}分钟不计入哦，请加油~`,
 						duration: 3000
 					})
 					return
@@ -151,13 +151,11 @@
 		onLoad() {
 			console.log('Mine onLoad');
 			this.$state.setWatch(this, 'userAuth', 'userAuth');
+			this.$state.setWatch(this, 'lessTime', 'lessTime');
 			this.userInfo = getApp().globalData.userInfo;
 			getApp().loginCB = () => {
 				console.log('loginCB');
 				this.userInfo = getApp().globalData.userInfo;
-			}
-			getApp().configCB = r => {
-				this.lessTime = r.lessTime
 			}
 		},
 		onShow() {
@@ -171,14 +169,14 @@
 		},
 		onHide() {
 			clearInterval(this.exercise.clock)
-			uni.setStorage({
+			if (this.exercise.start) uni.setStorage({
 				key: 'exercise',
 				data: this.exercise
 			})
 		},
 		onUnload() {
 			clearInterval(this.exercise.clock)
-			uni.setStorage({
+			if (this.exercise.start) uni.setStorage({
 				key: 'exercise',
 				data: this.exercise
 			})

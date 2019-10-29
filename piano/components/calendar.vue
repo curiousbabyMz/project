@@ -211,7 +211,7 @@
 				}
 
 				.dateItem {
-					height: 80rpx;
+					height: 90rpx;
 					font-size: 26rpx;
 
 					.inside {

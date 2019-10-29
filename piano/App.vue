@@ -12,7 +12,8 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			this.$state.setState({
-				userAuth: false
+				userAuth: false,
+				lessTime: null
 			})
 			this.getConfig();
 			login()
@@ -32,8 +33,9 @@
 						wxCloud: true
 					})
 					.then(r => {
-						getApp().globalData.lessTime = r.result.lessTime;
-						if (getApp().configCB) getApp().configCB(r.result);
+						this.$state.lessTime = r.result.lessTime
+						// getApp().globalData.lessTime = r.result.lessTime;
+						// if (getApp().configCB) getApp().configCB(r.result);
 					})
 			}
 		}

@@ -5,9 +5,9 @@
 			<view class="pannel">
 				<view class="clock">
 					<view class="circle"></view>
-					<view :class="['flex','progress'+i]" v-for="(item,i) in dateInfo" :key='i' v-if="i===currentProgress">
+					<view :class="['flex','progress']">
 						<view class="mask">
-							<view class="circle" :style="{clipPath:item.clipPath}"></view>
+							<view class="circle" :style="{clipPath:dateInfo[currentProgress].clipPath,transform:dateInfo[currentProgress].rotate}"></view>
 						</view>
 					</view>
 					<view class="inside">
@@ -65,15 +65,17 @@
 			}
 		},
 		methods: {
-			time2Deg(time) {
-				let [h, m, s] = time.split(':'),
-					date = new Date(2000, 0, 0, h, m, s),
-					hour0 = new Date(2000, 0, 0),
-					duration = date.getTime() - hour0.getTime();
+			time2Deg(start, end) {
+				let [sh, sm, ss] = start.split(':'),
+					[eh, em, es] = end.split(':'),
+					startDate = new Date(2000, 0, 0, sh, sm, ss),
+					endDate = new Date(2000, 0, 0, eh, em, es),
+					duration = endDate.getTime() - startDate.getTime();
 				let deg = (duration / 1000 / 60 / 60 - 12) / 12 * 360,
 					x = 50 + Math.sin(Math.PI / 180 * deg) * Math.sqrt(5000),
 					y = 50 - Math.cos(Math.PI / 180 * deg) * Math.sqrt(5000)
 				return {
+					deg,
 					x: x > 100 ? 100 : (x < 0 ? 0 : x),
 					y: y > 100 ? 100 : (y < 0 ? 0 : y)
 				}
@@ -99,10 +101,19 @@
 							each.long = formateTime(each.long).slice(-8);
 							each.start = each.start.slice(-8);
 							each.end = each.end.slice(-8);
-							let start = this.time2Deg(each.start),
-								end = this.time2Deg(each.end);
+							let {
+								deg
+							} = this.time2Deg('0:0:0', each.start);
+							let {
+								x,
+								y
+							} = this.time2Deg(each.start, each.end);
 
-							each.clipPath = `polygon(50% 50%,${start.x}% ${start.y}%,${end.x}% ${end.y}%)`;
+							each.rotate = `rotate(${deg}deg)`;
+							each.clipPath = `polygon(50% 50%,50% 0,${x}% ${y}%)`;
+							// let start = this.time2Deg(each.start),
+							// 	end = this.time2Deg(each.end);
+							// each.clipPath = `polygon(50% 50%,${start.x}% ${start.y}%,${end.x}% ${end.y}%)`;
 							return each;
 						});
 					})
@@ -148,8 +159,7 @@
 					.catch(e => {})
 			}
 		},
-		onLoad() {
-		},
+		onLoad() {},
 		onShow() {
 			this.getLogs()
 			this.getSumInfo()
@@ -173,14 +183,6 @@
 		}
 	}
 
-	@keyframes clockProgess {
-		0% {
-			opacity: 0;
-		}
-
-		100% {}
-	}
-
 	.calendar {
 		padding: 30rpx;
 		color: #333333;
@@ -190,7 +192,7 @@
 			animation: dateInfo 200ms ease-out forwards;
 
 			.pannel {
-				background: #312A32;
+				background: linear-gradient(135deg,#57CFF9,#1C5CD0);
 				box-shadow: 0 0 5rpx 2rpx #e1e1e1;
 				border-radius: 20rpx;
 				padding: 20rpx;
@@ -199,7 +201,7 @@
 				.clock {
 					@clockWidth: 280rpx;
 					@clockWeight: 8rpx;
-					@clockColor: rgba(215, 216, 218, 0.867);
+					@clockColor: RGB(47,76,136,.8);
 					position: relative;
 					width: @clockWidth;
 					height: @clockWidth;
@@ -224,7 +226,7 @@
 						z-index: 1;
 					}
 
-					[class*=progress] {
+					.progress {
 						position: absolute;
 						margin: auto;
 						left: 0;
@@ -239,24 +241,13 @@
 							height: inherit;
 
 							.circle {
-								animation: clockProgess .2s linear forwards;
-							}
-						}
-					}
-
-					.pLoop(@i)when(@i<5) {
-						.progress@{i} {
-							.circle {
+								transition: all .3s ease-out;
 								width: @clockWidth;
 								height: @clockWidth;
-								background: radial-gradient(hsl(@i*77+66+47, 100%, 50%), hsl(@i*77+66, 100%, 50%)) // border-color: hsl(@i*77+66, 100%, 50%)	
+								background: radial-gradient(hsl(70, 100%, 50%), hsl(200, 100%, 50%))
 							}
 						}
-
-						.pLoop(@i+1);
 					}
-
-					.pLoop(0);
 
 					.inside {
 						position: absolute;
@@ -265,7 +256,7 @@
 						top: 10rpx;
 						margin: auto;
 						text-align: center;
-						color: #BEC2CA;
+						color: #E6F2E9;
 						font-size: 24rpx;
 						line-height: 1.8rem;
 					}

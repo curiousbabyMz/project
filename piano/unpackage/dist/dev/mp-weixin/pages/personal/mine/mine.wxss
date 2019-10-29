@@ -1,4 +1,4 @@
-.flex.data-v-42d1150a {
+.flex.data-v-30cd7e74 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12,10 +12,10 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.container.data-v-42d1150a {
+.container.data-v-30cd7e74 {
   color: #333;
 }
-.container .personal.data-v-42d1150a {
+.container .personal.data-v-30cd7e74 {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-flow: column nowrap;
@@ -24,18 +24,18 @@
   background: #FFFFFF;
   position: relative;
 }
-.container .personal .login.data-v-42d1150a {
+.container .personal .login.data-v-30cd7e74 {
   margin-top: 100rpx;
   z-index: 1;
   overflow: visible;
 }
-.container .personal .login .head.data-v-42d1150a {
+.container .personal .login .head.data-v-30cd7e74 {
   position: relative;
   width: 1em;
   height: 1em;
   font-size: 150rpx;
 }
-.container .personal .login .head .headImg.data-v-42d1150a {
+.container .personal .login .head .headImg.data-v-30cd7e74 {
   position: absolute;
   left: 0;
   top: 0;
@@ -48,7 +48,7 @@
   -webkit-box-shadow: 0 0 5rpx 5rpx rgba(68, 129, 187, 0.384);
           box-shadow: 0 0 5rpx 5rpx rgba(68, 129, 187, 0.384);
 }
-.container .personal .login .head .headIn.data-v-42d1150a {
+.container .personal .login .head .headIn.data-v-30cd7e74 {
   -webkit-transition: all 0.25s 0.25s ease-out;
   -o-transition: all 0.25s 0.25s ease-out;
   transition: all 0.25s 0.25s ease-out;
@@ -56,67 +56,67 @@
       -ms-transform: none;
           transform: none;
 }
-.container .personal .login .head .headOut.data-v-42d1150a {
+.container .personal .login .head .headOut.data-v-30cd7e74 {
   -webkit-transition: all 0.25s ease-out;
   -o-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
   -webkit-transform: rotateY(90deg);
           transform: rotateY(90deg);
 }
-.container .personal .login .name.data-v-42d1150a {
+.container .personal .login .name.data-v-30cd7e74 {
   margin-top: 30rpx;
   font-size: 28rpx;
   color: #007AFF;
 }
-.container .personal .sea.data-v-42d1150a,
-.container .personal .sea1.data-v-42d1150a,
-.container .personal .sea2.data-v-42d1150a {
+.container .personal .sea.data-v-30cd7e74,
+.container .personal .sea1.data-v-30cd7e74,
+.container .personal .sea2.data-v-30cd7e74 {
   position: absolute;
   top: -1850rpx;
   width: 2000rpx;
   height: 2000rpx;
   border-radius: 44% 46%;
-  -webkit-animation: 10s sea0-data-v-42d1150a forwards infinite linear;
-          animation: 10s sea0-data-v-42d1150a forwards infinite linear;
+  -webkit-animation: 10s sea0-data-v-30cd7e74 forwards infinite linear;
+          animation: 10s sea0-data-v-30cd7e74 forwards infinite linear;
   background: rgba(138, 237, 255, 0.863);
 }
-.container .personal .sea1.data-v-42d1150a {
+.container .personal .sea1.data-v-30cd7e74 {
   background: rgba(255, 230, 177, 0.322);
-  -webkit-animation: 12s sea1-data-v-42d1150a forwards infinite linear;
-          animation: 12s sea1-data-v-42d1150a forwards infinite linear;
+  -webkit-animation: 12s sea1-data-v-30cd7e74 forwards infinite linear;
+          animation: 12s sea1-data-v-30cd7e74 forwards infinite linear;
   top: 0;
   content: "";
 }
-.container .personal .sea2.data-v-42d1150a {
+.container .personal .sea2.data-v-30cd7e74 {
   background: rgba(93, 175, 251, 0.486);
-  -webkit-animation: 14s sea2-data-v-42d1150a forwards infinite linear;
-          animation: 14s sea2-data-v-42d1150a forwards infinite linear;
+  -webkit-animation: 14s sea2-data-v-30cd7e74 forwards infinite linear;
+          animation: 14s sea2-data-v-30cd7e74 forwards infinite linear;
   top: 0;
   content: "";
 }
-.container .white.button-hover.data-v-42d1150a {
+.container .white.button-hover.data-v-30cd7e74 {
   -webkit-filter: brightness(0.8);
           filter: brightness(0.8);
 }
-.container .exercise.data-v-42d1150a {
+.container .exercise.data-v-30cd7e74 {
   height: 300rpx;
 }
-.container .exercise .btn.data-v-42d1150a {
+.container .exercise .btn.data-v-30cd7e74 {
   margin: auto;
   width: 4rem;
 }
-.container .exercise .btn .clockIn.data-v-42d1150a {
+.container .exercise .btn .clockIn.data-v-30cd7e74 {
   position: relative;
   font-size: 50rpx;
   height: 2em;
   color: #41C3CC;
   margin: 30rpx auto 10rpx;
 }
-.container .exercise .btn .clockIn > text.data-v-42d1150a {
+.container .exercise .btn .clockIn > text.data-v-30cd7e74 {
   position: absolute;
   font-size: inherit;
-  -webkit-animation-name: note-data-v-42d1150a;
-          animation-name: note-data-v-42d1150a;
+  -webkit-animation-name: note-data-v-30cd7e74;
+          animation-name: note-data-v-30cd7e74;
   -webkit-animation-duration: 0.8s;
           animation-duration: 0.8s;
   -webkit-animation-iteration-count: infinite;
@@ -128,15 +128,15 @@
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.container .exercise .btn .clockIn .border.data-v-42d1150a {
+.container .exercise .btn .clockIn .border.data-v-30cd7e74 {
   position: absolute;
   width: 2em;
   height: 2em;
   border-radius: 50%;
   border: 5rpx solid #41C3CC;
   border-color: #41C3CC #41CC96 #57AED6 #57BAD6;
-  -webkit-animation-name: noteBorder-data-v-42d1150a;
-          animation-name: noteBorder-data-v-42d1150a;
+  -webkit-animation-name: noteBorder-data-v-30cd7e74;
+          animation-name: noteBorder-data-v-30cd7e74;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
@@ -146,24 +146,24 @@
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.container .exercise .btn .clockIn .play.data-v-42d1150a {
+.container .exercise .btn .clockIn .play.data-v-30cd7e74 {
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.container .exercise .btn .tip.data-v-42d1150a {
+.container .exercise .btn .tip.data-v-30cd7e74 {
   font-size: 25rpx;
   text-align: center;
   margin-bottom: 20rpx;
 }
-.container .exercise .timeing.data-v-42d1150a {
+.container .exercise .timeing.data-v-30cd7e74 {
   font-size: 30rpx;
 }
-.container .exercise .timeing .duration.data-v-42d1150a {
+.container .exercise .timeing .duration.data-v-30cd7e74 {
   line-height: 1.8rem;
   text-align: center;
   font-size: 32rpx;
 }
-.container .exercise .timeing .progress.data-v-42d1150a {
+.container .exercise .timeing .progress.data-v-30cd7e74 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -177,23 +177,23 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.container .exercise .timeing .progress .point.data-v-42d1150a {
+.container .exercise .timeing .progress .point.data-v-30cd7e74 {
   content: '';
   padding: 10rpx;
   border-radius: 50%;
   background: #E2E2E2;
   z-index: 1;
 }
-.container .exercise .timeing .progress .line.data-v-42d1150a {
+.container .exercise .timeing .progress .line.data-v-30cd7e74 {
   width: 300rpx;
   height: 10rpx;
   background: #E2E2E2;
   margin: 0 -10rpx;
 }
-.container .exercise .timeing .progress .done.data-v-42d1150a {
+.container .exercise .timeing .progress .done.data-v-30cd7e74 {
   background: #6C73FF;
 }
-.container .exercise .timeing .time.data-v-42d1150a {
+.container .exercise .timeing .time.data-v-30cd7e74 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -214,13 +214,13 @@
   line-height: 2rem;
   margin: 0 auto;
 }
-.container .menu.data-v-42d1150a {
+.container .menu.data-v-30cd7e74 {
   margin-top: 50rpx;
   padding: 0 50rpx;
   font-size: 34rpx;
   line-height: 80rpx;
 }
-.container .menu > .item.data-v-42d1150a {
+.container .menu > .item.data-v-30cd7e74 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -239,13 +239,13 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.container .menu > .item text.data-v-42d1150a {
+.container .menu > .item text.data-v-30cd7e74 {
   font-size: 34rpx;
 }
-.container .menu > .item.data-v-42d1150a:nth-of-type(1) {
+.container .menu > .item.data-v-30cd7e74:nth-of-type(1) {
   border: none;
 }
-@-webkit-keyframes note-data-v-42d1150a {
+@-webkit-keyframes note-data-v-30cd7e74 {
 0% {
     -webkit-transform: translateY(5rpx);
             transform: translateY(5rpx);
@@ -255,7 +255,7 @@
             transform: translateY(-5px);
 }
 }
-@keyframes note-data-v-42d1150a {
+@keyframes note-data-v-30cd7e74 {
 0% {
     -webkit-transform: translateY(5rpx);
             transform: translateY(5rpx);
@@ -265,7 +265,7 @@
             transform: translateY(-5px);
 }
 }
-@-webkit-keyframes noteBorder-data-v-42d1150a {
+@-webkit-keyframes noteBorder-data-v-30cd7e74 {
 0% {
     -webkit-transform: none;
             transform: none;
@@ -275,7 +275,7 @@
             transform: rotate(360deg);
 }
 }
-@keyframes noteBorder-data-v-42d1150a {
+@keyframes noteBorder-data-v-30cd7e74 {
 0% {
     -webkit-transform: none;
             transform: none;
@@ -285,7 +285,7 @@
             transform: rotate(360deg);
 }
 }
-@-webkit-keyframes sea0-data-v-42d1150a {
+@-webkit-keyframes sea0-data-v-30cd7e74 {
 0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -295,7 +295,7 @@
             transform: rotate(360deg);
 }
 }
-@keyframes sea0-data-v-42d1150a {
+@keyframes sea0-data-v-30cd7e74 {
 0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -305,7 +305,7 @@
             transform: rotate(360deg);
 }
 }
-@-webkit-keyframes sea1-data-v-42d1150a {
+@-webkit-keyframes sea1-data-v-30cd7e74 {
 0% {
     -webkit-transform: rotate(20deg);
             transform: rotate(20deg);
@@ -315,7 +315,7 @@
             transform: rotate(380deg);
 }
 }
-@keyframes sea1-data-v-42d1150a {
+@keyframes sea1-data-v-30cd7e74 {
 0% {
     -webkit-transform: rotate(20deg);
             transform: rotate(20deg);
@@ -325,7 +325,7 @@
             transform: rotate(380deg);
 }
 }
-@-webkit-keyframes sea2-data-v-42d1150a {
+@-webkit-keyframes sea2-data-v-30cd7e74 {
 0% {
     -webkit-transform: rotate(40deg);
             transform: rotate(40deg);
@@ -335,7 +335,7 @@
             transform: rotate(400deg);
 }
 }
-@keyframes sea2-data-v-42d1150a {
+@keyframes sea2-data-v-30cd7e74 {
 0% {
     -webkit-transform: rotate(40deg);
             transform: rotate(40deg);
